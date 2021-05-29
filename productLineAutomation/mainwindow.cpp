@@ -4,6 +4,7 @@
 #include <QSqlDatabase>
 #include <QSqlDriver>
 #include <QtSql>
+#include <QString>
 #include <QSqlError>
 #include <QSqlQuery>
 #include "QDebug"
@@ -32,10 +33,20 @@ void MainWindow::on_pushButton_2_clicked()
     db.setPassword("Asd.1234");
     if (!db.open()) qDebug() << "Failed to connect to root mysql admin";
 
+    //QSqlQuery query("SELECT customerName FROM classicmodels.customers", db);
+    QSqlQuery query;
+    query.exec("SELECT * FROM customers");
+    const int memCount = query.record().count();
+    //qDebug() << memCount;
 
-    QSqlQuery query("SELECT customerName FROM classicmodels.customers", db);
+    QString qs = "";
     while (query.next()) {
-      qDebug() << "first column:" << query.value(0).toString();
+      for(int i=0; i<memCount; i++){
+         qs += query.value(i).toString() + " ";
+      }
+      qDebug() << qs;
+      qs = "";
     }
 
-}
+
+};
