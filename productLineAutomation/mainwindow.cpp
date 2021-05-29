@@ -26,6 +26,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_2_clicked()
 {
+    //connect to classicmodels database
     QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
     db.setHostName("127.0.0.1");
     db.setDatabaseName("classicmodels");
@@ -34,26 +35,18 @@ void MainWindow::on_pushButton_2_clicked()
     if (!db.open())
         qDebug() << "Failed to connect to root mysql admin";
 
+    //create and execute query
+    //todo: make code below a generic class
     QSqlQuery query;
     query.prepare("SELECT * FROM customers");
     query.exec();
     int columnCount = query.record().count();
     int rowCount = query.size();
-    qDebug() << "col:" << columnCount << "row:" << rowCount;
-
-    /*QString qs = "";
-    while (query.next()) {
-       for(int i=0; i<columnCount; i++){
-          qs += query.value(i).toString() + " ";
-       }
-       qDebug() << qs;
-       qs = "";
-    }*/
 
     ui->tableWidget->setRowCount(rowCount);
     ui->tableWidget->setColumnCount(columnCount);
 
-
+    //populate the table widget with the query result
     for(int row=0; row<rowCount; row++){
        query.next();
        for(int col=0; col<columnCount; col++){
@@ -63,5 +56,9 @@ void MainWindow::on_pushButton_2_clicked()
           pCell->setText(query.value(col).toString());
        }
     }
+
+    //fit cell width according to its content
+    ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
 };
 
