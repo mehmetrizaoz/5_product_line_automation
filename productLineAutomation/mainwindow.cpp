@@ -31,9 +31,9 @@ void MainWindow::on_pushButton_2_clicked()
     db.setDatabaseName("classicmodels");
     db.setUserName("root");
     db.setPassword("Asd.1234");
-    if (!db.open()) qDebug() << "Failed to connect to root mysql admin";
+    if (!db.open())
+        qDebug() << "Failed to connect to root mysql admin";
 
-    //QSqlQuery query("SELECT customerName FROM classicmodels.customers", db);
     QSqlQuery query;
     query.prepare("SELECT * FROM customers");
     query.exec();
@@ -41,13 +41,27 @@ void MainWindow::on_pushButton_2_clicked()
     int rowCount = query.size();
     qDebug() << "col:" << columnCount << "row:" << rowCount;
 
-    QString qs = "";
+    /*QString qs = "";
     while (query.next()) {
        for(int i=0; i<columnCount; i++){
           qs += query.value(i).toString() + " ";
        }
        qDebug() << qs;
        qs = "";
+    }*/
+
+    ui->tableWidget->setRowCount(rowCount);
+    ui->tableWidget->setColumnCount(columnCount);
+
+
+    for(int row=0; row<rowCount; row++){
+       query.next();
+       for(int col=0; col<columnCount; col++){
+          QTableWidgetItem *pCell = ui->tableWidget->item(row, col);
+          pCell = new QTableWidgetItem;
+          ui->tableWidget->setItem(row, col, pCell);
+          pCell->setText(query.value(col).toString());
+       }
     }
 };
 
