@@ -35,18 +35,19 @@ void MainWindow::on_pushButton_2_clicked()
 
     //QSqlQuery query("SELECT customerName FROM classicmodels.customers", db);
     QSqlQuery query;
-    query.exec("SELECT * FROM customers");
-    const int memCount = query.record().count();
-    //qDebug() << memCount;
+    query.prepare("SELECT * FROM customers");
+    query.exec();
+    int columnCount = query.record().count();
+    int rowCount = query.size();
+    qDebug() << "col:" << columnCount << "row:" << rowCount;
 
     QString qs = "";
     while (query.next()) {
-      for(int i=0; i<memCount; i++){
-         qs += query.value(i).toString() + " ";
-      }
-      qDebug() << qs;
-      qs = "";
+       for(int i=0; i<columnCount; i++){
+          qs += query.value(i).toString() + " ";
+       }
+       qDebug() << qs;
+       qs = "";
     }
-
-
 };
+
