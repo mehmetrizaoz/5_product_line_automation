@@ -8,6 +8,7 @@
 #include <QSqlError>
 #include <QSqlQuery>
 #include "QDebug"
+#include "dialog.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -27,6 +28,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_pushButton_2_clicked()
 {
     //connect to classicmodels database
+    //todo: if no connection check
     QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
     db.setHostName("127.0.0.1");
     db.setDatabaseName("classicmodels");
@@ -62,3 +64,11 @@ void MainWindow::on_pushButton_2_clicked()
 
 };
 
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    //this->hide();
+    Dialog ddd;
+    ddd.setModal(true);
+    ddd.exec();
+}
