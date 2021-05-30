@@ -20,6 +20,7 @@
 #include <QCoreApplication>
 #include <QFile>
 #include <QTextStream>
+#include <QString>
 #include <QTableWidget>
 
 using namespace std;
@@ -29,6 +30,7 @@ public:
    database();
    void execQuery(QString queryString, QTableWidget *tableWidget);
    bool connect(QString hostName, QString database, QString user, QString psw );
+   QString readQuery(QString filename);
 private:
 
 };

@@ -15,7 +15,6 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    QString read(QString filename);
 
 private slots:
     void on_pushButton_2_clicked();

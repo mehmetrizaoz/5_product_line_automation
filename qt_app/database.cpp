@@ -31,9 +31,22 @@ bool database::connect(QString hostName, QString database, QString user, QString
     return db.open();
 }
 
+QString database::readQuery(QString filename){
+    QFile file(filename);
+    if(!file.open(QFile::ReadOnly |
+                  QFile::Text)){
+        qDebug() << " Could not open the file for reading";
+        return "";
+    }
+    QTextStream in(&file);
+    QString myText = in.readAll();
+    file.close();
+    return myText;
+}
+
 void database::execQuery(QString queryString, QTableWidget *tableWidget){
     QSqlQuery query(db);
-    query.prepare("SELECT * FROM customers");
+    query.prepare(readQuery(queryString));
     query.exec();
 
     if(tableWidget != nullptr){
