@@ -9,6 +9,7 @@
 #include <QSqlQuery>
 #include "QDebug"
 #include "dialog.h"
+#include "color.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -27,6 +28,12 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_2_clicked()
 {
+    color myColor = color(10, 20, 30);
+    qDebug() << myColor.R;
+    qDebug() << myColor.G;
+    qDebug() << myColor.B;
+
+
     //connect to classicmodels database
     //todo: if no connection check
     QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");

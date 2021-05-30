@@ -18,10 +18,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     dialog.cpp \
     main.cpp \
+    color.cpp \
     mainwindow.cpp
 
 HEADERS += \
     dialog.h \
+    color.h \
     mainwindow.h
 
 FORMS += \
