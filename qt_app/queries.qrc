@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>queries/listEmployees</file>
+        <file>queries/listCustomers</file>
+    </qresource>
+</RCC>

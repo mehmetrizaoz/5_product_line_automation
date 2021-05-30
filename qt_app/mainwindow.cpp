@@ -11,6 +11,33 @@
 #include "dialog.h"
 #include "color.h"
 
+#include <QCoreApplication>
+#include <QFile>
+#include <QString>
+#include <QTextStream>
+
+
+QString MainWindow::read(QString filename){
+    QFile file(filename);
+    if(!file.open(QFile::ReadOnly |
+                  QFile::Text))
+    {
+        qDebug() << " Could not open the file for reading";
+        return "";
+    }
+
+    QTextStream in(&file);
+    QString myText = in.readAll();
+
+    // put QString into qDebug stream
+    //qDebug() << myText;
+
+    file.close();
+
+    return myText;
+}
+
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -34,6 +61,10 @@ void MainWindow::on_pushButton_2_clicked()
     qDebug() << myColor.B;
 
 
+    //read("://queries/listEmployees");
+    //qDebug() << read("://queries/listCustomers");
+
+
     //connect to classicmodels database
     //todo: if no connection check
     QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
@@ -47,7 +78,7 @@ void MainWindow::on_pushButton_2_clicked()
     //create and execute query
     //todo: make code below a generic class
     QSqlQuery query;
-    query.prepare("SELECT * FROM customers");
+    query.prepare(read("://queries/listCustomers"));
     query.exec();
     int columnCount = query.record().count();
     int rowCount = query.size();
@@ -67,10 +98,9 @@ void MainWindow::on_pushButton_2_clicked()
     }
 
     //fit cell width according to its content
-    ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    //ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
 };
-
 
 void MainWindow::on_pushButton_3_clicked()
 {
