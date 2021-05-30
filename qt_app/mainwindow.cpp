@@ -3,19 +3,10 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "QMessageBox"
-#include <QSqlDatabase>
-#include <QSqlDriver>
-#include <QtSql>
 #include <QString>
-#include <QSqlError>
-#include <QSqlQuery>
 #include "QDebug"
 #include "dialog.h"
 #include "database.h"
-#include <QCoreApplication>
-#include <QFile>
-#include <QString>
-#include <QTextStream>
 #include <QTableWidget>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -23,24 +14,12 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->pushButton->setText("Hello");
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
-
-void MainWindow::on_pushButton_2_clicked()
-{
-    database myDB = database();
-    if(myDB.connect("127.0.0.1", "classicmodels", "root", "Asd.1234") != false){
-       myDB.execQuery("://queries/listCustomers", ui->tableWidget);
-    }
-    else{
-       qDebug() << "cant connect to database";
-    }
-};
 
 void MainWindow::on_pushButton_3_clicked()
 {

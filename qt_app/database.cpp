@@ -27,7 +27,7 @@ bool database::connect(QString hostName, QString database, QString user, QString
     db.setHostName("127.0.0.1");
     db.setDatabaseName("classicmodels");
     db.setUserName("root");
-    db.setPassword("Asd.1234");
+    db.setPassword(psw);
     return db.open();
 }
 

@@ -1,6 +1,5 @@
 #include "dialog.h"
 #include "ui_dialog.h"
-#include "mainwindow.h"
 
 Dialog::Dialog(QWidget *parent) :
     QDialog(parent),
@@ -16,8 +15,13 @@ Dialog::~Dialog()
 
 void Dialog::on_pushButton_clicked()
 {
-    //MainWindow mmm;
-    //mmm.exec();
+    password = ui->lineEdit->text();
 
-    this->close();
+    database myDB = database();
+    if(myDB.connect("127.0.0.1", "classicmodels", "root", password) != false){
+       myDB.execQuery("://queries/listCustomers", ui->tableWidget);
+    }
+    else{
+       qDebug() << "cant connect to database";
+    }
 }
