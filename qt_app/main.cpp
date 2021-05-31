@@ -1,5 +1,5 @@
 #include "mainwindow.h"
-#include "dialog.h"
+#include "queryResult.h"
 
 #include <QApplication>
 

@@ -16,7 +16,7 @@
 #include <QString>
 #include <QSqlError>
 #include "QDebug"
-#include "dialog.h"
+#include "queryResult.h"
 #include <QCoreApplication>
 #include <QFile>
 #include <QTextStream>

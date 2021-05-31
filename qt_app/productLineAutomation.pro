@@ -17,21 +17,21 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     database.cpp \
-    dialog.cpp \
     main.cpp \
     mainwindow.cpp \
-    newoffice.cpp
+    newoffice.cpp \
+    queryResult.cpp
 
 HEADERS += \
     database.h \
-    dialog.h \
     mainwindow.h \
-    newoffice.h
+    newoffice.h \
+    queryResult.h
 
 FORMS += \
-    dialog.ui \
     mainwindow.ui \
-    newoffice.ui
+    newoffice.ui \
+    queryResult.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

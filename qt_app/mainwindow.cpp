@@ -5,7 +5,7 @@
 #include "QMessageBox"
 #include <QString>
 #include "QDebug"
-#include "dialog.h"
+#include "queryResult.h"
 #include "database.h"
 #include "newoffice.h"
 #include <QTableWidget>

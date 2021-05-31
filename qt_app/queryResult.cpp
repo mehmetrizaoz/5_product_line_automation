@@ -1,4 +1,4 @@
-#include "dialog.h"
+#include "queryResult.h"
 #include "ui_dialog.h"
 #include <QVBoxLayout>
 
