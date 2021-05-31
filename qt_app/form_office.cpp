@@ -1,14 +1,13 @@
-#include "office.h"
-#include "ui_office.h"
+#include "form_office.h"
+#include "ui_form_office.h"
 #include <QMainWindow>
 #include <QVBoxLayout>
 
-NewOffice::NewOffice(QWidget *parent) :
+Form_Office::Form_Office(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::NewOffice)
+    ui(new Ui::Form_Office)
 {
     ui->setupUi(this);
-
     this->setStyleSheet("background-color: rgb(123, 204, 181)");
     ui->lineEdit->setStyleSheet("background-color: white;");
     ui->lineEdit_2->setStyleSheet("background-color: white;");
@@ -41,9 +40,10 @@ NewOffice::NewOffice(QWidget *parent) :
     layout->addWidget(ui->lineEdit_9,8,1);
     layout->addWidget(ui->pushButton_1,9,0,1,0);
     this->setLayout(layout);
+
 }
 
-NewOffice::~NewOffice()
+Form_Office::~Form_Office()
 {
     delete ui;
 }

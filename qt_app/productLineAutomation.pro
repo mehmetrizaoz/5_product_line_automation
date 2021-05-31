@@ -18,22 +18,22 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     database.cpp \
     form_employee.cpp \
+    form_office.cpp \
     main.cpp \
     mainwindow.cpp \
-    office.cpp \
     queryResult.cpp
 
 HEADERS += \
     database.h \
     form_employee.h \
+    form_office.h \
     mainwindow.h \
-    office.h \
     queryResult.h
 
 FORMS += \
     form_employee.ui \
+    form_office.ui \
     mainwindow.ui \
-    office.ui \
     queryResult.ui
 
 # Default rules for deployment.

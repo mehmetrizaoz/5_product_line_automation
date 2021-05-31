@@ -7,7 +7,7 @@
 #include "QDebug"
 #include "queryResult.h"
 #include "database.h"
-#include "office.h"
+#include "form_office.h"
 #include <QTableWidget>
 #include "form_employee.h"
 
@@ -36,7 +36,7 @@ void MainWindow::on_pushButton_3_clicked()
 
 void MainWindow::on_pushButton_clicked()
 {
-    NewOffice ddd;
+    Form_Office ddd;
     ddd.setModal(true);
     ddd.exec();
 }
