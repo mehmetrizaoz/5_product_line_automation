@@ -9,6 +9,7 @@
 #include "database.h"
 #include "office.h"
 #include <QTableWidget>
+#include "employee.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -36,6 +37,13 @@ void MainWindow::on_pushButton_3_clicked()
 void MainWindow::on_pushButton_clicked()
 {
     NewOffice ddd;
+    ddd.setModal(true);
+    ddd.exec();
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    employee ddd;
     ddd.setModal(true);
     ddd.exec();
 }

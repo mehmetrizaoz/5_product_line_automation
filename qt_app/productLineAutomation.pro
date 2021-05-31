@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     database.cpp \
+    employee.cpp \
     main.cpp \
     mainwindow.cpp \
     office.cpp \
@@ -24,11 +25,13 @@ SOURCES += \
 
 HEADERS += \
     database.h \
+    employee.h \
     mainwindow.h \
     office.h \
     queryResult.h
 
 FORMS += \
+    employee.ui \
     mainwindow.ui \
     office.ui \
     queryResult.ui
