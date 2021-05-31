@@ -1,5 +1,5 @@
 #include "office.h"
-#include "ui_newoffice.h"
+#include "ui_office.h"
 #include <QMainWindow>
 #include <QVBoxLayout>
 

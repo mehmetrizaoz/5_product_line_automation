@@ -1,5 +1,5 @@
 #include "queryResult.h"
-#include "ui_dialog.h"
+#include "ui_queryResult.h"
 #include <QVBoxLayout>
 
 Dialog::Dialog(QWidget *parent) :
