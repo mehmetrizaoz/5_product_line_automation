@@ -1,11 +1,21 @@
 #include "dialog.h"
 #include "ui_dialog.h"
+#include <QVBoxLayout>
 
 Dialog::Dialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Dialog)
 {
     ui->setupUi(this);
+
+    QGridLayout *layout = new QGridLayout();
+    layout->addWidget(ui->tableWidget,0,0,1,0);
+    layout->addWidget(ui->pushButton,1,0);
+    layout->addWidget(ui->lineEdit,1,1);
+    this->setLayout(layout);
+    setWindowTitle(tr("List of all Customers"));
+
+    this->setStyleSheet("background-color: rgb(123, 204, 181)");
 }
 
 Dialog::~Dialog()

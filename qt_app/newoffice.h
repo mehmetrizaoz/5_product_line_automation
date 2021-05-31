@@ -2,6 +2,7 @@
 #define NEWOFFICE_H
 
 #include <QDialog>
+#include <QMainWindow>
 
 namespace Ui {
 class NewOffice;

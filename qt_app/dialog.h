@@ -5,6 +5,8 @@
 #include <QString>
 #include "QDebug"
 #include "database.h"
+#include <QMainWindow>
+
 
 namespace Ui {
 class Dialog;

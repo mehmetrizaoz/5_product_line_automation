@@ -16,6 +16,9 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     ui->frame->setStyleSheet("background-color: rgb(0,255,0)");
+    setCentralWidget(ui->frame);
+
+    this->setStyleSheet("background-color: rgb(123, 204, 181)");
 }
 
 MainWindow::~MainWindow()
