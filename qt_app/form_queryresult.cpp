@@ -1,13 +1,13 @@
-#include "queryResult.h"
-#include "ui_queryResult.h"
+#include "form_queryresult.h"
 #include <QVBoxLayout>
+#include "ui_form_queryresult.h"
+#include "database.h"
 
-Dialog::Dialog(QWidget *parent) :
+Form_QueryResult::Form_QueryResult(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::Dialog)
+    ui(new Ui::Form_QueryResult)
 {
     ui->setupUi(this);
-
     QGridLayout *layout = new QGridLayout();
     layout->addWidget(ui->tableWidget,0,0,1,0);
     layout->addWidget(ui->pushButton,1,0);
@@ -20,12 +20,12 @@ Dialog::Dialog(QWidget *parent) :
     ui->lineEdit->setStyleSheet("background-color: white;");
 }
 
-Dialog::~Dialog()
+Form_QueryResult::~Form_QueryResult()
 {
     delete ui;
 }
 
-void Dialog::on_pushButton_clicked()
+void Form_QueryResult::on_pushButton_clicked()
 {
     password = ui->lineEdit->text();
 

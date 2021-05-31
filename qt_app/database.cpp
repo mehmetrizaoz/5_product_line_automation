@@ -17,7 +17,7 @@
 #include <QFile>
 #include <QString>
 #include <QTextStream>
-#include "queryResult.h"
+#include "form_queryresult.h"
 #include "database.h"
 
 QSqlDatabase db;

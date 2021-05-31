@@ -19,22 +19,22 @@ SOURCES += \
     database.cpp \
     form_employee.cpp \
     form_office.cpp \
+    form_queryresult.cpp \
     main.cpp \
-    mainwindow.cpp \
-    queryResult.cpp
+    mainwindow.cpp
 
 HEADERS += \
     database.h \
     form_employee.h \
     form_office.h \
-    mainwindow.h \
-    queryResult.h
+    form_queryresult.h \
+    mainwindow.h
 
 FORMS += \
     form_employee.ui \
     form_office.ui \
-    mainwindow.ui \
-    queryResult.ui
+    form_queryresult.ui \
+    mainwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

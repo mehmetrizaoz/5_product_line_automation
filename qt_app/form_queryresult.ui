@@ -1,38 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Dialog</class>
- <widget class="QDialog" name="Dialog">
+ <class>Form_QueryResult</class>
+ <widget class="QDialog" name="Form_QueryResult">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>704</width>
-    <height>300</height>
+    <width>713</width>
+    <height>254</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QPushButton" name="pushButton">
-   <property name="geometry">
-    <rect>
-     <x>300</x>
-     <y>220</y>
-     <width>89</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>PushButton</string>
-   </property>
-  </widget>
   <widget class="QTableWidget" name="tableWidget">
    <property name="enabled">
     <bool>true</bool>
    </property>
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>20</x>
      <y>10</y>
      <width>681</width>
      <height>192</height>
@@ -45,7 +32,7 @@
    </property>
    <property name="geometry">
     <rect>
-     <x>180</x>
+     <x>190</x>
      <y>220</y>
      <width>113</width>
      <height>25</height>
@@ -53,6 +40,19 @@
    </property>
    <property name="echoMode">
     <enum>QLineEdit::Password</enum>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>220</y>
+     <width>89</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>PushButton</string>
    </property>
   </widget>
  </widget>

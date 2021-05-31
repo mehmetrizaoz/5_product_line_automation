@@ -5,7 +5,7 @@
 #include "QMessageBox"
 #include <QString>
 #include "QDebug"
-#include "queryResult.h"
+#include "form_queryresult.h"
 #include "database.h"
 #include "form_office.h"
 #include <QTableWidget>
@@ -29,7 +29,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_3_clicked()
 {
-    Dialog ddd;
+    Form_QueryResult ddd;
     ddd.setModal(true);
     ddd.exec();
 }
