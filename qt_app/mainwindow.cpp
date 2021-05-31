@@ -7,6 +7,7 @@
 #include "QDebug"
 #include "dialog.h"
 #include "database.h"
+#include "newoffice.h"
 #include <QTableWidget>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -14,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->frame->setStyleSheet("background-color: rgb(0,255,0)");
 }
 
 MainWindow::~MainWindow()
@@ -24,6 +26,13 @@ MainWindow::~MainWindow()
 void MainWindow::on_pushButton_3_clicked()
 {
     Dialog ddd;
+    ddd.setModal(true);
+    ddd.exec();
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    NewOffice ddd;
     ddd.setModal(true);
     ddd.exec();
 }

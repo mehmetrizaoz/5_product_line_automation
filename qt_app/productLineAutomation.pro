@@ -19,16 +19,19 @@ SOURCES += \
     database.cpp \
     dialog.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    newoffice.cpp
 
 HEADERS += \
     database.h \
     dialog.h \
-    mainwindow.h
+    mainwindow.h \
+    newoffice.h
 
 FORMS += \
     dialog.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    newoffice.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
