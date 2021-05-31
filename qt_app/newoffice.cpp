@@ -9,6 +9,17 @@ NewOffice::NewOffice(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    this->setStyleSheet("background-color: rgb(123, 204, 181)");
+    ui->lineEdit->setStyleSheet("background-color: white;");
+    ui->lineEdit_2->setStyleSheet("background-color: white;");
+    ui->lineEdit_3->setStyleSheet("background-color: white;");
+    ui->lineEdit_4->setStyleSheet("background-color: white;");
+    ui->lineEdit_5->setStyleSheet("background-color: white;");
+    ui->lineEdit_6->setStyleSheet("background-color: white;");
+    ui->lineEdit_7->setStyleSheet("background-color: white;");
+    ui->lineEdit_8->setStyleSheet("background-color: white;");
+    ui->lineEdit_9->setStyleSheet("background-color: white;");
+
     QGridLayout *layout = new QGridLayout();
     layout->addWidget(ui->label,0,0);
     layout->addWidget(ui->lineEdit,0,1);
@@ -30,8 +41,6 @@ NewOffice::NewOffice(QWidget *parent) :
     layout->addWidget(ui->lineEdit_9,8,1);
     layout->addWidget(ui->pushButton_1,9,0,1,0);
     this->setLayout(layout);
-
-    this->setStyleSheet("background-color: rgb(123, 204, 181)");
 }
 
 NewOffice::~NewOffice()
