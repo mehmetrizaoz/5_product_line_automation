@@ -19,18 +19,18 @@ SOURCES += \
     database.cpp \
     main.cpp \
     mainwindow.cpp \
-    newoffice.cpp \
+    office.cpp \
     queryResult.cpp
 
 HEADERS += \
     database.h \
     mainwindow.h \
-    newoffice.h \
+    office.h \
     queryResult.h
 
 FORMS += \
     mainwindow.ui \
-    newoffice.ui \
+    office.ui \
     queryResult.ui
 
 # Default rules for deployment.

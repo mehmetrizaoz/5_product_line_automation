@@ -16,6 +16,8 @@ Dialog::Dialog(QWidget *parent) :
     setWindowTitle(tr("List of all Customers"));
 
     this->setStyleSheet("background-color: rgb(123, 204, 181)");
+    ui->tableWidget->setStyleSheet("background-color: white;");
+    ui->lineEdit->setStyleSheet("background-color: white;");
 }
 
 Dialog::~Dialog()

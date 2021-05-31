@@ -7,7 +7,7 @@
 #include "QDebug"
 #include "queryResult.h"
 #include "database.h"
-#include "newoffice.h"
+#include "office.h"
 #include <QTableWidget>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -15,7 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->frame->setStyleSheet("background-color: rgb(0,255,0)");
+
     setCentralWidget(ui->frame);
 
     this->setStyleSheet("background-color: rgb(123, 204, 181)");

@@ -1,4 +1,4 @@
-#include "newoffice.h"
+#include "office.h"
 #include "ui_newoffice.h"
 #include <QMainWindow>
 #include <QVBoxLayout>
