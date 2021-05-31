@@ -24,9 +24,9 @@ QSqlDatabase db;
 
 bool database::connect(QString hostName, QString database, QString user, QString psw ){
     db = QSqlDatabase::addDatabase("QMYSQL");
-    db.setHostName("127.0.0.1");
-    db.setDatabaseName("classicmodels");
-    db.setUserName("root");
+    db.setHostName(hostName);
+    db.setDatabaseName(database);
+    db.setUserName(user);
     db.setPassword(psw);
     return db.open();
 }
