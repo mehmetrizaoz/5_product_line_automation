@@ -1,10 +1,10 @@
-#include "employee.h"
-#include "ui_employee.h"
-#include <QVBoxLayout>
+#include "form_employee.h"
+#include "ui_form_employee.h"
+#include <QGridLayout>
 
-employee::employee(QWidget *parent) :
+Form_Employee::Form_Employee(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::employee)
+    ui(new Ui::Form_Employee)
 {
     ui->setupUi(this);
     this->setStyleSheet("background-color: rgb(123, 204, 181)");
@@ -36,9 +36,10 @@ employee::employee(QWidget *parent) :
     layout->addWidget(ui->lineEdit_8,7,1);
     layout->addWidget(ui->pushButton,8,0,1,0);
     this->setLayout(layout);
+
 }
 
-employee::~employee()
+Form_Employee::~Form_Employee()
 {
     delete ui;
 }
