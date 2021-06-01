@@ -31,6 +31,7 @@ public:
    void execQuery(QString queryString, QTableWidget *tableWidget);
    bool connect(QString hostName, QString database, QString user, QString psw );
    QString readQuery(QString filename);
+   void disconnect();
 private:
 
 };

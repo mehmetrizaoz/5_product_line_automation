@@ -31,6 +31,10 @@ bool database::connect(QString hostName, QString database, QString user, QString
     return db.open();
 }
 
+void database::disconnect(){
+    db.close();
+}
+
 QString database::readQuery(QString filename){
     QFile file(filename);
     if(!file.open(QFile::ReadOnly |

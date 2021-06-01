@@ -6,6 +6,7 @@
 #include <QString>
 #include <QDebug>
 #include <QTableWidget>
+#include <QStatusBar>
 #include "database.h"
 #include "form_productlines.h"
 #include "form_queryresult.h"
@@ -14,19 +15,32 @@
 #include "form_product.h"
 #include "form_customer.h"
 
+database *myDB;
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-    ui->setupUi(this);
+    ui->setupUi(this);   
 
-    setCentralWidget(ui->frame);
+    //setCentralWidget(ui->frame);
 
+    ui->statusbar->showMessage("Connected");
     this->setStyleSheet("background-color: rgb(123, 204, 181)");
+
+    //ui->comboBox->addItem("abc");
+    //ui->comboBox->addItem("def");
+
+    qDebug() << "connecting to database ...";
+    myDB = new database();
+    myDB->connect("127.0.0.1", "classicmodels", "root", "Asd.1234");
+
 }
 
 MainWindow::~MainWindow()
 {
+    qDebug() << "disconnecting from database ...";
+    myDB->disconnect();
     delete ui;
 }
 
@@ -71,3 +85,5 @@ void MainWindow::on_pushButton_6_clicked()
     cus.setModal(true);
     cus.exec();
 }
+
+
