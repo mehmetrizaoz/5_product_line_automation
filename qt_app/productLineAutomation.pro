@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     database.cpp \
+    form_customer.cpp \
     form_employee.cpp \
     form_office.cpp \
     form_product.cpp \
@@ -27,6 +28,7 @@ SOURCES += \
 
 HEADERS += \
     database.h \
+    form_customer.h \
     form_employee.h \
     form_office.h \
     form_product.h \
@@ -35,6 +37,7 @@ HEADERS += \
     mainwindow.h
 
 FORMS += \
+    form_customer.ui \
     form_employee.ui \
     form_office.ui \
     form_product.ui \
