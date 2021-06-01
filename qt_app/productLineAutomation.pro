@@ -19,6 +19,7 @@ SOURCES += \
     database.cpp \
     form_employee.cpp \
     form_office.cpp \
+    form_productlines.cpp \
     form_queryresult.cpp \
     main.cpp \
     mainwindow.cpp
@@ -27,12 +28,14 @@ HEADERS += \
     database.h \
     form_employee.h \
     form_office.h \
+    form_productlines.h \
     form_queryresult.h \
     mainwindow.h
 
 FORMS += \
     form_employee.ui \
     form_office.ui \
+    form_productlines.ui \
     form_queryresult.ui \
     mainwindow.ui
 

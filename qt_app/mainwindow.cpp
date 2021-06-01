@@ -2,13 +2,14 @@
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "QMessageBox"
+#include <QMessageBox>
 #include <QString>
-#include "QDebug"
-#include "form_queryresult.h"
-#include "database.h"
-#include "form_office.h"
+#include <QDebug>
 #include <QTableWidget>
+#include "database.h"
+#include "form_productlines.h"
+#include "form_queryresult.h"
+#include "form_office.h"
 #include "form_employee.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -29,21 +30,28 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_3_clicked()
 {
-    Form_QueryResult ddd;
-    ddd.setModal(true);
-    ddd.exec();
+    Form_QueryResult qry;
+    qry.setModal(true);
+    qry.exec();
 }
 
 void MainWindow::on_pushButton_clicked()
 {
-    Form_Office ddd;
-    ddd.setModal(true);
-    ddd.exec();
+    Form_Office ofc;
+    ofc.setModal(true);
+    ofc.exec();
 }
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    Form_Employee ddd;
-    ddd.setModal(true);
-    ddd.exec();
+    Form_Employee emp;
+    emp.setModal(true);
+    emp.exec();
+}
+
+void MainWindow::on_pushButton_4_clicked()
+{
+    Form_ProductLines pl;
+    pl.setModal(true);
+    pl.exec();
 }

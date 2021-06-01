@@ -8,6 +8,7 @@ Form_QueryResult::Form_QueryResult(QWidget *parent) :
     ui(new Ui::Form_QueryResult)
 {
     ui->setupUi(this);
+    this->setWindowTitle("Query Result");
     QGridLayout *layout = new QGridLayout();
     layout->addWidget(ui->tableWidget,0,0,1,0);
     layout->addWidget(ui->pushButton,1,0);
