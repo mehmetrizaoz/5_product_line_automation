@@ -11,6 +11,7 @@
 #include "form_queryresult.h"
 #include "form_office.h"
 #include "form_employee.h"
+#include "form_product.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -54,4 +55,11 @@ void MainWindow::on_pushButton_4_clicked()
     Form_ProductLines pl;
     pl.setModal(true);
     pl.exec();
+}
+
+void MainWindow::on_pushButton_5_clicked()
+{
+    Form_Product prd;
+    prd.setModal(true);
+    prd.exec();
 }
