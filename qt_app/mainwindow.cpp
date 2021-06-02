@@ -15,8 +15,6 @@
 #include "form_product.h"
 #include "form_customer.h"
 
-database *myDB;
-
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
