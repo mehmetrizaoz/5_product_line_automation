@@ -28,10 +28,12 @@ bool database::connect(QString hostName, QString database, QString user, QString
     db.setDatabaseName(database);
     db.setUserName(user);
     db.setPassword(psw);
+    qDebug()<<"connecting";
     return db.open();
 }
 
 void database::disconnect(){
+    qDebug()<<"disconnecting";
     db.close();
 }
 

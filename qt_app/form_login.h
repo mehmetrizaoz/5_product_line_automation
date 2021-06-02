@@ -15,6 +15,9 @@ public:
     explicit Form_Login(QWidget *parent = nullptr);
     ~Form_Login();
 
+private slots:
+    void on_pushButton_clicked();
+
 private:
     Ui::Form_Login *ui;
 };

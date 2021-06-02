@@ -31,16 +31,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     //ui->comboBox->addItem("abc");
     //ui->comboBox->addItem("def");
-
-    qDebug() << "connecting to database ...";
-    myDB = new database();
-    myDB->connect("127.0.0.1", "classicmodels", "root", "Asd.1234");
-
 }
 
 MainWindow::~MainWindow()
 {
-    qDebug() << "disconnecting from database ...";
     myDB->disconnect();
     delete ui;
 }
