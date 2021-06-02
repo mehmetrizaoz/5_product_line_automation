@@ -9,7 +9,7 @@ Form_Employee::Form_Employee(QWidget *parent) :
     ui->setupUi(this);
     this->setWindowTitle("Employee");
 
-    this->setStyleSheet("background-color: rgb(123, 204, 181)");
+    //todo: remove setting background color
     ui->lineEdit->setStyleSheet("background-color: white;");
     ui->lineEdit_2->setStyleSheet("background-color: white;");
     ui->lineEdit_3->setStyleSheet("background-color: white;");

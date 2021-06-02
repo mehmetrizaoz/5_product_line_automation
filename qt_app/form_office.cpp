@@ -9,7 +9,8 @@ Form_Office::Form_Office(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowTitle("Office");
-    this->setStyleSheet("background-color: rgb(123, 204, 181)");
+
+    //todo: remove setting background color
     ui->lineEdit->setStyleSheet("background-color: white;");
     ui->lineEdit_2->setStyleSheet("background-color: white;");
     ui->lineEdit_3->setStyleSheet("background-color: white;");

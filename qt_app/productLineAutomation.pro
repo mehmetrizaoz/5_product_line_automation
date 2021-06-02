@@ -23,7 +23,6 @@ SOURCES += \
     form_office.cpp \
     form_product.cpp \
     form_productlines.cpp \
-    form_queryresult.cpp \
     main.cpp \
     mainwindow.cpp
 
@@ -35,7 +34,6 @@ HEADERS += \
     form_office.h \
     form_product.h \
     form_productlines.h \
-    form_queryresult.h \
     mainwindow.h
 
 FORMS += \
@@ -45,7 +43,6 @@ FORMS += \
     form_office.ui \
     form_product.ui \
     form_productlines.ui \
-    form_queryresult.ui \
     mainwindow.ui
 
 # Default rules for deployment.

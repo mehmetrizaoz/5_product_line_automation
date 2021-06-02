@@ -8,11 +8,13 @@ Form_ProductLines::Form_ProductLines(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowTitle("Product Line");
-    this->setStyleSheet("background-color: rgb(123, 204, 181)");
+
+    //todo: remove setting background color
     ui->lineEdit->setStyleSheet("background-color: white;");
     ui->lineEdit_2->setStyleSheet("background-color: white;");
     ui->lineEdit_3->setStyleSheet("background-color: white;");
     ui->lineEdit_4->setStyleSheet("background-color: white;");
+
     QGridLayout *layout = new QGridLayout();
     layout->addWidget(ui->label,0,0);
     layout->addWidget(ui->lineEdit,0,1);
@@ -22,7 +24,6 @@ Form_ProductLines::Form_ProductLines(QWidget *parent) :
     layout->addWidget(ui->lineEdit_3,2,1);
     layout->addWidget(ui->label_4,3,0);
     layout->addWidget(ui->lineEdit_4,3,1);
-
     layout->addWidget(ui->pushButton_1,9,0,1,0);
     this->setLayout(layout);
 }
