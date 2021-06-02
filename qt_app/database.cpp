@@ -35,6 +35,7 @@ bool database::connect(QString hostName, QString database, QString user, QString
 void database::disconnect(){
     qDebug()<<"disconnecting";
     db.close();
+    qDebug()<<"disconnected";
 }
 
 QString database::readQuery(QString filename){
