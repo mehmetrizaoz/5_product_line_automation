@@ -14,12 +14,15 @@
 #include "form_employee.h"
 #include "form_product.h"
 #include "form_customer.h"
+#include "form_login.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);   
+
+    login = new Form_Login();
 
     //setCentralWidget(ui->frame);
 
@@ -79,9 +82,7 @@ void MainWindow::on_pushButton_5_clicked()
 
 void MainWindow::on_pushButton_6_clicked()
 {
-    Form_Customer cus;
-    cus.setModal(true);
-    cus.exec();
+    login->show();
 }
 
 
