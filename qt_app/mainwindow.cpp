@@ -19,58 +19,56 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-    ui->setupUi(this);   
-    //this->setStyleSheet("background-color: rgb(123, 204, 181)");
+    ui->setupUi(this);       
     login = new Form_Login();
 
     //setCentralWidget(ui->frame);
     //ui->statusbar->showMessage("Connected");
-    ui->comboBox->addItem("add office");
-    ui->comboBox->addItem("delete office");
-    ui->comboBox->addItem("update office");
-    ui->comboBox->addItem("list offices");
-    ui->comboBox->addItem("list number of employees");
+    ui->comboBox_01->addItem("add office");
+    ui->comboBox_01->addItem("delete office");
+    ui->comboBox_01->addItem("update office");
+    ui->comboBox_01->addItem("list offices");
+    ui->comboBox_01->addItem("group employees by office");
 
-    ui->comboBox_2->addItem("add employee");
-    ui->comboBox_2->addItem("delete employee");
-    ui->comboBox_2->addItem("update employee");
-    ui->comboBox_2->addItem("list employees");
-    ui->comboBox_2->addItem("list reporters of an employee");
-    ui->comboBox_2->addItem("list customers of an employee");
-    ui->comboBox_2->addItem("total number of employees per employee");
+    ui->comboBox_02->addItem("add employee");
+    ui->comboBox_02->addItem("delete employee");
+    ui->comboBox_02->addItem("update employee");
+    ui->comboBox_02->addItem("list employees");
+    ui->comboBox_02->addItem("group reporters by employees");
+    ui->comboBox_02->addItem("group customers by employees");
+    ui->comboBox_02->addItem("group sales by employees");
 
-    ui->comboBox_3->addItem("add customer");
-    ui->comboBox_3->addItem("delete customer");
-    ui->comboBox_3->addItem("update customer");
-    ui->comboBox_3->addItem("list customers");
-    ui->comboBox_3->addItem("list orders of a customer");
-    ui->comboBox_3->addItem("list products of a customer");
-    ui->comboBox_3->addItem("list payments of a customer");
+    ui->comboBox_03->addItem("add customer");
+    ui->comboBox_03->addItem("delete customer");
+    ui->comboBox_03->addItem("update customer");
+    ui->comboBox_03->addItem("list customers");
+    ui->comboBox_03->addItem("group orders by customer");
+    ui->comboBox_03->addItem("group products by customer");
+    ui->comboBox_03->addItem("group payments by customer");
 
-    ui->comboBox_4->addItem("add order");
-    ui->comboBox_4->addItem("delete order");
-    ui->comboBox_4->addItem("update order");
-    ui->comboBox_4->addItem("list orders");
-    ui->comboBox_4->addItem("list order for each customes");
+    ui->comboBox_04->addItem("add order");
+    ui->comboBox_04->addItem("delete order");
+    ui->comboBox_04->addItem("update order");
+    ui->comboBox_04->addItem("list orders");
+    ui->comboBox_04->addItem("group orders by customer");
 
-    ui->comboBox_5->addItem("add payment");
-    ui->comboBox_5->addItem("delete payment");
-    ui->comboBox_5->addItem("update payment");
-    ui->comboBox_5->addItem("list payments");
-    ui->comboBox_5->addItem("list payment for each customes");
+    ui->comboBox_05->addItem("add payment");
+    ui->comboBox_05->addItem("delete payment");
+    ui->comboBox_05->addItem("update payment");
+    ui->comboBox_05->addItem("list payments");
 
-    ui->comboBox_6->addItem("add product");
-    ui->comboBox_6->addItem("delete product");
-    ui->comboBox_6->addItem("update product");
-    ui->comboBox_6->addItem("list products");
-    ui->comboBox_6->addItem("list numbers sales of all the products");
-    ui->comboBox_6->addItem("list products in an order");
+    ui->comboBox_06->addItem("add product");
+    ui->comboBox_06->addItem("delete product");
+    ui->comboBox_06->addItem("update product");
+    ui->comboBox_06->addItem("list products");
+    ui->comboBox_06->addItem("group sales by product");
+    ui->comboBox_06->addItem("group orders by product");
 
-    ui->comboBox_7->addItem("add product line");
-    ui->comboBox_7->addItem("delete product line");
-    ui->comboBox_7->addItem("update product line");
-    ui->comboBox_7->addItem("list product lines");
-    ui->comboBox_7->addItem("list products manufactered in a line");
+    ui->comboBox_07->addItem("add product line");
+    ui->comboBox_07->addItem("delete product line");
+    ui->comboBox_07->addItem("update product line");
+    ui->comboBox_07->addItem("list product lines");
+    ui->comboBox_07->addItem("group products by line");
 }
 
 MainWindow::~MainWindow()
@@ -80,40 +78,31 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_pushButton_6_clicked()
+void MainWindow::on_comboBox_01_activated(int index)
 {
-    login->show();
-}
-
-void MainWindow::on_comboBox_activated(int index)
-{
-    if(ui->comboBox->currentIndex()==0){
+    if(ui->comboBox_01->currentIndex()==0){
         Form_Office ofc;
         ofc.setModal(true);
         ofc.exec();
     }
-    else if(ui->comboBox->currentIndex()==1){
+    else if(ui->comboBox_01->currentIndex()==1){
         qDebug()<<"1";
     }
-    else if(ui->comboBox->currentIndex()==2){
+    else if(ui->comboBox_01->currentIndex()==2){
         qDebug()<<"2";
     }
-    else if(ui->comboBox->currentIndex()==3){
+    else if(ui->comboBox_01->currentIndex()==3){
         database myDB = database();
-        myDB.execQuery("://queries/list_offices", ui->tableWidget);
+        myDB.execQuery("://queries/list_offices", ui->tableWidget_01);
     }
-    else if(ui->comboBox->currentIndex()==4){
+    else if(ui->comboBox_01->currentIndex()==4){
         database myDB = database();
-        myDB.execQuery("://queries/number_of_employees_for_each_office", ui->tableWidget);
+        myDB.execQuery("://queries/list_customers", ui->tableWidget_01);
     }
-}
-
-void MainWindow::on_comboBox_2_activated(int index)
-{
 
 }
 
-void MainWindow::on_comboBox_3_activated(int index)
+void MainWindow::on_pushButton_01_clicked()
 {
-
+    login->show();
 }

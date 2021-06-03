@@ -16,13 +16,9 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-private slots:
-    void on_pushButton_6_clicked();
-    void on_comboBox_activated(int index);
-
-    void on_comboBox_2_activated(int index);
-
-    void on_comboBox_3_activated(int index);
+private slots:    
+    void on_comboBox_01_activated(int index);
+    void on_pushButton_01_clicked();
 
 private:
     Ui::MainWindow *ui;
