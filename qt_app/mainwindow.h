@@ -19,10 +19,10 @@ public:
 private slots:    
     void on_comboBox_01_activated(int index);
     void on_pushButton_01_clicked();
-
+    void getLoginStatus();
 private:
     Ui::MainWindow *ui;
-    Form_Login *login;
+    Form_Login *login;    
 };
 
 #endif // MAINWINDOW_H

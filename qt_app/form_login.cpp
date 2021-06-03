@@ -10,12 +10,18 @@ Form_Login::Form_Login(QWidget *parent) :
     ui->setupUi(this);
     this->setFixedSize(278,194);
     this->setWindowTitle("Login");
+
+    connect(ui->pushButton, SIGNAL(clicked()), this, SIGNAL(loginClicked()));
 }
 
 Form_Login::~Form_Login()
 {
     delete ui;
 }
+/*
+void Form_Login::aaa(){
+    qDebug() << "aaa";
+}*/
 
 void Form_Login::on_pushButton_clicked()
 {
@@ -24,14 +30,17 @@ void Form_Login::on_pushButton_clicked()
     QString password = ui->lineEdit_2->text();
     QString hostname = ui->lineEdit_3->text();
     QString database = ui->lineEdit_4->text();
+
     if(myDB->connect(hostname, database, username, password) == true)
     {
        qDebug() << "connected";
+       isConnected = true;
        this->close();
     }
     else
     {
        //todo: use messagebox
+       isConnected = false;
        qDebug() << "cant connect to database server";
     }
 }

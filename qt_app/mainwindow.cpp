@@ -23,7 +23,8 @@ MainWindow::MainWindow(QWidget *parent)
     login = new Form_Login();
 
     //setCentralWidget(ui->frame);
-    //ui->statusbar->showMessage("Connected");
+    ui->statusbar->showMessage("Disconnected");
+
     ui->comboBox_01->addItem("add office");
     ui->comboBox_01->addItem("delete office");
     ui->comboBox_01->addItem("update office");
@@ -69,6 +70,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->comboBox_07->addItem("update product line");
     ui->comboBox_07->addItem("list product lines");
     ui->comboBox_07->addItem("group products by line");
+
+    connect(login, SIGNAL(loginClicked()), this, SLOT(getLoginStatus()));
 }
 
 MainWindow::~MainWindow()
@@ -76,6 +79,14 @@ MainWindow::~MainWindow()
     database *myDB = new database();
     myDB->disconnect();
     delete ui;
+}
+
+void MainWindow::getLoginStatus(){
+    if(login->isConnected == true){
+        ui->statusbar->showMessage("Connected");
+    }
+    else
+        ui->statusbar->showMessage("Disconnected");
 }
 
 void MainWindow::on_comboBox_01_activated(int index)
@@ -99,7 +110,6 @@ void MainWindow::on_comboBox_01_activated(int index)
         database myDB = database();
         myDB.execQuery("://queries/list_customers", ui->tableWidget_01);
     }
-
 }
 
 void MainWindow::on_pushButton_01_clicked()
