@@ -2,6 +2,8 @@
 #include "ui_form_login.h"
 #include <QGridLayout>
 #include "database.h"
+#include <QDesktopWidget>
+#include <QStyle>
 
 Form_Login::Form_Login(QWidget *parent) :
     QWidget(parent),
@@ -10,6 +12,8 @@ Form_Login::Form_Login(QWidget *parent) :
     ui->setupUi(this);
     this->setFixedSize(278,194);
     this->setWindowTitle("Login");
+
+    window()->setGeometry(QStyle::alignedRect(Qt::LeftToRight,Qt::AlignCenter,window()->size(),qApp->desktop()->availableGeometry()));
 
     connect(ui->pushButton, SIGNAL(clicked()), this, SIGNAL(loginClicked()));
 }

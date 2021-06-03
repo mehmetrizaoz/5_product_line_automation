@@ -14,6 +14,8 @@
 #include "form_product.h"
 #include "form_customer.h"
 #include "form_login.h"
+#include <QDesktopWidget>
+#include <QStyle>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -22,7 +24,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);       
     login = new Form_Login();
 
-    //setCentralWidget(ui->frame);
+    window()->setGeometry(QStyle::alignedRect(Qt::LeftToRight,Qt::AlignCenter,window()->size(),qApp->desktop()->availableGeometry()));
+
     ui->statusbar->showMessage("Disconnected");
 
     ui->comboBox_01->addItem("add office");
