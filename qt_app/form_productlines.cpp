@@ -9,12 +9,6 @@ Form_ProductLines::Form_ProductLines(QWidget *parent) :
     ui->setupUi(this);
     this->setWindowTitle("Product Line");
 
-    //todo: remove setting background color
-    ui->lineEdit->setStyleSheet("background-color: white;");
-    ui->lineEdit_2->setStyleSheet("background-color: white;");
-    ui->lineEdit_3->setStyleSheet("background-color: white;");
-    ui->lineEdit_4->setStyleSheet("background-color: white;");
-
     QGridLayout *layout = new QGridLayout();
     layout->addWidget(ui->label,0,0);
     layout->addWidget(ui->lineEdit,0,1);

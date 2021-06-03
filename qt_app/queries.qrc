@@ -3,5 +3,6 @@
         <file>queries/list_employees</file>
         <file>queries/list_customers</file>
         <file>queries/number_of_employees_for_each_office</file>
+        <file>queries/list_offices</file>
     </qresource>
 </RCC>

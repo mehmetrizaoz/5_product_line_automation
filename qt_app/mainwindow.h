@@ -20,6 +20,10 @@ private slots:
     void on_pushButton_6_clicked();
     void on_comboBox_activated(int index);
 
+    void on_comboBox_2_activated(int index);
+
+    void on_comboBox_3_activated(int index);
+
 private:
     Ui::MainWindow *ui;
     Form_Login *login;

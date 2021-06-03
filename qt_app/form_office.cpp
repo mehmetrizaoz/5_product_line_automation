@@ -10,17 +10,6 @@ Form_Office::Form_Office(QWidget *parent) :
     ui->setupUi(this);
     this->setWindowTitle("Office");
 
-    //todo: remove setting background color
-    ui->lineEdit->setStyleSheet("background-color: white;");
-    ui->lineEdit_2->setStyleSheet("background-color: white;");
-    ui->lineEdit_3->setStyleSheet("background-color: white;");
-    ui->lineEdit_4->setStyleSheet("background-color: white;");
-    ui->lineEdit_5->setStyleSheet("background-color: white;");
-    ui->lineEdit_6->setStyleSheet("background-color: white;");
-    ui->lineEdit_7->setStyleSheet("background-color: white;");
-    ui->lineEdit_8->setStyleSheet("background-color: white;");
-    ui->lineEdit_9->setStyleSheet("background-color: white;");
-
     QGridLayout *layout = new QGridLayout();
     layout->addWidget(ui->label,0,0);
     layout->addWidget(ui->lineEdit,0,1);

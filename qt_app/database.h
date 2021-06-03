@@ -16,7 +16,6 @@
 #include <QString>
 #include <QSqlError>
 #include "QDebug"
-#include "form_queryresult.h"
 #include <QCoreApplication>
 #include <QFile>
 #include <QTextStream>
