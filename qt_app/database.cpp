@@ -68,8 +68,7 @@ void database::execQuery(QString queryString, QTableWidget *tableWidget){
 
     //add column names to the table
     QSqlRecord record = query.record();//db.record("table_name");
-    int n = record.count();
-    for(int i = 0; i < n; i++){
+    for(int i = 0; i < record.count(); i++){
        QTableWidgetItem *pCell = new QTableWidgetItem;
        tableWidget->setItem(0, i, pCell);
        tableWidget->item(0, i)->setFont(font);
@@ -86,7 +85,6 @@ void database::execQuery(QString queryString, QTableWidget *tableWidget){
           pCell->setText(query.value(col).toString());
        }
     }
-
 }
 
 database::database(){}

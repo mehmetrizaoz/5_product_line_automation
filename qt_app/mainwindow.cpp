@@ -123,8 +123,19 @@ void MainWindow::on_pushButton_01_clicked()
 
 void MainWindow::on_comboBox_02_activated(int index)
 {
-    if(ui->comboBox_02->currentIndex()==3){
-            database myDB = database();
-            myDB.execQuery("://queries/list_employees", ui->tableWidget_01);
-        }
+    if(ui->comboBox_02->currentIndex()==0){
+        Form_Employee emp;
+        emp.setModal(true);
+        emp.exec();
+    }
+    else if(ui->comboBox_02->currentIndex()==3){
+        database myDB = database();
+        myDB.execQuery("://queries/list_employees", ui->tableWidget_01);
+    }
+    else if(ui->comboBox_02->currentIndex()==5){
+        database myDB = database();
+        myDB.execQuery("://queries/number_of_customers_for_each_employee", ui->tableWidget_01);
+    }
+
+
 }

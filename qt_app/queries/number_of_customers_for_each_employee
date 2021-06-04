@@ -1,0 +1,12 @@
+SELECT 
+    e.firstName,
+    e.lastName,
+    COUNT(*) number_of_customers
+FROM 
+	classicmodels.employees e
+JOIN classicmodels.customers c 
+	ON c.salesRepEmployeeNumber = e.employeeNumber
+GROUP BY e.employeeNumber
+ORDER BY number_of_customers DESC;
+	
+
