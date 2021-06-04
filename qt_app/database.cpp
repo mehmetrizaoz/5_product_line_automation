@@ -63,13 +63,17 @@ void database::execQuery(QString queryString, QTableWidget *tableWidget){
     tableWidget->setRowCount(rowCount+1); //+1 is for column headers
     tableWidget->setColumnCount(columnCount);
 
+    QFont font;
+    font.setBold(true);
+
     //add column names to the table
     QSqlRecord record = query.record();//db.record("table_name");
     int n = record.count();
     for(int i = 0; i < n; i++){
        QTableWidgetItem *pCell = new QTableWidgetItem;
        tableWidget->setItem(0, i, pCell);
-       //todo: bold font
+       tableWidget->item(0, i)->setFont(font);
+       tableWidget->item(0, i)->setForeground(QBrush(QColor(255, 0, 0)));
        pCell->setText(record.fieldName(i));
     }
 
