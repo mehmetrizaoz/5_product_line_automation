@@ -1,9 +1,9 @@
 SELECT
-    o.city,
-    COUNT(*) AS c
+    o.city city,
+    COUNT(*) AS number_of_employee
 FROM 
     classicmodels.offices o
 JOIN classicmodels.employees e
     ON e.officeCode = o.officeCode
 GROUP BY city
-ORDER BY c DESC;
+ORDER BY number_of_employee DESC;

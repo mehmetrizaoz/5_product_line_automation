@@ -20,6 +20,8 @@ private slots:
     void on_comboBox_01_activated(int index);
     void on_pushButton_01_clicked();
     void getLoginStatus();
+    void on_comboBox_02_activated(int index);
+
 private:
     Ui::MainWindow *ui;
     Form_Login *login;    

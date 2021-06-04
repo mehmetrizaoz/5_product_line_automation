@@ -1,6 +1,8 @@
 #include "form_employee.h"
 #include "ui_form_employee.h"
 #include <QGridLayout>
+#include <QDesktopWidget>
+#include <QStyle>
 
 Form_Employee::Form_Employee(QWidget *parent) :
     QDialog(parent),
@@ -8,6 +10,8 @@ Form_Employee::Form_Employee(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowTitle("Employee");
+
+    window()->setGeometry(QStyle::alignedRect(Qt::LeftToRight,Qt::AlignCenter,window()->size(),qApp->desktop()->availableGeometry()));
 
     QGridLayout *layout = new QGridLayout();
     layout->addWidget(ui->label,0,0);

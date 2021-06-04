@@ -1,13 +1,8 @@
 //sudo apt-get install libqt5sql5-mysql
 
-#include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QMessageBox>
-#include <QString>
-#include <QDebug>
-#include <QTableWidget>
-#include <QStatusBar>
 #include "database.h"
+#include "mainwindow.h"
 #include "form_productlines.h"
 #include "form_office.h"
 #include "form_employee.h"
@@ -16,6 +11,11 @@
 #include "form_login.h"
 #include <QDesktopWidget>
 #include <QStyle>
+#include <QMessageBox>
+#include <QString>
+#include <QDebug>
+#include <QTableWidget>
+#include <QStatusBar>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -88,8 +88,9 @@ void MainWindow::getLoginStatus(){
     if(login->isConnected == true){
         ui->statusbar->showMessage("Connected");
     }
-    else
+    else{
         ui->statusbar->showMessage("Disconnected");
+    }
 }
 
 void MainWindow::on_comboBox_01_activated(int index)
@@ -111,11 +112,19 @@ void MainWindow::on_comboBox_01_activated(int index)
     }
     else if(ui->comboBox_01->currentIndex()==4){
         database myDB = database();
-        myDB.execQuery("://queries/list_customers", ui->tableWidget_01);
+        myDB.execQuery("://queries/number_of_employees_for_each_office", ui->tableWidget_01);
     }
 }
 
 void MainWindow::on_pushButton_01_clicked()
 {
     login->show();
+}
+
+void MainWindow::on_comboBox_02_activated(int index)
+{
+    if(ui->comboBox_02->currentIndex()==3){
+            database myDB = database();
+            myDB.execQuery("://queries/list_employees", ui->tableWidget_01);
+        }
 }

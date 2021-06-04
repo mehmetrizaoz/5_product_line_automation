@@ -2,6 +2,8 @@
 #include "ui_form_office.h"
 #include <QMainWindow>
 #include <QVBoxLayout>
+#include <QDesktopWidget>
+#include <QStyle>
 
 Form_Office::Form_Office(QWidget *parent) :
     QDialog(parent),
@@ -9,6 +11,8 @@ Form_Office::Form_Office(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowTitle("Office");
+
+    window()->setGeometry(QStyle::alignedRect(Qt::LeftToRight,Qt::AlignCenter,window()->size(),qApp->desktop()->availableGeometry()));
 
     QGridLayout *layout = new QGridLayout();
     layout->addWidget(ui->label,0,0);

@@ -27,6 +27,10 @@ bool database::connect(QString hostName, QString database, QString user, QString
     db.setDatabaseName(database);
     db.setUserName(user);
     db.setPassword(psw);
+    _hostName = hostName;
+    _database = database;
+    _userName = user;
+    _password = psw;
     qDebug()<<"connecting";
     return db.open();
 }
@@ -39,8 +43,7 @@ void database::disconnect(){
 
 QString database::readQuery(QString filename){
     QFile file(filename);
-    if(!file.open(QFile::ReadOnly |
-                  QFile::Text)){
+    if(!file.open(QFile::ReadOnly | QFile::Text)){
         qDebug() << " Could not open the file for reading";
         return "";
     }
@@ -55,22 +58,29 @@ void database::execQuery(QString queryString, QTableWidget *tableWidget){
     query.prepare(readQuery(queryString));
     query.exec();
 
-    if(tableWidget != nullptr){
-        int columnCount = query.record().count();
-        int rowCount = query.size();
+    int columnCount = query.record().count();
+    int rowCount = query.size();
+    tableWidget->setRowCount(rowCount+1); //+1 is for column headers
+    tableWidget->setColumnCount(columnCount);
 
-        tableWidget->setRowCount(rowCount);
-        tableWidget->setColumnCount(columnCount);
+    //add column names to the table
+    QSqlRecord record = query.record();//db.record("table_name");
+    int n = record.count();
+    for(int i = 0; i < n; i++){
+       QTableWidgetItem *pCell = new QTableWidgetItem;
+       tableWidget->setItem(0, i, pCell);
+       //todo: bold font
+       pCell->setText(record.fieldName(i));
+    }
 
-        for(int row=0; row<rowCount; row++){
-           query.next();
-           for(int col=0; col<columnCount; col++){
-              QTableWidgetItem *pCell = tableWidget->item(row, col);
-              pCell = new QTableWidgetItem;
-              tableWidget->setItem(row, col, pCell);
-              pCell->setText(query.value(col).toString());
-           }
-        }
+    //fill table with query result
+    for(int row=1; row<=rowCount; row++){
+       query.next();
+       for(int col=0; col<columnCount; col++){
+          QTableWidgetItem *pCell = new QTableWidgetItem;
+          tableWidget->setItem(row, col, pCell);
+          pCell->setText(query.value(col).toString());
+       }
     }
 
 }

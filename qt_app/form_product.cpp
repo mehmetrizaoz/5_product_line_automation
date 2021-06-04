@@ -1,6 +1,8 @@
 #include "form_product.h"
 #include "ui_form_product.h"
 #include <QGridLayout>
+#include <QDesktopWidget>
+#include <QStyle>
 
 Form_Product::Form_Product(QWidget *parent) :
     QDialog(parent),
@@ -8,6 +10,8 @@ Form_Product::Form_Product(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowTitle("Product");
+
+    window()->setGeometry(QStyle::alignedRect(Qt::LeftToRight,Qt::AlignCenter,window()->size(),qApp->desktop()->availableGeometry()));
 
     QGridLayout *layout = new QGridLayout();
     layout->addWidget(ui->label,0,0);

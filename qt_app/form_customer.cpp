@@ -1,6 +1,8 @@
 #include "form_customer.h"
 #include "ui_form_customer.h"
 #include <QGridLayout>
+#include <QDesktopWidget>
+#include <QStyle>
 
 Form_Customer::Form_Customer(QWidget *parent) :
     QDialog(parent),
@@ -8,6 +10,8 @@ Form_Customer::Form_Customer(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowTitle("Customer");
+
+    window()->setGeometry(QStyle::alignedRect(Qt::LeftToRight,Qt::AlignCenter,window()->size(),qApp->desktop()->availableGeometry()));
 
     QGridLayout *layout = new QGridLayout();
     layout->addWidget(ui->label,0,0);
