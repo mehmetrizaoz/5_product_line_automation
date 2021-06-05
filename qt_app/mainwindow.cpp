@@ -39,7 +39,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->comboBox_02->addItem("update employee");
     ui->comboBox_02->addItem("list employees");
     ui->comboBox_02->addItem("group reporters by employees");
-    ui->comboBox_02->addItem("group customers by employees");
+    ui->comboBox_02->addItem("number of customers per employee");
     ui->comboBox_02->addItem("group sales by employees");
 
     ui->comboBox_03->addItem("add customer");

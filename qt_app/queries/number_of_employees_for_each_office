@@ -1,5 +1,5 @@
 SELECT
-    o.city city,
+    o.city office,
     COUNT(*) AS number_of_employee
 FROM 
     classicmodels.offices o
