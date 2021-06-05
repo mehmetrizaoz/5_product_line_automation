@@ -53,7 +53,9 @@ QString database::readQuery(QString filename){
     return myText;
 }
 
-void database::execQuery(QString queryString, QTableWidget *tableWidget){
+
+
+void database::fillTableWithQueryResult(QString queryString, QTableWidget *tableWidget){
     QSqlQuery query(db);
     query.prepare(readQuery(queryString));
     query.exec();

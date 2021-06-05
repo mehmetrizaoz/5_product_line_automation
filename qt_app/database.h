@@ -27,7 +27,7 @@ using namespace std;
 class database{
 public:
    database();
-   void execQuery(QString queryString, QTableWidget *tableWidget);
+   void fillTableWithQueryResult(QString queryString, QTableWidget *tableWidget);
    bool connect(QString hostName, QString database, QString user, QString psw );
    QString readQuery(QString filename);
 

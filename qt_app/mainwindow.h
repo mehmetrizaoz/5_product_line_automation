@@ -24,6 +24,14 @@ private slots:
 
     void on_comboBox_03_activated(int index);
 
+    void on_comboBox_04_activated(int index);
+
+    void on_comboBox_05_activated(int index);
+
+    void on_comboBox_06_activated(int index);
+
+    void on_comboBox_07_activated(int index);
+
 private:
     Ui::MainWindow *ui;
     Form_Login *login;    
