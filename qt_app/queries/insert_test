@@ -1,0 +1,1 @@
+insert  into `classicmodels.offices`(`officeCode`,`city`,`phone`,`addressLine1`,`addressLine2`,`state`,`country`,`postalCode`,`territory`) values ('14','Balıkesir','+1 650 219 4782','100 Market Street','Suite 300','CA','USA','94080','NA')

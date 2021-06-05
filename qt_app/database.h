@@ -27,15 +27,12 @@ using namespace std;
 class database{
 public:
    database();
-   void fillTableWithQueryResult(QString queryString, QTableWidget *tableWidget);
    bool connect(QString hostName, QString database, QString user, QString psw );
-   QString readQuery(QString filename);
-
    void disconnect();
+   QSqlQuery executeQuery(QString qr);
+   void fillTable(QSqlQuery query, QTableWidget *tableWidget);
+   QString readQueryFile(QString filename);
+
 private:
-   QString _hostName;
-   QString _userName;
-   QString _database;
-   QString _password;
 
 };

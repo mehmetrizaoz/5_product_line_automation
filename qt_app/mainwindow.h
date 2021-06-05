@@ -16,22 +16,17 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-private slots:    
-    void on_comboBox_01_activated(int index);
-    void on_pushButton_01_clicked();
+    database myDB;
+private slots:            
     void getLoginStatus();
+    void on_pushButton_01_clicked();
+    void on_comboBox_01_activated(int index);
     void on_comboBox_02_activated(int index);
-
     void on_comboBox_03_activated(int index);
-
     void on_comboBox_04_activated(int index);
-
     void on_comboBox_05_activated(int index);
-
     void on_comboBox_06_activated(int index);
-
     void on_comboBox_07_activated(int index);
-
 private:
     Ui::MainWindow *ui;
     Form_Login *login;    

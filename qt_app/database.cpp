@@ -9,9 +9,9 @@
 #include <QSqlDatabase>
 #include <QSqlDriver>
 #include <QtSql>
-#include <QString>
 #include <QSqlError>
 #include <QSqlQuery>
+#include <QString>
 #include "QDebug"
 #include <QCoreApplication>
 #include <QFile>
@@ -27,10 +27,6 @@ bool database::connect(QString hostName, QString database, QString user, QString
     db.setDatabaseName(database);
     db.setUserName(user);
     db.setPassword(psw);
-    _hostName = hostName;
-    _database = database;
-    _userName = user;
-    _password = psw;
     qDebug()<<"connecting";
     return db.open();
 }
@@ -41,7 +37,7 @@ void database::disconnect(){
     qDebug()<<"disconnected";
 }
 
-QString database::readQuery(QString filename){
+QString database::readQueryFile(QString filename){
     QFile file(filename);
     if(!file.open(QFile::ReadOnly | QFile::Text)){
         qDebug() << " Could not open the file for reading";
@@ -53,13 +49,14 @@ QString database::readQuery(QString filename){
     return myText;
 }
 
-
-
-void database::fillTableWithQueryResult(QString queryString, QTableWidget *tableWidget){
+QSqlQuery database::executeQuery(QString qr){
     QSqlQuery query(db);
-    query.prepare(readQuery(queryString));
+    query.prepare(qr);
     query.exec();
+    return query;
+}
 
+void database::fillTable(QSqlQuery query, QTableWidget *tableWidget){
     int columnCount = query.record().count();
     int rowCount = query.size();
     tableWidget->setRowCount(rowCount+1); //+1 is for column headers
@@ -74,7 +71,8 @@ void database::fillTableWithQueryResult(QString queryString, QTableWidget *table
        QTableWidgetItem *pCell = new QTableWidgetItem;
        tableWidget->setItem(0, i, pCell);
        tableWidget->item(0, i)->setFont(font);
-       tableWidget->item(0, i)->setForeground(QBrush(QColor(255, 0, 0)));
+       tableWidget->item(0, i)->setForeground(QBrush(QColor(255, 255, 255)));
+       tableWidget->item(0,i)->setBackgroundColor(QColor(0,100,1));
        pCell->setText(record.fieldName(i));
     }
 
@@ -84,10 +82,19 @@ void database::fillTableWithQueryResult(QString queryString, QTableWidget *table
        for(int col=0; col<columnCount; col++){
           QTableWidgetItem *pCell = new QTableWidgetItem;
           tableWidget->setItem(row, col, pCell);
+
+          if(row % 2)
+            tableWidget->item(row,col)->setBackgroundColor(QColor(0,255,127));
+          else
+            tableWidget->item(row,col)->setBackgroundColor(QColor(60,179,113));
+
           pCell->setText(query.value(col).toString());
        }
     }
 }
 
-database::database(){}
+database::database()
+{
+
+}
 

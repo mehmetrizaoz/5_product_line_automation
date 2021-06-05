@@ -22,7 +22,10 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);       
+
     login = new Form_Login();
+
+    myDB = database();
 
     window()->setGeometry(QStyle::alignedRect(Qt::LeftToRight,Qt::AlignCenter,window()->size(),qApp->desktop()->availableGeometry()));
 
@@ -79,8 +82,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
-    database *myDB = new database();
-    myDB->disconnect();
+    myDB.disconnect();
     delete ui;
 }
 
@@ -100,31 +102,37 @@ void MainWindow::on_pushButton_01_clicked()
 
 void MainWindow::on_comboBox_01_activated(int index)
 {
+    QString fileName;
+    QSqlQuery qr;
+
     if(ui->comboBox_01->currentIndex()==0){
         Form_Office ofc;
         ofc.setModal(true);
         ofc.exec();
     }
-    else if(ui->comboBox_01->currentIndex()==1){
-        qDebug()<<"1";
+    else if(ui->comboBox_01->currentIndex()==1){        
+
     }
     else if(ui->comboBox_01->currentIndex()==2){
         qDebug()<<"2";
     }
     else if(ui->comboBox_01->currentIndex()==3){
-        database myDB = database();
-        myDB.fillTableWithQueryResult("://queries/list_offices", ui->tableWidget_01);
-        qDebug()<<"3";
+        fileName = myDB.readQueryFile("://queries/list_offices");
+        qr = myDB.executeQuery(fileName);
+        myDB.fillTable(qr, ui->tableWidget_01);
     }
     else if(ui->comboBox_01->currentIndex()==4){
-        database myDB = database();
-        myDB.fillTableWithQueryResult("://queries/number_of_employees_for_each_office", ui->tableWidget_01);
-        qDebug()<<"4";
+        fileName = myDB.readQueryFile("://queries/number_of_employees_for_each_office");
+        qr = myDB.executeQuery(fileName);
+        myDB.fillTable(qr, ui->tableWidget_01);
     }
 }
 
 void MainWindow::on_comboBox_02_activated(int index)
 {
+    QString fileName;
+    QSqlQuery qr;
+
     if(ui->comboBox_02->currentIndex()==0){
         Form_Employee emp;
         emp.setModal(true);
@@ -137,15 +145,17 @@ void MainWindow::on_comboBox_02_activated(int index)
         qDebug()<<"2";
     }
     else if(ui->comboBox_02->currentIndex()==3){
-        database myDB = database();
-        myDB.fillTableWithQueryResult("://queries/list_employees", ui->tableWidget_01);
+        fileName = myDB.readQueryFile("://queries/list_employees");
+        qr = myDB.executeQuery(fileName);
+        myDB.fillTable(qr, ui->tableWidget_01);
     }
     else if(ui->comboBox_02->currentIndex()==4){
         qDebug()<<"4";
     }
     else if(ui->comboBox_02->currentIndex()==5){
-        database myDB = database();
-        myDB.fillTableWithQueryResult("://queries/number_of_customers_for_each_employee", ui->tableWidget_01);
+        fileName = myDB.readQueryFile("://queries/number_of_customers_for_each_employee");
+        qr = myDB.executeQuery(fileName);
+        myDB.fillTable(qr, ui->tableWidget_01);
     }
     else if(ui->comboBox_02->currentIndex()==6){
         qDebug()<<"6";
@@ -154,6 +164,9 @@ void MainWindow::on_comboBox_02_activated(int index)
 
 void MainWindow::on_comboBox_03_activated(int index)
 {
+    QString fileName;
+    QSqlQuery qr;
+
     if(ui->comboBox_03->currentIndex()==0){
         Form_Customer cus;
         cus.setModal(true);
@@ -166,8 +179,9 @@ void MainWindow::on_comboBox_03_activated(int index)
         qDebug()<<"2";
     }
     else if(ui->comboBox_03->currentIndex()==3){
-        database myDB = database();
-        myDB.fillTableWithQueryResult("://queries/list_customers", ui->tableWidget_01);
+        fileName = myDB.readQueryFile("://queries/list_customers");
+        qr = myDB.executeQuery(fileName);
+        myDB.fillTable(qr, ui->tableWidget_01);
     }
     else if(ui->comboBox_03->currentIndex()==4){
         qDebug()<<"4";
@@ -239,7 +253,7 @@ void MainWindow::on_comboBox_06_activated(int index)
 void MainWindow::on_comboBox_07_activated(int index)
 {
     if(ui->comboBox_07->currentIndex()==0){
-        Form_Product lin;
+        Form_ProductLines lin;
         lin.setModal(true);
         lin.exec();
     }
