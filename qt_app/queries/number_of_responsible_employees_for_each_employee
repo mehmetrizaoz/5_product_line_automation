@@ -1,0 +1,8 @@
+SELECT 
+	COUNT(employeeNumber) number_of_employee,
+	reportsTo
+FROM 
+	classicmodels.employees
+GROUP BY reportsTo;
+
+

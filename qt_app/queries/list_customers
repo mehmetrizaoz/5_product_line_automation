@@ -1,4 +1,10 @@
 SELECT
-    *
-FROM
-    customers
+    c.customerName,
+    c.phone,
+    CONCAT(c.city, ' ', c.country) place,
+    c.creditLimit,
+    CONCAT(e.firstName, ' ', e.lastName)  contact_person
+FROM classicmodels.customers c
+JOIN classicmodels.employees e
+    ON(c.salesRepEmployeeNumber = e.employeeNumber)
+ORDER BY c.creditLimit DESC;

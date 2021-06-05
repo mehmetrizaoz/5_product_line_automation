@@ -22,6 +22,8 @@ private slots:
     void getLoginStatus();
     void on_comboBox_02_activated(int index);
 
+    void on_comboBox_03_activated(int index);
+
 private:
     Ui::MainWindow *ui;
     Form_Login *login;    

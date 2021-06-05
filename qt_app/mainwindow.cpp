@@ -139,3 +139,17 @@ void MainWindow::on_comboBox_02_activated(int index)
 
 
 }
+
+void MainWindow::on_comboBox_03_activated(int index)
+{
+    if(ui->comboBox_03->currentIndex()==0){
+        Form_Customer cus;
+        cus.setModal(true);
+        cus.exec();
+    }
+    else if(ui->comboBox_03->currentIndex()==3){
+        database myDB = database();
+        myDB.execQuery("://queries/list_customers", ui->tableWidget_01);
+    }
+
+}
