@@ -37,25 +37,20 @@ Form_ProductLines::~Form_ProductLines()
 }
 
 void Form_ProductLines::on_pushButton_1_clicked()
-{/*
+{
     QSqlDatabase db;
     QSqlQuery query(db);
-    QString queryString = "insert into `productlines`(`productLine`,`textDescription`,`htmlDescription`,`image`) values";
+    QString queryString = "insert into `productlines`(`productLine`,`textDescription`,`htmlDescription`,`image`) values (";
+    queryString.append("'");
     queryString.append(ui->lineEdit->text());
-    queryString.append(',');
+    queryString.append("','");
     queryString.append(ui->lineEdit_2->text());
-    queryString.append(',');
+    queryString.append("','");
     queryString.append(ui->lineEdit_3->text());
-    queryString.append(',');
-    queryString.append(ui->lineEdit_4->text());
+    queryString.append("',");
+    queryString.append("NULL"); //neglect blob
+    queryString.append(")");
     query.prepare(queryString);
-    //query.exec();
-    qDebug() << queryString;*/
-
-    QSqlDatabase db;
-    QSqlQuery query(db);
-    query.prepare("insert into `productlines`(`productLine`,`textDescription`,`htmlDescription`,`image`) \
-        values ('9999','mmmmm',NULL,NULL)");
     query.exec();
-    qDebug()<<"--------";
+    qDebug() << queryString;
 }

@@ -21,13 +21,13 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-    ui->setupUi(this);       
-
+    ui->setupUi(this);
     login = new Form_Login();
-
     myDB = database();
 
+    //make window open in screen center
     window()->setGeometry(QStyle::alignedRect(Qt::LeftToRight,Qt::AlignCenter,window()->size(),qApp->desktop()->availableGeometry()));
+    setStyleSheet("background-color: rgb(224,243,176)");
 
     ui->statusbar->showMessage("Disconnected");
 
@@ -117,12 +117,12 @@ void MainWindow::on_comboBox_01_activated(int index)
         qDebug()<<"2";
     }
     else if(ui->comboBox_01->currentIndex()==3){
-        fileName = myDB.readQueryFile("://queries/list_offices");
+        fileName = myDB.readFile("://queries/list_offices");
         qr = myDB.executeQuery(fileName);
         myDB.fillTable(qr, ui->tableWidget_01);
     }
     else if(ui->comboBox_01->currentIndex()==4){
-        fileName = myDB.readQueryFile("://queries/number_of_employees_for_each_office");
+        fileName = myDB.readFile("://queries/number_of_employees_for_each_office");
         qr = myDB.executeQuery(fileName);
         myDB.fillTable(qr, ui->tableWidget_01);
     }
@@ -145,7 +145,7 @@ void MainWindow::on_comboBox_02_activated(int index)
         qDebug()<<"2";
     }
     else if(ui->comboBox_02->currentIndex()==3){
-        fileName = myDB.readQueryFile("://queries/list_employees");
+        fileName = myDB.readFile("://queries/list_employees");
         qr = myDB.executeQuery(fileName);
         myDB.fillTable(qr, ui->tableWidget_01);
     }
@@ -153,7 +153,7 @@ void MainWindow::on_comboBox_02_activated(int index)
         qDebug()<<"4";
     }
     else if(ui->comboBox_02->currentIndex()==5){
-        fileName = myDB.readQueryFile("://queries/number_of_customers_for_each_employee");
+        fileName = myDB.readFile("://queries/number_of_customers_for_each_employee");
         qr = myDB.executeQuery(fileName);
         myDB.fillTable(qr, ui->tableWidget_01);
     }
@@ -179,7 +179,7 @@ void MainWindow::on_comboBox_03_activated(int index)
         qDebug()<<"2";
     }
     else if(ui->comboBox_03->currentIndex()==3){
-        fileName = myDB.readQueryFile("://queries/list_customers");
+        fileName = myDB.readFile("://queries/list_customers");
         qr = myDB.executeQuery(fileName);
         myDB.fillTable(qr, ui->tableWidget_01);
     }

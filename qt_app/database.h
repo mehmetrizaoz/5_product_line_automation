@@ -31,7 +31,7 @@ public:
    void disconnect();
    QSqlQuery executeQuery(QString qr);
    void fillTable(QSqlQuery query, QTableWidget *tableWidget);
-   QString readQueryFile(QString filename);
+   QString readFile(QString filename);
 
 private:
 

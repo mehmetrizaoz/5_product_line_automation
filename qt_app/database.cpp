@@ -37,7 +37,7 @@ void database::disconnect(){
     qDebug()<<"disconnected";
 }
 
-QString database::readQueryFile(QString filename){
+QString database::readFile(QString filename){
     QFile file(filename);
     if(!file.open(QFile::ReadOnly | QFile::Text)){
         qDebug() << " Could not open the file for reading";
@@ -84,9 +84,9 @@ void database::fillTable(QSqlQuery query, QTableWidget *tableWidget){
           tableWidget->setItem(row, col, pCell);
 
           if(row % 2)
-            tableWidget->item(row,col)->setBackgroundColor(QColor(0,255,127));
+            tableWidget->item(row,col)->setBackgroundColor(QColor(240,232,205));
           else
-            tableWidget->item(row,col)->setBackgroundColor(QColor(60,179,113));
+            tableWidget->item(row,col)->setBackgroundColor(QColor(255,255,176));
 
           pCell->setText(query.value(col).toString());
        }
