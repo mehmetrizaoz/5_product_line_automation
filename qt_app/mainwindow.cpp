@@ -23,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     login = new Form_Login();
+    office = new Form_Office();
     myDB = database();
 
     //make window open in screen center
@@ -77,7 +78,10 @@ MainWindow::MainWindow(QWidget *parent)
     ui->comboBox_07->addItem("list product lines");
     ui->comboBox_07->addItem("group products by line");
 
+    //used to get connection status from login window
     connect(login, SIGNAL(loginClicked()), this, SLOT(getLoginStatus()));
+    //used to set office windows officeCode column with next p.k.
+    connect(ui->comboBox_01, SIGNAL(activated(int)), office, SLOT(onShow()));
 }
 
 MainWindow::~MainWindow()
@@ -87,12 +91,10 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::getLoginStatus(){
-    if(login->isConnected == true){
-        ui->statusbar->showMessage("Connected");
-    }
-    else{
-        ui->statusbar->showMessage("Disconnected");
-    }
+    if(login->isConnected == true)
+        ui->statusbar->showMessage("Connected");    
+    else
+        ui->statusbar->showMessage("Disconnected");    
 }
 
 void MainWindow::on_pushButton_01_clicked()
@@ -105,10 +107,8 @@ void MainWindow::on_comboBox_01_activated(int index)
     QString fileName;
     QSqlQuery qr;
 
-    if(ui->comboBox_01->currentIndex()==0){
-        Form_Office ofc;
-        ofc.setModal(true);
-        ofc.exec();
+    if(ui->comboBox_01->currentIndex()==0){        
+        office->show();
     }
     else if(ui->comboBox_01->currentIndex()==1){        
 

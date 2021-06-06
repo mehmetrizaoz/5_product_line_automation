@@ -22,10 +22,6 @@ Form_Login::~Form_Login()
 {
     delete ui;
 }
-/*
-void Form_Login::aaa(){
-    qDebug() << "aaa";
-}*/
 
 void Form_Login::on_pushButton_clicked()
 {

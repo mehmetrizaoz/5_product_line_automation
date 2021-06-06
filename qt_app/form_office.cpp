@@ -45,7 +45,6 @@ Form_Office::Form_Office(QWidget *parent) :
     layout->addWidget(ui->lineEdit_9,8,1);
     layout->addWidget(ui->pushButton_1,9,0,1,0);
     this->setLayout(layout);
-
 }
 
 Form_Office::~Form_Office()
@@ -53,11 +52,15 @@ Form_Office::~Form_Office()
     delete ui;
 }
 
-void Form_Office::on_pushButton_1_clicked()
+void Form_Office::onShow()
 {
     QSqlQuery qr = myDB.executeQuery("SELECT MAX(CONVERT(officeCode,UNSIGNED INTEGER)) FROM offices");
-    qDebug() << myDB.getCell(qr, 1, 0);
+    int n = myDB.getCell(qr, 1, 0).toInt() + 1;
+    ui->lineEdit->setText(QString::number(n));
+}
 
+void Form_Office::on_pushButton_1_clicked()
+{//insert new record
 
 }
 

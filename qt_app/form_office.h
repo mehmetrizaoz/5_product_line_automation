@@ -15,7 +15,11 @@ class Form_Office : public QDialog
 public:
     explicit Form_Office(QWidget *parent = nullptr);
     ~Form_Office();
-    database myDB;   
+    database myDB;
+/*signals:
+    void sss();*/
+public slots:
+    void onShow();
 private slots:
     void on_pushButton_1_clicked();
 private:

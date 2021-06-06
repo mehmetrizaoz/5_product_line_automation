@@ -5,6 +5,7 @@
 #include "database.h"
 #include <QTextEdit>
 #include "form_login.h"
+#include "form_office.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -17,7 +18,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     database myDB;
-private slots:            
+private slots:
     void getLoginStatus();
     void on_pushButton_01_clicked();
     void on_comboBox_01_activated(int index);
@@ -29,7 +30,8 @@ private slots:
     void on_comboBox_07_activated(int index);
 private:
     Ui::MainWindow *ui;
-    Form_Login *login;    
+    Form_Login  *login;
+    Form_Office *office;
 };
 
 #endif // MAINWINDOW_H
