@@ -148,7 +148,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_1">
+  <widget class="QPushButton" name="add_office">
    <property name="geometry">
     <rect>
      <x>119</x>

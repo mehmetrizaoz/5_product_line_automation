@@ -19,9 +19,7 @@ Form_Office::Form_Office(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowTitle("Office");
-
     myDB = database();
-
     window()->setGeometry(QStyle::alignedRect(Qt::LeftToRight,Qt::AlignCenter,window()->size(),qApp->desktop()->availableGeometry()));
 
     QGridLayout *layout = new QGridLayout();
@@ -43,7 +41,7 @@ Form_Office::Form_Office(QWidget *parent) :
     layout->addWidget(ui->lineEdit_8,7,1);
     layout->addWidget(ui->label_9,8,0);
     layout->addWidget(ui->lineEdit_9,8,1);
-    layout->addWidget(ui->pushButton_1,9,0,1,0);
+    layout->addWidget(ui->add_office,9,0,1,0);
     this->setLayout(layout);
 }
 
@@ -52,17 +50,36 @@ Form_Office::~Form_Office()
     delete ui;
 }
 
-void Form_Office::onShow()
+void Form_Office::on_show()
 {
     QSqlQuery qr = myDB.executeQuery("SELECT MAX(CONVERT(officeCode,UNSIGNED INTEGER)) FROM offices");
     int n = myDB.getCell(qr, 1, 0).toInt() + 1;
     ui->lineEdit->setText(QString::number(n));
 }
 
-void Form_Office::on_pushButton_1_clicked()
-{//insert new record
+void Form_Office::on_add_office_clicked()
+{
+    QString queryString = "insert into `offices`(`officeCode`,`city`,`phone`,`addressLine1`,`addressLine2`,`state`,`country`,`postalCode`,`territory`) values (";
+    queryString.append("'" + ui->lineEdit->text()   + "',");
+    queryString.append("'" + ui->lineEdit_2->text() + "',");
+    queryString.append("'" + ui->lineEdit_3->text() + "',");
+    queryString.append("'" + ui->lineEdit_4->text() + "',");
+    queryString.append("'" + ui->lineEdit_5->text() + "',");
+    queryString.append("'" + ui->lineEdit_6->text() + "',");
+    queryString.append("'" + ui->lineEdit_7->text() + "',");
+    queryString.append("'" + ui->lineEdit_8->text() + "',");
+    queryString.append("'" + ui->lineEdit_9->text() + "')");
+    myDB.executeQuery(queryString);
 
+    qDebug() << queryString;
+
+    ui->lineEdit->setText(QString::number(ui->lineEdit->text().toInt() + 1));
+    ui->lineEdit_2->setText("");
+    ui->lineEdit_3->setText("");
+    ui->lineEdit_4->setText("");
+    ui->lineEdit_5->setText("");
+    ui->lineEdit_6->setText("");
+    ui->lineEdit_7->setText("");
+    ui->lineEdit_8->setText("");
+    ui->lineEdit_9->setText("");
 }
-
-
-

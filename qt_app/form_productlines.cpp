@@ -32,11 +32,19 @@ Form_ProductLines::~Form_ProductLines()
 
 void Form_ProductLines::on_pushButton_1_clicked()
 {
-    QString queryString = "insert into `productlines`(`productLine`,`textDescription`,`htmlDescription`,`image `)";
-    queryString.append("values ('"   + ui->lineEdit->text()   + "','" + ui->lineEdit_2->text());
-    queryString.append("','" + ui->lineEdit_3->text() + "', NULL )");
+    QString queryString = "insert into `productlines`(`productLine`,`textDescription`,`htmlDescription`,`image`) values(";
+    queryString.append("'" + ui->lineEdit->text()   + "',");
+    queryString.append("'" + ui->lineEdit_2->text() + "',");
+    queryString.append("'" + ui->lineEdit_3->text() + "',");
+    queryString.append("NULL)");
+
     myDB.executeQuery(queryString);
+
+    qDebug() << queryString;
+
+    ui->lineEdit->setText("");
+    ui->lineEdit_2->setText("");
+    ui->lineEdit_3->setText("");
+    ui->lineEdit_4->setText("");
 }
-
-
 

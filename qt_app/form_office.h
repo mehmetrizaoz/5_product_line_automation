@@ -16,12 +16,11 @@ public:
     explicit Form_Office(QWidget *parent = nullptr);
     ~Form_Office();
     database myDB;
-/*signals:
-    void sss();*/
 public slots:
-    void onShow();
+    void on_show();
 private slots:
-    void on_pushButton_1_clicked();
+    void on_add_office_clicked();
+
 private:
     Ui::Form_Office *ui;
 };

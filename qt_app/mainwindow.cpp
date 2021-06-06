@@ -81,7 +81,7 @@ MainWindow::MainWindow(QWidget *parent)
     //used to get connection status from login window
     connect(login, SIGNAL(loginClicked()), this, SLOT(getLoginStatus()));
     //used to set office windows officeCode column with next p.k.
-    connect(ui->comboBox_01, SIGNAL(activated(int)), office, SLOT(onShow()));
+    connect(ui->comboBox_01, SIGNAL(activated(int)), office, SLOT(on_show()));
 }
 
 MainWindow::~MainWindow()
@@ -111,7 +111,7 @@ void MainWindow::on_comboBox_01_activated(int index)
         office->show();
     }
     else if(ui->comboBox_01->currentIndex()==1){        
-
+        qDebug()<<"2";
     }
     else if(ui->comboBox_01->currentIndex()==2){
         qDebug()<<"2";
