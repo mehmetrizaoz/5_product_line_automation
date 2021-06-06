@@ -13,10 +13,7 @@
 #include <QSqlQuery>
 #include "database.h"
 
-Form_Office::Form_Office(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::Form_Office)
-{
+Form_Office::Form_Office(QWidget *parent) : QDialog(parent), ui(new Ui::Form_Office){
     ui->setupUi(this);
     this->setWindowTitle("Office");
     myDB = database();
@@ -45,20 +42,17 @@ Form_Office::Form_Office(QWidget *parent) :
     this->setLayout(layout);
 }
 
-Form_Office::~Form_Office()
-{
+Form_Office::~Form_Office(){
     delete ui;
 }
 
-void Form_Office::on_show()
-{
+void Form_Office::on_show(){
     QSqlQuery qr = myDB.executeQuery("SELECT MAX(CONVERT(officeCode,UNSIGNED INTEGER)) FROM offices");
     int n = myDB.getCell(qr, 1, 0).toInt() + 1;
     ui->lineEdit->setText(QString::number(n));
 }
 
-void Form_Office::on_add_office_clicked()
-{
+void Form_Office::on_add_office_clicked(){
     QString queryString = "insert into `offices`(`officeCode`,`city`,`phone`,`addressLine1`,`addressLine2`,`state`,`country`,`postalCode`,`territory`) values (";
     queryString.append("'" + ui->lineEdit->text()   + "',");
     queryString.append("'" + ui->lineEdit_2->text() + "',");

@@ -21,7 +21,6 @@ public:
     database myDB;
 private slots:
     void getLoginStatus();
-    void on_pushButton_01_clicked();
     void on_comboBox_01_activated(int index);
     void on_comboBox_02_activated(int index);
     void on_comboBox_03_activated(int index);

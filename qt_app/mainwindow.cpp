@@ -4,11 +4,9 @@
 #include "database.h"
 #include "mainwindow.h"
 #include "form_productlines.h"
-#include "form_office.h"
-#include "form_employee.h"
 #include "form_product.h"
 #include "form_customer.h"
-#include "form_login.h"
+
 #include <QDesktopWidget>
 #include <QStyle>
 #include <QMessageBox>
@@ -19,8 +17,7 @@
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
-{
+    , ui(new Ui::MainWindow){
     ui->setupUi(this);
 
     login  = new Form_Login();
@@ -83,12 +80,12 @@ MainWindow::MainWindow(QWidget *parent)
 
     //used to get connection status from login window
     connect(login, SIGNAL(loginClicked()), this, SLOT(getLoginStatus()));
+
     //used to set office windows officeCode column with next p.k.
     connect(ui->comboBox_01, SIGNAL(activated(int)), office, SLOT(on_show()));
 }
 
-MainWindow::~MainWindow()
-{
+MainWindow::~MainWindow(){
     myDB.disconnect();
     delete ui;
 }
@@ -100,165 +97,174 @@ void MainWindow::getLoginStatus(){
         ui->statusbar->showMessage("Disconnected");    
 }
 
-void MainWindow::on_pushButton_01_clicked()
-{
-    login->show();
+void MainWindow::on_comboBox_01_activated(int index){
+    if(login->isConnected == true){
+        if(ui->comboBox_01->currentIndex()==0){
+            office->show();
+        }
+        else if(ui->comboBox_01->currentIndex()==1){
+            qDebug()<<"2";
+        }
+        else if(ui->comboBox_01->currentIndex()==2){
+            qDebug()<<"2";
+        }
+        else if(ui->comboBox_01->currentIndex()==3){
+            fileName = myDB.readFile("://queries/list_offices");
+            qr = myDB.executeQuery(fileName);
+            myDB.fillTable(qr, ui->tableWidget_01);
+        }
+        else if(ui->comboBox_01->currentIndex()==4){
+            fileName = myDB.readFile("://queries/number_of_employees_for_each_office");
+            qr = myDB.executeQuery(fileName);
+            myDB.fillTable(qr, ui->tableWidget_01);
+        }
+    }
+    else{ login->show(); }
 }
 
-void MainWindow::on_comboBox_01_activated(int index)
-{
-    if(ui->comboBox_01->currentIndex()==0){        
-        office->show();
+void MainWindow::on_comboBox_02_activated(int index){
+    if(login->isConnected == true){
+        if(ui->comboBox_02->currentIndex()==0){
+            emp->show();
+        }
+        else if(ui->comboBox_02->currentIndex()==1){
+            qDebug()<<"1";
+        }
+        else if(ui->comboBox_02->currentIndex()==2){
+            qDebug()<<"2";
+        }
+        else if(ui->comboBox_02->currentIndex()==3){
+            fileName = myDB.readFile("://queries/list_employees");
+            qr = myDB.executeQuery(fileName);
+            myDB.fillTable(qr, ui->tableWidget_01);
+        }
+        else if(ui->comboBox_02->currentIndex()==4){
+            qDebug()<<"4";
+        }
+        else if(ui->comboBox_02->currentIndex()==5){
+            fileName = myDB.readFile("://queries/number_of_customers_for_each_employee");
+            qr = myDB.executeQuery(fileName);
+            myDB.fillTable(qr, ui->tableWidget_01);
+        }
+        else if(ui->comboBox_02->currentIndex()==6){
+            qDebug()<<"6";
+        }
     }
-    else if(ui->comboBox_01->currentIndex()==1){        
-        qDebug()<<"2";
-    }
-    else if(ui->comboBox_01->currentIndex()==2){
-        qDebug()<<"2";
-    }
-    else if(ui->comboBox_01->currentIndex()==3){
-        fileName = myDB.readFile("://queries/list_offices");
-        qr = myDB.executeQuery(fileName);
-        myDB.fillTable(qr, ui->tableWidget_01);
-    }
-    else if(ui->comboBox_01->currentIndex()==4){
-        fileName = myDB.readFile("://queries/number_of_employees_for_each_office");
-        qr = myDB.executeQuery(fileName);
-        myDB.fillTable(qr, ui->tableWidget_01);
-    }
+    else{ login->show(); }
 }
 
-void MainWindow::on_comboBox_02_activated(int index)
-{
-    if(ui->comboBox_02->currentIndex()==0){
-        emp->show();
+void MainWindow::on_comboBox_03_activated(int index){
+    if(login->isConnected == true){
+        if(ui->comboBox_03->currentIndex()==0){
+            Form_Customer cus;
+            cus.setModal(true);
+            cus.exec();
+        }
+        else if(ui->comboBox_03->currentIndex()==1){
+            qDebug()<<"1";
+        }
+        else if(ui->comboBox_03->currentIndex()==2){
+            qDebug()<<"2";
+        }
+        else if(ui->comboBox_03->currentIndex()==3){
+            fileName = myDB.readFile("://queries/list_customers");
+            qr = myDB.executeQuery(fileName);
+            myDB.fillTable(qr, ui->tableWidget_01);
+        }
+        else if(ui->comboBox_03->currentIndex()==4){
+            qDebug()<<"4";
+        }
+        else if(ui->comboBox_03->currentIndex()==5){
+            qDebug()<<"5";
+        }
+        else if(ui->comboBox_03->currentIndex()==6){
+            qDebug()<<"6";
+        }
     }
-    else if(ui->comboBox_02->currentIndex()==1){
-        qDebug()<<"1";
-    }
-    else if(ui->comboBox_02->currentIndex()==2){
-        qDebug()<<"2";
-    }
-    else if(ui->comboBox_02->currentIndex()==3){
-        fileName = myDB.readFile("://queries/list_employees");
-        qr = myDB.executeQuery(fileName);
-        myDB.fillTable(qr, ui->tableWidget_01);
-    }
-    else if(ui->comboBox_02->currentIndex()==4){
-        qDebug()<<"4";
-    }
-    else if(ui->comboBox_02->currentIndex()==5){
-        fileName = myDB.readFile("://queries/number_of_customers_for_each_employee");
-        qr = myDB.executeQuery(fileName);
-        myDB.fillTable(qr, ui->tableWidget_01);
-    }
-    else if(ui->comboBox_02->currentIndex()==6){
-        qDebug()<<"6";
-    }
+    else{ login->show(); }
 }
 
-void MainWindow::on_comboBox_03_activated(int index)
-{
-    if(ui->comboBox_03->currentIndex()==0){
-        Form_Customer cus;
-        cus.setModal(true);
-        cus.exec();
+void MainWindow::on_comboBox_04_activated(int index){
+    if(login->isConnected == true){
+        if(ui->comboBox_04->currentIndex()==0){
+            qDebug()<<"0";
+        }
+        else if(ui->comboBox_04->currentIndex()==1){
+            qDebug()<<"1";
+        }
+        else if(ui->comboBox_04->currentIndex()==2){
+            qDebug()<<"2";
+        }
+        else if(ui->comboBox_04->currentIndex()==3){
+            qDebug()<<"3";
+        }
+        else if(ui->comboBox_04->currentIndex()==4){
+            qDebug()<<"4";
+        }
     }
-    else if(ui->comboBox_03->currentIndex()==1){
-        qDebug()<<"1";
-    }
-    else if(ui->comboBox_03->currentIndex()==2){
-        qDebug()<<"2";
-    }
-    else if(ui->comboBox_03->currentIndex()==3){
-        fileName = myDB.readFile("://queries/list_customers");
-        qr = myDB.executeQuery(fileName);
-        myDB.fillTable(qr, ui->tableWidget_01);
-    }
-    else if(ui->comboBox_03->currentIndex()==4){
-        qDebug()<<"4";
-    }
-    else if(ui->comboBox_03->currentIndex()==5){
-        qDebug()<<"5";
-    }
-    else if(ui->comboBox_03->currentIndex()==6){
-        qDebug()<<"6";
-    }
+    else{ login->show(); }
 }
 
-void MainWindow::on_comboBox_04_activated(int index)
-{
-    if(ui->comboBox_04->currentIndex()==0){
-        qDebug()<<"0";
+void MainWindow::on_comboBox_05_activated(int index){
+    if(login->isConnected == true){
+        if(ui->comboBox_05->currentIndex()==0){
+            qDebug()<<"0";
+        }
+        else if(ui->comboBox_05->currentIndex()==1){
+            qDebug()<<"1";
+        }
+        else if(ui->comboBox_05->currentIndex()==2){
+            qDebug()<<"2";
+        }
+        else if(ui->comboBox_05->currentIndex()==3){
+            qDebug()<<"3";
+        }
     }
-    else if(ui->comboBox_04->currentIndex()==1){
-        qDebug()<<"1";
-    }
-    else if(ui->comboBox_04->currentIndex()==2){
-        qDebug()<<"2";
-    }
-    else if(ui->comboBox_04->currentIndex()==3){
-        qDebug()<<"3";
-    }
-    else if(ui->comboBox_04->currentIndex()==4){
-        qDebug()<<"4";
-    }
+    else{ login->show(); }
 }
 
-void MainWindow::on_comboBox_05_activated(int index)
-{
-    if(ui->comboBox_05->currentIndex()==0){
-        qDebug()<<"0";
+void MainWindow::on_comboBox_06_activated(int index){
+    if(login->isConnected == true){
+        if(ui->comboBox_06->currentIndex()==0){
+            Form_Product pro;
+            pro.setModal(true);
+            pro.exec();
+        }
+        else if(ui->comboBox_06->currentIndex()==1){
+            qDebug()<<"1";
+        }
+        else if(ui->comboBox_06->currentIndex()==2){
+            qDebug()<<"2";
+        }
+        else if(ui->comboBox_06->currentIndex()==3){
+            qDebug()<<"3";
+        }
+        else if(ui->comboBox_06->currentIndex()==4){
+            qDebug()<<"4";
+        }
     }
-    else if(ui->comboBox_05->currentIndex()==1){
-        qDebug()<<"1";
-    }
-    else if(ui->comboBox_05->currentIndex()==2){
-        qDebug()<<"2";
-    }
-    else if(ui->comboBox_05->currentIndex()==3){
-        qDebug()<<"3";
-    }
+    else{ login->show(); }
 }
 
-void MainWindow::on_comboBox_06_activated(int index)
-{
-    if(ui->comboBox_06->currentIndex()==0){
-        Form_Product pro;
-        pro.setModal(true);
-        pro.exec();
+void MainWindow::on_comboBox_07_activated(int index){
+    if(login->isConnected == true){
+        if(ui->comboBox_07->currentIndex()==0){
+            Form_ProductLines lin;
+            lin.setModal(true);
+            lin.exec();
+        }
+        else if(ui->comboBox_07->currentIndex()==1){
+            qDebug()<<"1";
+        }
+        else if(ui->comboBox_07->currentIndex()==2){
+            qDebug()<<"2";
+        }
+        else if(ui->comboBox_07->currentIndex()==3){
+            qDebug()<<"3";
+        }
+        else if(ui->comboBox_07->currentIndex()==4){
+            qDebug()<<"4";
+        }
     }
-    else if(ui->comboBox_06->currentIndex()==1){
-        qDebug()<<"1";
-    }
-    else if(ui->comboBox_06->currentIndex()==2){
-        qDebug()<<"2";
-    }
-    else if(ui->comboBox_06->currentIndex()==3){
-        qDebug()<<"3";
-    }
-    else if(ui->comboBox_06->currentIndex()==4){
-        qDebug()<<"4";
-    }
-}
-
-void MainWindow::on_comboBox_07_activated(int index)
-{
-    if(ui->comboBox_07->currentIndex()==0){
-        Form_ProductLines lin;
-        lin.setModal(true);
-        lin.exec();
-    }
-    else if(ui->comboBox_07->currentIndex()==1){
-        qDebug()<<"1";
-    }
-    else if(ui->comboBox_07->currentIndex()==2){
-        qDebug()<<"2";
-    }
-    else if(ui->comboBox_07->currentIndex()==3){
-        qDebug()<<"3";
-    }
-    else if(ui->comboBox_07->currentIndex()==4){
-        qDebug()<<"4";
-    }
+    else{ login->show(); }
 }
