@@ -2,6 +2,7 @@
 #define FORM_LOGIN_H
 
 #include <QWidget>
+#include "database.h"
 
 namespace Ui {
 class Form_Login;
@@ -15,7 +16,7 @@ public:
     explicit Form_Login(QWidget *parent = nullptr);
     ~Form_Login();
     bool isConnected=false;
-
+    database myDB;
 private slots:
     void on_pushButton_clicked();
 

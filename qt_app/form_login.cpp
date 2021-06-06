@@ -10,6 +10,8 @@ Form_Login::Form_Login(QWidget *parent) : QWidget(parent), ui(new Ui::Form_Login
     this->setFixedSize(278,194);
     this->setWindowTitle("Login");
 
+    myDB = database();
+
     window()->setGeometry(QStyle::alignedRect(Qt::LeftToRight,Qt::AlignCenter,window()->size(),qApp->desktop()->availableGeometry()));
     connect(ui->pushButton, SIGNAL(clicked()), this, SIGNAL(loginClicked()));
 }
@@ -19,13 +21,12 @@ Form_Login::~Form_Login(){
 }
 
 void Form_Login::on_pushButton_clicked(){
-    database *myDB = new database();
     QString username = ui->lineEdit->text();
     QString password = ui->lineEdit_2->text();
     QString hostname = ui->lineEdit_3->text();
     QString database = ui->lineEdit_4->text();
 
-    if(myDB->connect(hostname, database, username, password) == true){
+    if(myDB.connect(hostname, database, username, password) == true){
        qDebug() << "connected";
        isConnected = true;
        this->close();

@@ -88,6 +88,9 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow(){
     myDB.disconnect();
     delete ui;
+    delete login;
+    delete office;
+    delete emp;
 }
 
 void MainWindow::getLoginStatus(){
