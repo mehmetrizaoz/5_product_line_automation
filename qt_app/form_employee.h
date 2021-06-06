@@ -15,6 +15,9 @@ public:
     explicit Form_Employee(QWidget *parent = nullptr);
     ~Form_Employee();
 
+private slots:
+    void on_pushButton_clicked();
+
 private:
     Ui::Form_Employee *ui;
 };

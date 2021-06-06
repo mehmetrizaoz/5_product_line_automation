@@ -9,6 +9,7 @@ Form_Login::Form_Login(QWidget *parent) : QWidget(parent), ui(new Ui::Form_Login
     ui->setupUi(this);
     this->setFixedSize(278,194);
     this->setWindowTitle("Login");
+    setStyleSheet("background-color: rgb(224,243,176)");
 
     myDB = database();
 

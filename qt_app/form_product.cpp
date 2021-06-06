@@ -12,6 +12,7 @@ Form_Product::Form_Product(QWidget *parent) :
     this->setWindowTitle("Product");
 
     window()->setGeometry(QStyle::alignedRect(Qt::LeftToRight,Qt::AlignCenter,window()->size(),qApp->desktop()->availableGeometry()));
+    setStyleSheet("background-color: rgb(224,243,176)");
 
     QGridLayout *layout = new QGridLayout();
     layout->addWidget(ui->label,0,0);
@@ -19,7 +20,7 @@ Form_Product::Form_Product(QWidget *parent) :
     layout->addWidget(ui->label_2,1,0);
     layout->addWidget(ui->lineEdit_2,1,1);
     layout->addWidget(ui->label_3,2,0);
-    layout->addWidget(ui->lineEdit_3,2,1);
+    layout->addWidget(ui->comboBox,2,1);
     layout->addWidget(ui->label_4,3,0);
     layout->addWidget(ui->lineEdit_4,3,1);
     layout->addWidget(ui->label_5,4,0);
@@ -40,4 +41,9 @@ Form_Product::Form_Product(QWidget *parent) :
 Form_Product::~Form_Product()
 {
     delete ui;
+}
+
+void Form_Product::on_pushButton_clicked()
+{
+
 }

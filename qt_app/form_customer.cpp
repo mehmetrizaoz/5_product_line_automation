@@ -10,7 +10,7 @@ Form_Customer::Form_Customer(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowTitle("Customer");
-
+    setStyleSheet("background-color: rgb(224,243,176)");
     window()->setGeometry(QStyle::alignedRect(Qt::LeftToRight,Qt::AlignCenter,window()->size(),qApp->desktop()->availableGeometry()));
 
     QGridLayout *layout = new QGridLayout();
@@ -39,7 +39,7 @@ Form_Customer::Form_Customer(QWidget *parent) :
     layout->addWidget(ui->label_12,11,0);
     layout->addWidget(ui->lineEdit_12,11,1);
     layout->addWidget(ui->label_13,12,0);
-    layout->addWidget(ui->lineEdit_13,12,1);
+    layout->addWidget(ui->comboBox,12,1);
     layout->addWidget(ui->label_14,13,0);
     layout->addWidget(ui->lineEdit_14,13,1);
     layout->addWidget(ui->pushButton,14,0,1,0);
@@ -50,4 +50,9 @@ Form_Customer::Form_Customer(QWidget *parent) :
 Form_Customer::~Form_Customer()
 {
     delete ui;
+}
+
+void Form_Customer::on_pushButton_clicked()
+{
+
 }

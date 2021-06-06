@@ -11,6 +11,7 @@ Form_ProductLines::Form_ProductLines(QWidget *parent) :
     this->setWindowTitle("Product Line");
     myDB = database();
     window()->setGeometry(QStyle::alignedRect(Qt::LeftToRight,Qt::AlignCenter,window()->size(),qApp->desktop()->availableGeometry()));
+    setStyleSheet("background-color: rgb(224,243,176)");
 
     QGridLayout *layout = new QGridLayout();
     layout->addWidget(ui->label,0,0);

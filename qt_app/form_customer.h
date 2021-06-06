@@ -15,6 +15,9 @@ public:
     explicit Form_Customer(QWidget *parent = nullptr);
     ~Form_Customer();
 
+private slots:
+    void on_pushButton_clicked();
+
 private:
     Ui::Form_Customer *ui;
 };

@@ -10,7 +10,7 @@ Form_Employee::Form_Employee(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowTitle("Employee");
-
+    setStyleSheet("background-color: rgb(224,243,176)");
     window()->setGeometry(QStyle::alignedRect(Qt::LeftToRight,Qt::AlignCenter,window()->size(),qApp->desktop()->availableGeometry()));
 
     QGridLayout *layout = new QGridLayout();
@@ -25,9 +25,9 @@ Form_Employee::Form_Employee(QWidget *parent) :
     layout->addWidget(ui->label_5,4,0);
     layout->addWidget(ui->lineEdit_5,4,1);
     layout->addWidget(ui->label_6,5,0);
-    layout->addWidget(ui->lineEdit_6,5,1);
+    layout->addWidget(ui->comboBox,5,1);
     layout->addWidget(ui->label_7,6,0);
-    layout->addWidget(ui->lineEdit_7,6,1);
+    layout->addWidget(ui->comboBox_2,6,1);
     layout->addWidget(ui->label_8,7,0);
     layout->addWidget(ui->lineEdit_8,7,1);
     layout->addWidget(ui->pushButton,8,0,1,0);
@@ -38,4 +38,9 @@ Form_Employee::Form_Employee(QWidget *parent) :
 Form_Employee::~Form_Employee()
 {
     delete ui;
+}
+
+void Form_Employee::on_pushButton_clicked()
+{
+
 }

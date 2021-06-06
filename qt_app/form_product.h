@@ -15,6 +15,9 @@ public:
     explicit Form_Product(QWidget *parent = nullptr);
     ~Form_Product();
 
+private slots:
+    void on_pushButton_clicked();
+
 private:
     Ui::Form_Product *ui;
 };

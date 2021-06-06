@@ -243,18 +243,8 @@
   <widget class="QLineEdit" name="lineEdit_12">
    <property name="geometry">
     <rect>
-     <x>220</x>
-     <y>330</y>
-     <width>113</width>
-     <height>25</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_13">
-   <property name="geometry">
-    <rect>
      <x>260</x>
-     <y>360</y>
+     <y>330</y>
      <width>113</width>
      <height>25</height>
     </rect>
@@ -346,6 +336,16 @@
    </property>
    <property name="text">
     <string>Creadit Limit:</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboBox">
+   <property name="geometry">
+    <rect>
+     <x>260</x>
+     <y>360</y>
+     <width>111</width>
+     <height>25</height>
+    </rect>
    </property>
   </widget>
  </widget>
