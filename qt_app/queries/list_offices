@@ -1,4 +1,5 @@
 SELECT
     *
-FROM
-    offices
+FROM offices
+ORDER BY CAST(officeCode as decimal);
+

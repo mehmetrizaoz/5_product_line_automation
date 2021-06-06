@@ -22,8 +22,11 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    login = new Form_Login();
+
+    login  = new Form_Login();
     office = new Form_Office();
+    emp    = new Form_Employee();
+
     myDB = database();
 
     //make window open in screen center
@@ -104,9 +107,6 @@ void MainWindow::on_pushButton_01_clicked()
 
 void MainWindow::on_comboBox_01_activated(int index)
 {
-    QString fileName;
-    QSqlQuery qr;
-
     if(ui->comboBox_01->currentIndex()==0){        
         office->show();
     }
@@ -130,13 +130,8 @@ void MainWindow::on_comboBox_01_activated(int index)
 
 void MainWindow::on_comboBox_02_activated(int index)
 {
-    QString fileName;
-    QSqlQuery qr;
-
     if(ui->comboBox_02->currentIndex()==0){
-        Form_Employee emp;
-        emp.setModal(true);
-        emp.exec();
+        emp->show();
     }
     else if(ui->comboBox_02->currentIndex()==1){
         qDebug()<<"1";
@@ -164,9 +159,6 @@ void MainWindow::on_comboBox_02_activated(int index)
 
 void MainWindow::on_comboBox_03_activated(int index)
 {
-    QString fileName;
-    QSqlQuery qr;
-
     if(ui->comboBox_03->currentIndex()==0){
         Form_Customer cus;
         cus.setModal(true);

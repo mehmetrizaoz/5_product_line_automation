@@ -6,6 +6,7 @@
 #include <QTextEdit>
 #include "form_login.h"
 #include "form_office.h"
+#include "form_employee.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -30,8 +31,12 @@ private slots:
     void on_comboBox_07_activated(int index);
 private:
     Ui::MainWindow *ui;
-    Form_Login  *login;
-    Form_Office *office;
+    Form_Login    *login;
+    Form_Office   *office;
+    Form_Employee *emp;
+
+    QString fileName;
+    QSqlQuery qr;
 };
 
 #endif // MAINWINDOW_H
