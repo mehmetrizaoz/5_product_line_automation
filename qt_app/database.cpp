@@ -37,6 +37,13 @@ void database::disconnect(){
     qDebug()<<"disconnected";
 }
 
+QString database::getCell(QSqlQuery query, int nth_record, int col){
+    for(int i=0; i<nth_record; i++){
+        query.next();
+    }
+    return query.value(col).toString();
+}
+
 QString database::readFile(QString filename){
     QFile file(filename);
     if(!file.open(QFile::ReadOnly | QFile::Text)){

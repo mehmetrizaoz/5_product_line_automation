@@ -3,19 +3,13 @@
 #include <QGridLayout>
 #include <QDesktopWidget>
 #include <QStyle>
-#include <QSqlDatabase>
-#include <QSqlDriver>
-#include <QtSql>
-#include <QSqlError>
-#include <QSqlQuery>
 
 Form_ProductLines::Form_ProductLines(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::Form_ProductLines)
+    QDialog(parent), ui(new Ui::Form_ProductLines)
 {
     ui->setupUi(this);
     this->setWindowTitle("Product Line");
-
+    myDB = database();
     window()->setGeometry(QStyle::alignedRect(Qt::LeftToRight,Qt::AlignCenter,window()->size(),qApp->desktop()->availableGeometry()));
 
     QGridLayout *layout = new QGridLayout();
@@ -38,19 +32,11 @@ Form_ProductLines::~Form_ProductLines()
 
 void Form_ProductLines::on_pushButton_1_clicked()
 {
-    QSqlDatabase db;
-    QSqlQuery query(db);
-    QString queryString = "insert into `productlines`(`productLine`,`textDescription`,`htmlDescription`,`image`) values (";
-    queryString.append("'");
-    queryString.append(ui->lineEdit->text());
-    queryString.append("','");
-    queryString.append(ui->lineEdit_2->text());
-    queryString.append("','");
-    queryString.append(ui->lineEdit_3->text());
-    queryString.append("',");
-    queryString.append("NULL"); //neglect blob
-    queryString.append(")");
-    query.prepare(queryString);
-    query.exec();
-    qDebug() << queryString;
+    QString queryString = "insert into `productlines`(`productLine`,`textDescription`,`htmlDescription`,`image `)";
+    queryString.append("values ('"   + ui->lineEdit->text()   + "','" + ui->lineEdit_2->text());
+    queryString.append("','" + ui->lineEdit_3->text() + "', NULL )");
+    myDB.executeQuery(queryString);
 }
+
+
+

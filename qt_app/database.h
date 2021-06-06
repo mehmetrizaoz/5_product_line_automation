@@ -32,6 +32,7 @@ public:
    QSqlQuery executeQuery(QString qr);
    void fillTable(QSqlQuery query, QTableWidget *tableWidget);
    QString readFile(QString filename);
+   QString getCell(QSqlQuery query, int nth_record, int col);
 
 private:
 

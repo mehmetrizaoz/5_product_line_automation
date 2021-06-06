@@ -2,6 +2,7 @@
 #define FORM_OFFICE_H
 
 #include <QDialog>
+#include "database.h"
 
 namespace Ui {
 class Form_Office;
@@ -14,7 +15,9 @@ class Form_Office : public QDialog
 public:
     explicit Form_Office(QWidget *parent = nullptr);
     ~Form_Office();
-
+    database myDB;   
+private slots:
+    void on_pushButton_1_clicked();
 private:
     Ui::Form_Office *ui;
 };

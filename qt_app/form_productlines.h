@@ -2,6 +2,7 @@
 #define FORM_PRODUCTLINES_H
 
 #include <QDialog>
+#include "database.h"
 
 namespace Ui {
 class Form_ProductLines;
@@ -14,6 +15,7 @@ class Form_ProductLines : public QDialog
 public:
     explicit Form_ProductLines(QWidget *parent = nullptr);
     ~Form_ProductLines();
+    database myDB;
 
 private slots:
     void on_pushButton_1_clicked();

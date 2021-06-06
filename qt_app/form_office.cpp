@@ -4,6 +4,14 @@
 #include <QVBoxLayout>
 #include <QDesktopWidget>
 #include <QStyle>
+#include <QString>
+
+#include <QSqlDatabase>
+#include <QSqlDriver>
+#include <QtSql>
+#include <QSqlError>
+#include <QSqlQuery>
+#include "database.h"
 
 Form_Office::Form_Office(QWidget *parent) :
     QDialog(parent),
@@ -11,6 +19,8 @@ Form_Office::Form_Office(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowTitle("Office");
+
+    myDB = database();
 
     window()->setGeometry(QStyle::alignedRect(Qt::LeftToRight,Qt::AlignCenter,window()->size(),qApp->desktop()->availableGeometry()));
 
@@ -42,3 +52,14 @@ Form_Office::~Form_Office()
 {
     delete ui;
 }
+
+void Form_Office::on_pushButton_1_clicked()
+{
+    QSqlQuery qr = myDB.executeQuery("SELECT MAX(CONVERT(officeCode,UNSIGNED INTEGER)) FROM offices");
+    qDebug() << myDB.getCell(qr, 1, 0);
+
+
+}
+
+
+
