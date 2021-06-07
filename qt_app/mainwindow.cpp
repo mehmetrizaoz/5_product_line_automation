@@ -3,10 +3,6 @@
 #include "ui_mainwindow.h"
 #include "database.h"
 #include "mainwindow.h"
-#include "form_productlines.h"
-#include "form_product.h"
-#include "form_customer.h"
-
 #include <QDesktopWidget>
 #include <QStyle>
 #include <QMessageBox>
@@ -23,6 +19,9 @@ MainWindow::MainWindow(QWidget *parent)
     login  = new Form_Login();
     office = new Form_Office();
     emp    = new Form_Employee();
+    cus    = new Form_Customer();
+    pro    = new Form_Product();
+    lin    = new Form_ProductLines();
 
     myDB = database();
 
@@ -83,6 +82,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     //used to set office windows officeCode column with next p.k.
     connect(ui->comboBox_01, SIGNAL(activated(int)), office, SLOT(on_show()));
+
+    //used to set employee windows employeeNumber column with next p.k.
+    connect(ui->comboBox_02, SIGNAL(activated(int)), emp, SLOT(on_show()));
 }
 
 MainWindow::~MainWindow(){
@@ -91,6 +93,9 @@ MainWindow::~MainWindow(){
     delete login;
     delete office;
     delete emp;
+    delete cus;
+    delete pro;
+    delete lin;
 }
 
 void MainWindow::getLoginStatus(){
@@ -159,9 +164,7 @@ void MainWindow::on_comboBox_02_activated(int index){
 void MainWindow::on_comboBox_03_activated(int index){
     if(login->isConnected == true){
         if(ui->comboBox_03->currentIndex()==0){
-            Form_Customer cus;
-            cus.setModal(true);
-            cus.exec();
+            cus->show();
         }
         else if(ui->comboBox_03->currentIndex()==1){
             qDebug()<<"1";
@@ -229,9 +232,7 @@ void MainWindow::on_comboBox_05_activated(int index){
 void MainWindow::on_comboBox_06_activated(int index){
     if(login->isConnected == true){
         if(ui->comboBox_06->currentIndex()==0){
-            Form_Product pro;
-            pro.setModal(true);
-            pro.exec();
+            pro->show();
         }
         else if(ui->comboBox_06->currentIndex()==1){
             qDebug()<<"1";
@@ -251,10 +252,8 @@ void MainWindow::on_comboBox_06_activated(int index){
 
 void MainWindow::on_comboBox_07_activated(int index){
     if(login->isConnected == true){
-        if(ui->comboBox_07->currentIndex()==0){
-            Form_ProductLines lin;
-            lin.setModal(true);
-            lin.exec();
+        if(ui->comboBox_07->currentIndex()==0){            
+            lin->show();
         }
         else if(ui->comboBox_07->currentIndex()==1){
             qDebug()<<"1";

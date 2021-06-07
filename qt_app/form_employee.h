@@ -2,6 +2,7 @@
 #define FORM_EMPLOYEE_H
 
 #include <QDialog>
+#include "database.h"
 
 namespace Ui {
 class Form_Employee;
@@ -13,8 +14,10 @@ class Form_Employee : public QDialog
 
 public:
     explicit Form_Employee(QWidget *parent = nullptr);
+    database myDB;
     ~Form_Employee();
-
+public slots:
+    void on_show();
 private slots:
     void on_pushButton_clicked();
 

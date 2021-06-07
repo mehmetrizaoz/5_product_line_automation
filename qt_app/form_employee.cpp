@@ -3,6 +3,8 @@
 #include <QGridLayout>
 #include <QDesktopWidget>
 #include <QStyle>
+#include <QDebug>
+#include <QSqlQuery>
 
 Form_Employee::Form_Employee(QWidget *parent) :
     QDialog(parent),
@@ -33,6 +35,12 @@ Form_Employee::Form_Employee(QWidget *parent) :
     layout->addWidget(ui->pushButton,8,0,1,0);
     this->setLayout(layout);
 
+}
+
+void Form_Employee::on_show(){
+    QSqlQuery qr = myDB.executeQuery("SELECT max(employeeNumber) FROM classicmodels.employees");
+    int n = myDB.getCell(qr, 1, 0).toInt() + 1;
+    ui->lineEdit->setText(QString::number(n));
 }
 
 Form_Employee::~Form_Employee()

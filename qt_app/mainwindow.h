@@ -7,6 +7,9 @@
 #include "form_login.h"
 #include "form_office.h"
 #include "form_employee.h"
+#include "form_customer.h"
+#include "form_productlines.h"
+#include "form_product.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -33,6 +36,9 @@ private:
     Form_Login    *login;
     Form_Office   *office;
     Form_Employee *emp;
+    Form_Customer *cus;
+    Form_Product  *pro;
+    Form_ProductLines *lin;
 
     QString fileName;
     QSqlQuery qr;
