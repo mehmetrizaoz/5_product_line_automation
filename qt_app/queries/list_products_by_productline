@@ -1,0 +1,7 @@
+SELECT 
+	pl.productLine,
+	p.productName
+FROM classicmodels.productlines pl
+LEFT JOIN classicmodels.products p USING(productLine)
+ORDER BY p.productLine DESC;
+

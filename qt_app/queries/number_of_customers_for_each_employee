@@ -2,8 +2,8 @@ SELECT
     CONCAT(e.firstName,' ',e.lastName) employee,
     COUNT(*) number_of_customers
 FROM 
-    classicmodels.employees e
-JOIN classicmodels.customers c 
+    employees e
+JOIN customers c
     ON c.salesRepEmployeeNumber = e.employeeNumber
 GROUP BY e.employeeNumber
 ORDER BY number_of_customers DESC;

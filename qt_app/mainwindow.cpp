@@ -76,6 +76,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->comboBox_07->addItem("update product line");
     ui->comboBox_07->addItem("list product lines");
     ui->comboBox_07->addItem("group products by line");
+    ui->comboBox_07->addItem("number of products per line");
 
     //used to get connection status from login window
     connect(login, SIGNAL(loginClicked()), this, SLOT(getLoginStatus()));
@@ -265,8 +266,16 @@ void MainWindow::on_comboBox_07_activated(int index){
             qDebug()<<"3";
         }
         else if(ui->comboBox_07->currentIndex()==4){
-            qDebug()<<"4";
+            fileName = myDB.readFile("://queries/list_products_by_productline");
+            qr = myDB.executeQuery(fileName);
+            myDB.fillTable(qr, ui->tableWidget_01);
         }
+        else if(ui->comboBox_07->currentIndex()==5){
+            fileName = myDB.readFile("://queries/number_of_products_per_line");
+            qr = myDB.executeQuery(fileName);
+            myDB.fillTable(qr, ui->tableWidget_01);
+        }
+
     }
     else{ login->show(); }
 }

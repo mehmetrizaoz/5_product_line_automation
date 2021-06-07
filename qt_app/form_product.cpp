@@ -35,7 +35,6 @@ Form_Product::Form_Product(QWidget *parent) :
     layout->addWidget(ui->lineEdit_9,8,1);
     layout->addWidget(ui->pushButton,9,0,1,0);
     this->setLayout(layout);
-
 }
 
 Form_Product::~Form_Product()

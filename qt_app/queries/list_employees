@@ -4,7 +4,7 @@ SELECT
     o.city,
     CONCAT(o.phone, ' - ext: ', e.extension) phone,
     e.email
-FROM classicmodels.employees e
-JOIN classicmodels.offices o
+FROM employees e
+JOIN offices o
     USING(officeCode)
 ORDER BY o.city;

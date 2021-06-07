@@ -1,0 +1,12 @@
+SELECT 
+	productLine,
+	COUNT(productLine) count
+FROM 
+	productlines pl
+LEFT JOIN 
+	products p USING(productLine)
+GROUP BY 
+	pl.productLine 
+ORDER BY 
+	count DESC;
+
