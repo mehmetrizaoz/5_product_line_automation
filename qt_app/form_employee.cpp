@@ -1,5 +1,6 @@
 #include "form_employee.h"
 #include "ui_form_employee.h"
+#include <vector>
 #include <QGridLayout>
 #include <QDesktopWidget>
 #include <QStyle>
@@ -39,7 +40,9 @@ Form_Employee::Form_Employee(QWidget *parent) :
 
 void Form_Employee::on_show(){
     QSqlQuery qr = myDB.executeQuery("SELECT max(employeeNumber) FROM classicmodels.employees");
-    int n = myDB.getCell(qr, 1, 0).toInt() + 1;
+    vector<int> cols{0};
+    int row = 1;
+    int n = myDB.getCells(qr, row, cols).toInt() + 1;
     ui->lineEdit->setText(QString::number(n));
 }
 

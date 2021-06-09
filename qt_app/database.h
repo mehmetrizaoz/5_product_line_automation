@@ -21,6 +21,7 @@
 #include <QTextStream>
 #include <QString>
 #include <QTableWidget>
+#include <vector>
 
 using namespace std;
 
@@ -32,7 +33,7 @@ public:
    QSqlQuery executeQuery(QString qr);
    void fillTable(QSqlQuery query, QTableWidget *tableWidget);
    QString readFile(QString filename);
-   QString getCell(QSqlQuery query, int nth_record, int col);
+   QString getCells(QSqlQuery query, int nth_record, vector<int> cols);
 private:
 
 };

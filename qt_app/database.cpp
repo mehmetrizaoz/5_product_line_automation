@@ -38,11 +38,18 @@ void database::disconnect(){
     qDebug()<<"disconnected";
 }
 
-QString database::getCell(QSqlQuery query, int nth_record, int col){
+QString database::getCells(QSqlQuery query, int nth_record, vector<int> cols){
     for(int i=0; i<nth_record; i++){
         query.next();
     }
-    return query.value(col).toString();
+
+    QString str;
+
+    for (auto it = begin(cols); it!=end(cols); ++it){
+        str += query.value(*it).toString() + " ";
+    }
+
+    return str;
 }
 
 QString database::readFile(QString filename){

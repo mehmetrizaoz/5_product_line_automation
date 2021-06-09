@@ -5,7 +5,7 @@
 #include <QDesktopWidget>
 #include <QStyle>
 #include <QString>
-
+#include <vector>
 #include <QSqlDatabase>
 #include <QSqlDriver>
 #include <QtSql>
@@ -48,8 +48,11 @@ Form_Office::~Form_Office(){
 }
 
 void Form_Office::on_show(){
+    //fill employee combobox with qery result
     QSqlQuery qr = myDB.executeQuery("SELECT MAX(CONVERT(officeCode,UNSIGNED INTEGER)) FROM offices");
-    int n = myDB.getCell(qr, 1, 0).toInt() + 1;
+    vector<int> cols{0};
+    int row = 1;
+    int n = myDB.getCells(qr, row, cols).toInt() + 1;
     ui->lineEdit->setText(QString::number(n));
 }
 

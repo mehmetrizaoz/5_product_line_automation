@@ -57,13 +57,13 @@ Form_Customer::~Form_Customer()
 void Form_Customer::on_show(){
     database myDB = database();
     QSqlQuery qr = myDB.executeQuery("SELECT contactFirstName, contactLastName FROM classicmodels.customers");
-    //int rowCount = qr.size();
-
-    //for(int i=1; i<rowCount; i++){
-        QString responsibleEmployee = myDB.getCell(qr, 1, 0) + " " + myDB.getCell(qr, 1, 1);
-        qDebug() << responsibleEmployee;
-    //}
-
+    vector<int> cols{0, 1};
+    int row = 1;
+    for(int i=1; i<=qr.size(); i++){
+        QString responsibleEmployee = myDB.getCells(qr, row, cols);
+        ui->comboBox->addItem(responsibleEmployee);
+        //qDebug() << responsibleEmployee;
+    }
 }
 
 void Form_Customer::on_pushButton_clicked()
