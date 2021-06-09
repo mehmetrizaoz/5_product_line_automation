@@ -23,25 +23,24 @@ public:
     ~MainWindow();
     database myDB;
 private slots:
-    void getLoginStatus();
-    void on_comboBox_01_activated(int index);
-    void on_comboBox_02_activated(int index);
-    void on_comboBox_03_activated(int index);
-    void on_comboBox_04_activated(int index);
-    void on_comboBox_05_activated(int index);
-    void on_comboBox_06_activated(int index);
-    void on_comboBox_07_activated(int index);
+    void get_login_status();
+    void on_comboBox_offices_activated(int index);
+    void on_comboBox_employees_activated(int index);
+    void on_comboBox_customers_activated(int index);
+    void on_comboBox_orders_activated(int index);
+    void on_comboBox_payments_activated(int index);
+    void on_comboBox_products_activated(int index);
+    void on_comboBox_productlines_activated(int index);
 private:
-    Ui::MainWindow *ui;
-    Form_Login    *login;
-    Form_Office   *office;
-    Form_Employee *emp;
-    Form_Customer *cus;
-    Form_Product  *pro;
+    Ui::MainWindow    *ui;
+    Form_Login        *login;
+    Form_Office       *office;
+    Form_Employee     *emp;
+    Form_Customer     *cus;
+    Form_Product      *pro;
     Form_ProductLines *lin;
-
-    QString fileName;
-    QSqlQuery qr;
+    QString           fileName;
+    QSqlQuery         qr;
 };
 
 #endif // MAINWINDOW_H

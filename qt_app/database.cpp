@@ -18,6 +18,7 @@
 #include <QString>
 #include <QTextStream>
 #include "database.h"
+#include <vector>
 
 QSqlDatabase db;
 

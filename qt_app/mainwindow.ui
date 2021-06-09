@@ -48,7 +48,7 @@
      </widget>
     </item>
     <item row="2" column="1">
-     <widget class="QComboBox" name="comboBox_03">
+     <widget class="QComboBox" name="comboBox_customers">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
         <horstretch>0</horstretch>
@@ -71,7 +71,7 @@
      </widget>
     </item>
     <item row="1" column="1">
-     <widget class="QComboBox" name="comboBox_02">
+     <widget class="QComboBox" name="comboBox_employees">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
         <horstretch>0</horstretch>
@@ -94,7 +94,7 @@
      </widget>
     </item>
     <item row="0" column="1">
-     <widget class="QComboBox" name="comboBox_01">
+     <widget class="QComboBox" name="comboBox_offices">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
         <horstretch>0</horstretch>
@@ -117,7 +117,7 @@
      </widget>
     </item>
     <item row="4" column="1">
-     <widget class="QComboBox" name="comboBox_05">
+     <widget class="QComboBox" name="comboBox_payments">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
         <horstretch>0</horstretch>
@@ -153,7 +153,7 @@
      </widget>
     </item>
     <item row="6" column="1">
-     <widget class="QComboBox" name="comboBox_07">
+     <widget class="QComboBox" name="comboBox_productlines">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
         <horstretch>0</horstretch>
@@ -163,7 +163,7 @@
      </widget>
     </item>
     <item row="3" column="1">
-     <widget class="QComboBox" name="comboBox_04">
+     <widget class="QComboBox" name="comboBox_orders">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
         <horstretch>0</horstretch>
@@ -186,7 +186,7 @@
      </widget>
     </item>
     <item row="5" column="1">
-     <widget class="QComboBox" name="comboBox_06">
+     <widget class="QComboBox" name="comboBox_products">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
         <horstretch>0</horstretch>

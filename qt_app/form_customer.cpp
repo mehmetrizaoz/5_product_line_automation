@@ -1,8 +1,10 @@
 #include "form_customer.h"
 #include "ui_form_customer.h"
+#include "database.h"
 #include <QGridLayout>
 #include <QDesktopWidget>
 #include <QStyle>
+#include <QDebug>
 
 Form_Customer::Form_Customer(QWidget *parent) :
     QDialog(parent),
@@ -50,6 +52,18 @@ Form_Customer::Form_Customer(QWidget *parent) :
 Form_Customer::~Form_Customer()
 {
     delete ui;
+}
+
+void Form_Customer::on_show(){
+    database myDB = database();
+    QSqlQuery qr = myDB.executeQuery("SELECT contactFirstName, contactLastName FROM classicmodels.customers");
+    //int rowCount = qr.size();
+
+    //for(int i=1; i<rowCount; i++){
+        QString responsibleEmployee = myDB.getCell(qr, 1, 0) + " " + myDB.getCell(qr, 1, 1);
+        qDebug() << responsibleEmployee;
+    //}
+
 }
 
 void Form_Customer::on_pushButton_clicked()

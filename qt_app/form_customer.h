@@ -14,7 +14,8 @@ class Form_Customer : public QDialog
 public:
     explicit Form_Customer(QWidget *parent = nullptr);
     ~Form_Customer();
-
+public slots:
+    void on_show();
 private slots:
     void on_pushButton_clicked();
 
