@@ -6,10 +6,7 @@
 #include <QStyle>
 #include <QDebug>
 
-Form_Customer::Form_Customer(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::Form_Customer)
-{
+Form_Customer::Form_Customer(QWidget *parent) : QDialog(parent), ui(new Ui::Form_Customer){
     ui->setupUi(this);
     this->setWindowTitle("Customer");
     setStyleSheet("background-color: rgb(224,243,176)");
@@ -27,7 +24,6 @@ Form_Customer::Form_Customer(QWidget *parent) :
     layout->addWidget(ui->lineEdit_4,3,1);
     layout->addWidget(ui->label_5,4,0);
     layout->addWidget(ui->lineEdit_5,4,1);
-
     layout->addWidget(ui->label_6,5,0);
     layout->addWidget(ui->lineEdit_6,5,1);
     layout->addWidget(ui->label_7,6,0);
@@ -44,20 +40,16 @@ Form_Customer::Form_Customer(QWidget *parent) :
     layout->addWidget(ui->comboBox,11,1);
     layout->addWidget(ui->label_13,12,0);
     layout->addWidget(ui->lineEdit_12,12,1);
-
     layout->addWidget(ui->add_customer,13,0,1,0);
-
     this->setLayout(layout);
 }
 
-Form_Customer::~Form_Customer()
-{
+Form_Customer::~Form_Customer(){
     delete ui;
 }
 
 void Form_Customer::on_show(){
-    database myDB = database();
-    QSqlQuery qr = myDB.executeQuery("SELECT contactFirstName, contactLastName FROM classicmodels.customers");
+    QSqlQuery qr = myDB.executeQuery("SELECT firstName, lastName FROM employees");
 
     //fill employee combobox with qery result
     vector<int> cols{0, 1};
@@ -67,6 +59,7 @@ void Form_Customer::on_show(){
         ui->comboBox->addItem(responsibleEmployee);
     }
 
+    //fill customer number field witt last number + 1
     qr = myDB.executeQuery("SELECT MAX(CONVERT(customerNumber, UNSIGNED INTEGER)) FROM customers");
     cols.clear();
     cols.push_back(0);
@@ -75,57 +68,31 @@ void Form_Customer::on_show(){
     ui->lineEdit->setText(QString::number(n));
 }
 
-void Form_Customer::on_add_customer_clicked()
-{
+void Form_Customer::on_add_customer_clicked(){
     QString queryString ="insert into customers (customerNumber, customerName, contactLastName, contactFirstName, \
 phone, addressLine1, addressLine2, city, state, postalCode, country, salesRepEmployeeNumber, \
 creditLimit) values (";
+
     queryString.append(ui->lineEdit->text() + ",");
-    queryString.append("'" + ui->lineEdit_2->text()   + "',");
-    queryString.append("'" + ui->lineEdit_3->text()   + "',");
-    queryString.append("'" + ui->lineEdit_4->text()   + "',");
-    queryString.append("'" + ui->lineEdit_5->text()   + "',");
-    queryString.append("'" + ui->lineEdit_6->text()   + "',");
-    queryString.append("'" + ui->lineEdit_7->text()   + "',");
-    queryString.append("'" + ui->lineEdit_8->text()   + "',");
-    queryString.append("'" + ui->lineEdit_9->text()   + "',");
-    queryString.append("'" + ui->lineEdit_10->text()   + "',");
-    queryString.append("'" + ui->lineEdit_11->text()   + "',");
-
-    queryString.append("1370, '21000.00')");
-
-    myDB.executeQuery(queryString);
-    qDebug()<<queryString;
-
-    /*
-
     queryString.append("'" + ui->lineEdit_2->text() + "',");
     queryString.append("'" + ui->lineEdit_3->text() + "',");
     queryString.append("'" + ui->lineEdit_4->text() + "',");
+    queryString.append("'" + ui->lineEdit_5->text() + "',");
     queryString.append("'" + ui->lineEdit_6->text() + "',");
     queryString.append("'" + ui->lineEdit_7->text() + "',");
     queryString.append("'" + ui->lineEdit_8->text() + "',");
     queryString.append("'" + ui->lineEdit_9->text() + "',");
     queryString.append("'" + ui->lineEdit_10->text() + "',");
     queryString.append("'" + ui->lineEdit_11->text() + "',");
-    queryString.append("'" + ui->lineEdit_12->text() + "',");
-    queryString.append("'" + ui->comboBox->currentText() + "',");
-    queryString.append("'" + ui->lineEdit_14->text() + "')");
+
+    //get selected employee number
+    QSqlQuery qr = myDB.executeQuery("SELECT * FROM employees");
+    vector<int> cols{0};
+    QString empNum = myDB.getCells(qr, ui->comboBox->currentIndex()+1, cols);
+
+    queryString.append(empNum);
+    queryString.append(",'" + ui->lineEdit_12->text() + "')");
 
     myDB.executeQuery(queryString);
-
-    qDebug() << queryString;
-
-    ui->lineEdit->setText(QString::number(ui->lineEdit->text().toInt() + 1));
-    ui->lineEdit_2->setText("");
-    ui->lineEdit_3->setText("");
-    ui->lineEdit_4->setText("");
-    ui->lineEdit_6->setText("");
-    ui->lineEdit_7->setText("");
-    ui->lineEdit_8->setText("");
-    ui->lineEdit_9->setText("");
-    ui->lineEdit_10->setText("");
-    ui->lineEdit_11->setText("");
-    ui->lineEdit_12->setText("");
-    ui->lineEdit_14->setText("");*/
+    qDebug()<<queryString;
 }
