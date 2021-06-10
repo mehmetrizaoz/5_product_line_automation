@@ -18,7 +18,7 @@ public:
     bool isConnected=false;
     database myDB;
 private slots:
-    void on_pushButton_clicked();
+    void on_connectButton_clicked();
 
 private:
     Ui::Form_Login *ui;

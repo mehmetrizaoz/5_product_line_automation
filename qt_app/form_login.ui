@@ -19,7 +19,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -86,7 +86,7 @@
      </widget>
     </item>
     <item row="4" column="0" colspan="2">
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="connectButton">
       <property name="text">
        <string>Connect</string>
       </property>

@@ -33,7 +33,7 @@ Form_Employee::Form_Employee(QWidget *parent) :
     layout->addWidget(ui->comboBox_2,6,1);
     layout->addWidget(ui->label_8,7,0);
     layout->addWidget(ui->lineEdit_8,7,1);
-    layout->addWidget(ui->pushButton,8,0,1,0);
+    layout->addWidget(ui->add_employee,8,0,1,0);
     this->setLayout(layout);
 
 }
@@ -51,7 +51,7 @@ Form_Employee::~Form_Employee()
     delete ui;
 }
 
-void Form_Employee::on_pushButton_clicked()
+void Form_Employee::on_add_employee_clicked()
 {
 
 }

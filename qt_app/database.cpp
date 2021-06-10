@@ -38,17 +38,14 @@ void database::disconnect(){
     qDebug()<<"disconnected";
 }
 
-QString database::getCells(QSqlQuery query, int nth_record, vector<int> cols){
-    for(int i=0; i<nth_record; i++){
+QString database::getCells(QSqlQuery query, int row, vector<int> cols){
+    QString str;
+    for(int i=0; i<row; i++){
         query.next();
     }
-
-    QString str;
-
     for (auto it = begin(cols); it!=end(cols); ++it){
         str += query.value(*it).toString() + " ";
     }
-
     return str;
 }
 

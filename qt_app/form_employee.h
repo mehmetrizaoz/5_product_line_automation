@@ -19,7 +19,7 @@ public:
 public slots:
     void on_show();
 private slots:
-    void on_pushButton_clicked();
+    void on_add_employee_clicked();
 
 private:
     Ui::Form_Employee *ui;

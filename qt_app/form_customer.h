@@ -2,6 +2,7 @@
 #define FORM_CUSTOMER_H
 
 #include <QDialog>
+#include "database.h"
 
 namespace Ui {
 class Form_Customer;
@@ -14,10 +15,11 @@ class Form_Customer : public QDialog
 public:
     explicit Form_Customer(QWidget *parent = nullptr);
     ~Form_Customer();
+    database myDB;
 public slots:
     void on_show();
 private slots:
-    void on_pushButton_clicked();
+    void on_add_customer_clicked();
 
 private:
     Ui::Form_Customer *ui;

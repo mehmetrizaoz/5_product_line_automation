@@ -95,7 +95,7 @@
     <string>Job Title:</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="add_employee">
    <property name="geometry">
     <rect>
      <x>190</x>
@@ -220,7 +220,7 @@
   <tabstop>comboBox_2</tabstop>
   <tabstop>lineEdit_5</tabstop>
   <tabstop>lineEdit_8</tabstop>
-  <tabstop>pushButton</tabstop>
+  <tabstop>add_employee</tabstop>
  </tabstops>
  <resources/>
  <connections/>

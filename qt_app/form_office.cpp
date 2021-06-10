@@ -47,8 +47,7 @@ Form_Office::~Form_Office(){
     delete ui;
 }
 
-void Form_Office::on_show(){
-    //fill employee combobox with qery result
+void Form_Office::on_show(){    
     QSqlQuery qr = myDB.executeQuery("SELECT MAX(CONVERT(officeCode,UNSIGNED INTEGER)) FROM offices");
     vector<int> cols{0};
     int row = 1;
