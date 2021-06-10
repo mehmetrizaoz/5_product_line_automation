@@ -1,13 +1,11 @@
 SELECT
-    *
-    #c.customerName,
-    #c.phone,
-    #CONCAT(c.city, ' ', c.country) place,
-    #c.creditLimit,
-    #CONCAT(e.firstName, ' ', e.lastName)  contact_person
+    c.customerName,
+    c.phone,
+    CONCAT(c.city, ' ', c.country) place,
+    c.creditLimit,
+    CONCAT(e.firstName, ' ', e.lastName) contact_person
 FROM customers c
-#JOIN employees e
-#    ON(c.salesRepEmployeeNumber = e.employeeNumber)
-#ORDER BY c.creditLimit DESC
-ORDER BY customerNumber DESC;
+JOIN employees e
+    ON(c.salesRepEmployeeNumber = e.employeeNumber)
+ORDER BY c.creditLimit DESC;
 
