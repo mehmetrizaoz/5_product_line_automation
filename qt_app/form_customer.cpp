@@ -78,18 +78,27 @@ void Form_Customer::on_show(){
 void Form_Customer::on_add_customer_clicked()
 {
     QString queryString ="insert into customers (customerNumber, customerName, contactLastName, contactFirstName, \
-    phone, addressLine1, addressLine2, city, state, postalCode, country, salesRepEmployeeNumber, \
-    creditLimit) values (505, 'Atelier graphique', 'Schmitt', 'Carine', '40.32.2555', '54, \
-    rue Royale', NULL, 'Nantes', NULL, '44000', 'France', 1370, '21000.00')";
+phone, addressLine1, addressLine2, city, state, postalCode, country, salesRepEmployeeNumber, \
+creditLimit) values (";
+    queryString.append(ui->lineEdit->text() + ",");
+    queryString.append("'" + ui->lineEdit_2->text()   + "',");
+    queryString.append("'" + ui->lineEdit_3->text()   + "',");
+    queryString.append("'" + ui->lineEdit_4->text()   + "',");
+    queryString.append("'" + ui->lineEdit_5->text()   + "',");
+    queryString.append("'" + ui->lineEdit_6->text()   + "',");
+    queryString.append("'" + ui->lineEdit_7->text()   + "',");
+    queryString.append("'" + ui->lineEdit_8->text()   + "',");
+    queryString.append("'" + ui->lineEdit_9->text()   + "',");
+    queryString.append("'" + ui->lineEdit_10->text()   + "',");
+    queryString.append("'" + ui->lineEdit_11->text()   + "',");
+
+    queryString.append("1370, '21000.00')");
 
     myDB.executeQuery(queryString);
     qDebug()<<queryString;
 
+    /*
 
-    /*QString queryString = "insert into `customers`(`customerNumber`,`customerName`,`contactLastName`, \
-                    `contactFirstName`,`phone`,`addressLine1`,`addressLine2`,`city`,`state`,`postalCode`, \
-                    `country`,`salesRepEmployeeNumber`,`creditLimit` ) values (";
-    queryString.append("'" + ui->lineEdit->text()   + "',");
     queryString.append("'" + ui->lineEdit_2->text() + "',");
     queryString.append("'" + ui->lineEdit_3->text() + "',");
     queryString.append("'" + ui->lineEdit_4->text() + "',");
@@ -119,7 +128,4 @@ void Form_Customer::on_add_customer_clicked()
     ui->lineEdit_11->setText("");
     ui->lineEdit_12->setText("");
     ui->lineEdit_14->setText("");*/
-
-
-
 }
