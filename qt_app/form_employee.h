@@ -11,7 +11,6 @@ class Form_Employee;
 class Form_Employee : public QDialog
 {
     Q_OBJECT
-
 public:
     explicit Form_Employee(QWidget *parent = nullptr);
     database myDB;

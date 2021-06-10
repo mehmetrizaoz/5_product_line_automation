@@ -13,14 +13,14 @@ Form_Login::Form_Login(QWidget *parent) : QWidget(parent), ui(new Ui::Form_Login
     myDB = database();
     window()->setGeometry(QStyle::alignedRect(Qt::LeftToRight,Qt::AlignCenter,window()->size(),qApp->desktop()->availableGeometry()));
     //used to send connection status to main window
-    connect(ui->connectButton, SIGNAL(clicked()), this, SIGNAL(loginClicked()));
+    connect(ui->connect, SIGNAL(clicked()), this, SIGNAL(loginClicked()));
 }
 
 Form_Login::~Form_Login(){
     delete ui;
 }
 
-void Form_Login::on_connectButton_clicked(){
+void Form_Login::on_connect_clicked(){
     QString username = ui->lineEdit->text();
     QString password = ui->lineEdit_2->text();
     QString hostname = ui->lineEdit_3->text();

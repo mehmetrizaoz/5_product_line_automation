@@ -11,7 +11,6 @@ class Form_Customer;
 class Form_Customer : public QDialog
 {
     Q_OBJECT
-
 public:
     explicit Form_Customer(QWidget *parent = nullptr);
     ~Form_Customer();
@@ -20,7 +19,6 @@ public slots:
     void on_show();
 private slots:
     void on_add_customer_clicked();
-
 private:
     Ui::Form_Customer *ui;
 };
