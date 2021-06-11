@@ -1,13 +1,13 @@
 #ifndef FORM_ORDER_H
 #define FORM_ORDER_H
 
-#include <QWidget>
+#include <QDialog>
 
 namespace Ui {
 class Form_Order;
 }
 
-class Form_Order : public QWidget
+class Form_Order : public QDialog
 {
     Q_OBJECT
 

@@ -5,7 +5,7 @@
 #include <QDesktopWidget>
 
 Form_Order_Detail::Form_Order_Detail(QWidget *parent) :
-    QWidget(parent),
+    QDialog(parent),
     ui(new Ui::Form_Order_Detail)
 {
     ui->setupUi(this);
