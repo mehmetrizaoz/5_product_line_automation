@@ -1,9 +1,9 @@
 SELECT
     CONCAT(e.firstName, ' ', e.lastName) 'employee',
-    SUM(od.priceEach * od.quantityOrdered) 'sales total'
+    SUM(od.priceEach * od.quantityOrdered) total_amount
 FROM classicmodels.orders o
 JOIN classicmodels.customers c USING(customerNumber)
 JOIN classicmodels.employees e ON (c.salesRepEmployeeNumber = e.employeeNumber)
 JOIN classicmodels.orderdetails od ON(o.orderNumber = od.orderNumber)
 GROUP BY e.employeeNumber
-ORDER BY total DESC
+ORDER BY total_amount DESC
