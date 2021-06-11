@@ -289,7 +289,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>PushButton</string>
+    <string>add</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_5">

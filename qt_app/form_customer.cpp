@@ -49,9 +49,8 @@ Form_Customer::~Form_Customer(){
 }
 
 void Form_Customer::on_show(){
-    QSqlQuery qr = myDB.executeQuery("SELECT * FROM employees");
-
     //fill employee combobox with query result
+    QSqlQuery qr = myDB.executeQuery("SELECT * FROM employees");    
     vector<int> cols{2, 1};
     int row = 1;
     ui->comboBox->clear();
@@ -73,7 +72,6 @@ void Form_Customer::on_add_customer_clicked(){
     QString queryString ="insert into customers (customerNumber, customerName, contactLastName, contactFirstName, \
 creditLimit, phone, addressLine1, addressLine2, city, state, postalCode, salesRepEmployeeNumber, country\
 ) values (";
-
     queryString.append(ui->lineEdit->text() + ",");
     queryString.append("'" + ui->lineEdit_2->text() + "',");
     queryString.append("'" + ui->lineEdit_3->text() + "',");
@@ -85,17 +83,25 @@ creditLimit, phone, addressLine1, addressLine2, city, state, postalCode, salesRe
     queryString.append("'" + ui->lineEdit_9->text() + "',");
     queryString.append("'" + ui->lineEdit_10->text() + "',");
     queryString.append("'" + ui->lineEdit_11->text() + "',");
-
     //get selected employee number
     QSqlQuery qr = myDB.executeQuery("SELECT * FROM employees");
     vector<int> cols{0};
-    qDebug() << ui->comboBox->currentIndex()+1;
-    qDebug() << ui->comboBox->currentText();
     QString empNum = myDB.getCells(qr, ui->comboBox->currentIndex()+1, cols);
-
     queryString.append(empNum);
     queryString.append(",'" + ui->lineEdit_12->text() + "')");
+    myDB.executeQuery(queryString);    
 
-    myDB.executeQuery(queryString);
-    qDebug()<<queryString;
+    //clear fields
+    ui->lineEdit->setText(QString::number(ui->lineEdit->text().toInt() + 1));
+    ui->lineEdit_2->setText("");
+    ui->lineEdit_3->setText("");
+    ui->lineEdit_4->setText("");
+    ui->lineEdit_5->setText("");
+    ui->lineEdit_6->setText("");
+    ui->lineEdit_7->setText("");
+    ui->lineEdit_8->setText("");
+    ui->lineEdit_9->setText("");
+    ui->lineEdit_10->setText("");
+    ui->lineEdit_11->setText("");
+    ui->lineEdit_12->setText("");
 }
