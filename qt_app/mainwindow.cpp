@@ -40,7 +40,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->comboBox_employees->addItem("list employees");
     ui->comboBox_employees->addItem("group reporters by employees");
     ui->comboBox_employees->addItem("number of customers per employee");
-    ui->comboBox_employees->addItem("group sales by employees");
+    ui->comboBox_employees->addItem("list sales by representative");
 
     ui->comboBox_customers->addItem("add customer");
     ui->comboBox_customers->addItem("delete customer");
@@ -156,8 +156,10 @@ void MainWindow::on_comboBox_employees_activated(int index){
             qr = myDB.executeQuery(fileName);
             myDB.fillTable(qr, ui->tableWidget_01);
         }
-        else if(ui->comboBox_employees->currentIndex()==6){
-            qDebug()<<"6";
+        else if(ui->comboBox_employees->currentIndex()==6){            
+            fileName = myDB.readFile("://queries/list_sales");
+            qr = myDB.executeQuery(fileName);
+            myDB.fillTable(qr, ui->tableWidget_01);
         }
     }
     else{ login->show(); }
