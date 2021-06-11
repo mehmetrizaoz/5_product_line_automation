@@ -21,6 +21,8 @@ SOURCES += \
     form_employee.cpp \
     form_login.cpp \
     form_office.cpp \
+    form_order.cpp \
+    form_order_detail.cpp \
     form_product.cpp \
     form_productlines.cpp \
     main.cpp \
@@ -32,6 +34,8 @@ HEADERS += \
     form_employee.h \
     form_login.h \
     form_office.h \
+    form_order.h \
+    form_order_detail.h \
     form_product.h \
     form_productlines.h \
     mainwindow.h
@@ -41,6 +45,8 @@ FORMS += \
     form_employee.ui \
     form_login.ui \
     form_office.ui \
+    form_order.ui \
+    form_order_detail.ui \
     form_product.ui \
     form_productlines.ui \
     mainwindow.ui

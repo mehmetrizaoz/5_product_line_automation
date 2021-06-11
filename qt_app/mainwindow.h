@@ -10,6 +10,8 @@
 #include "form_customer.h"
 #include "form_productlines.h"
 #include "form_product.h"
+#include "form_order.h"
+#include "form_order_detail.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -28,7 +30,7 @@ private slots:
     void on_comboBox_employees_activated(int index);
     void on_comboBox_customers_activated(int index);
     void on_comboBox_orders_activated(int index);
-    void on_comboBox_payments_activated(int index);
+    void on_comboBox_order_details_activated(int index);
     void on_comboBox_products_activated(int index);
     void on_comboBox_productlines_activated(int index);
 private:
@@ -39,6 +41,8 @@ private:
     Form_Customer     *cus;
     Form_Product      *pro;
     Form_ProductLines *lin;
+    Form_Order        *ord;
+    Form_Order_Detail *orddt;
     QString           fileName;
     QSqlQuery         qr;
 };

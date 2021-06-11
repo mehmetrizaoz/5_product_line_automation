@@ -20,6 +20,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     cus    = new Form_Customer();
     pro    = new Form_Product();
     lin    = new Form_ProductLines();
+    ord    = new Form_Order();
+    orddt  = new Form_Order_Detail();
     myDB   = database();
 
     //make window open in screen center
@@ -56,10 +58,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->comboBox_orders->addItem("list orders");
     ui->comboBox_orders->addItem("group orders by customer");
 
-    ui->comboBox_payments->addItem("add payment");
-    ui->comboBox_payments->addItem("delete payment");
-    ui->comboBox_payments->addItem("update payment");
-    ui->comboBox_payments->addItem("list payments");
+    ui->comboBox_order_details->addItem("add order detail");
+    ui->comboBox_order_details->addItem("delete order detail");
+    ui->comboBox_order_details->addItem("update order detail");
+    ui->comboBox_order_details->addItem("list order detail");
 
     ui->comboBox_products->addItem("add product");
     ui->comboBox_products->addItem("delete product");
@@ -96,6 +98,8 @@ MainWindow::~MainWindow(){
     delete cus;
     delete pro;
     delete lin;
+    delete ord;
+    delete orddt;
 }
 
 void MainWindow::get_login_status(){
@@ -197,7 +201,7 @@ void MainWindow::on_comboBox_customers_activated(int index){
 void MainWindow::on_comboBox_orders_activated(int index){
     if(login->isConnected == true){
         if(ui->comboBox_orders->currentIndex()==0){
-            qDebug()<<"0";
+            ord->show();
         }
         else if(ui->comboBox_orders->currentIndex()==1){
             qDebug()<<"1";
@@ -215,18 +219,18 @@ void MainWindow::on_comboBox_orders_activated(int index){
     else{ login->show(); }
 }
 
-void MainWindow::on_comboBox_payments_activated(int index){
+void MainWindow::on_comboBox_order_details_activated(int index){
     if(login->isConnected == true){
-        if(ui->comboBox_payments->currentIndex()==0){
-            qDebug()<<"0";
+        if(ui->comboBox_order_details->currentIndex()==0){
+            orddt->show();
         }
-        else if(ui->comboBox_payments->currentIndex()==1){
+        else if(ui->comboBox_order_details->currentIndex()==1){
             qDebug()<<"1";
         }
-        else if(ui->comboBox_payments->currentIndex()==2){
+        else if(ui->comboBox_order_details->currentIndex()==2){
             qDebug()<<"2";
         }
-        else if(ui->comboBox_payments->currentIndex()==3){
+        else if(ui->comboBox_order_details->currentIndex()==3){
             qDebug()<<"3";
         }
     }

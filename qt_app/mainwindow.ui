@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>931</width>
-    <height>402</height>
+    <height>345</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -21,19 +21,6 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="2" rowspan="8">
-     <widget class="QTableWidget" name="tableWidget_01">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-     </widget>
-    </item>
     <item row="2" column="0">
      <widget class="QLabel" name="label_11">
       <property name="sizePolicy">
@@ -66,7 +53,7 @@
        </sizepolicy>
       </property>
       <property name="text">
-       <string>Payments:</string>
+       <string>Order Details:</string>
       </property>
      </widget>
     </item>
@@ -117,7 +104,7 @@
      </widget>
     </item>
     <item row="4" column="1">
-     <widget class="QComboBox" name="comboBox_payments">
+     <widget class="QComboBox" name="comboBox_order_details">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
         <horstretch>0</horstretch>
@@ -189,6 +176,19 @@
      <widget class="QComboBox" name="comboBox_products">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="2" rowspan="8">
+     <widget class="QTableWidget" name="tableWidget_01">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
         <horstretch>0</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
