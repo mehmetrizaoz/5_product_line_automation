@@ -8,5 +8,6 @@
         <file>queries/insert_test</file>
         <file>queries/number_of_products_per_line</file>
         <file>queries/list_products_by_productline</file>
+        <file>queries/list_employee_hierarchy</file>
     </qresource>
 </RCC>

@@ -147,7 +147,9 @@ void MainWindow::on_comboBox_employees_activated(int index){
             myDB.fillTable(qr, ui->tableWidget_01);
         }
         else if(ui->comboBox_employees->currentIndex()==4){
-            qDebug()<<"4";
+            fileName = myDB.readFile("://queries/list_employee_hierarchy");
+            qr = myDB.executeQuery(fileName);
+            myDB.fillTable(qr, ui->tableWidget_01);
         }
         else if(ui->comboBox_employees->currentIndex()==5){
             fileName = myDB.readFile("://queries/number_of_customers_for_each_employee");

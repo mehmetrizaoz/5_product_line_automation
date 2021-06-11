@@ -1,0 +1,10 @@
+SELECT
+    CONCAT(m.lastName, ', ', m.firstName) AS Manager,
+    CONCAT(e.lastName, ', ', e.firstName) AS Employee,
+    m.jobTitle
+FROM
+    employees e
+JOIN employees m ON
+    m.employeeNumber = e.reportsTo
+ORDER BY
+    Manager;
