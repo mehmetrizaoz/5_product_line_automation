@@ -5,7 +5,7 @@ SELECT
     c.creditLimit,
     CONCAT(e.firstName, ' ', e.lastName) contact_person
 FROM customers c
-JOIN employees e
+LEFT JOIN employees e
     ON(c.salesRepEmployeeNumber = e.employeeNumber)
-ORDER BY c.creditLimit DESC;
+ORDER BY c.customerNumber DESC;
 

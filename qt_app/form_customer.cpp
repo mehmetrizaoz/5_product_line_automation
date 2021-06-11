@@ -49,11 +49,12 @@ Form_Customer::~Form_Customer(){
 }
 
 void Form_Customer::on_show(){
-    QSqlQuery qr = myDB.executeQuery("SELECT firstName, lastName FROM employees");
+    QSqlQuery qr = myDB.executeQuery("SELECT * FROM employees");
 
-    //fill employee combobox with qery result
-    vector<int> cols{0, 1};
+    //fill employee combobox with query result
+    vector<int> cols{2, 1};
     int row = 1;
+    ui->comboBox->clear();
     for(int i=1; i<=qr.size(); i++){
         QString responsibleEmployee = myDB.getCells(qr, row, cols);
         ui->comboBox->addItem(responsibleEmployee);
@@ -70,8 +71,8 @@ void Form_Customer::on_show(){
 
 void Form_Customer::on_add_customer_clicked(){
     QString queryString ="insert into customers (customerNumber, customerName, contactLastName, contactFirstName, \
-phone, addressLine1, addressLine2, city, state, postalCode, country, salesRepEmployeeNumber, \
-creditLimit) values (";
+creditLimit, phone, addressLine1, addressLine2, city, state, postalCode, salesRepEmployeeNumber, country\
+) values (";
 
     queryString.append(ui->lineEdit->text() + ",");
     queryString.append("'" + ui->lineEdit_2->text() + "',");
@@ -88,6 +89,8 @@ creditLimit) values (";
     //get selected employee number
     QSqlQuery qr = myDB.executeQuery("SELECT * FROM employees");
     vector<int> cols{0};
+    qDebug() << ui->comboBox->currentIndex()+1;
+    qDebug() << ui->comboBox->currentText();
     QString empNum = myDB.getCells(qr, ui->comboBox->currentIndex()+1, cols);
 
     queryString.append(empNum);
