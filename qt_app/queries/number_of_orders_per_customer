@@ -1,0 +1,7 @@
+SELECT 
+	c.customerName, 
+	COUNT(o.orderNumber) count 
+FROM customers c 
+LEFT JOIN orders o using(customerNumber) 
+GROUP BY c.customerName 
+ORDER BY count DESC;

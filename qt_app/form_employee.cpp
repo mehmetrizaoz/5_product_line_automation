@@ -45,7 +45,6 @@ void Form_Employee::on_show(){
     int n = myDB.getCells(qr, row, cols).toInt() + 1;
     ui->lineEdit->setText(QString::number(n));
 
-    //fill office combobox with query result
     qr = myDB.executeQuery("SELECT * FROM offices");
     cols.clear();
     cols.push_back(1);
@@ -56,7 +55,6 @@ void Form_Employee::on_show(){
         ui->comboBox->addItem(offi);
     }
 
-    //fill manager combobox with query result
     qr = myDB.executeQuery("SELECT * FROM employees");
     cols.clear();
     cols.push_back(2);

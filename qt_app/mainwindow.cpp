@@ -13,7 +13,6 @@
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow){
     ui->setupUi(this);
-
     login  = new Form_Login();
     office = new Form_Office();
     emp    = new Form_Employee();
@@ -48,8 +47,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->comboBox_customers->addItem("delete customer");
     ui->comboBox_customers->addItem("update customer");
     ui->comboBox_customers->addItem("list customers");
-    ui->comboBox_customers->addItem("group orders by customer");
-    ui->comboBox_customers->addItem("group products by customer");
+    ui->comboBox_customers->addItem("number of orders per customer");
+    ui->comboBox_customers->addItem("list products sold by customer");
     ui->comboBox_customers->addItem("group payments by customer");
 
     ui->comboBox_orders->addItem("add order");
@@ -79,7 +78,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     //used to get connection status from login window
     connect(login, SIGNAL(loginClicked()), this, SLOT(get_login_status()));
-
     //trigger on show events
     connect(ui->comboBox_offices, SIGNAL(activated(int)), office, SLOT(on_show()));    
     connect(ui->comboBox_employees, SIGNAL(activated(int)), emp, SLOT(on_show()));
@@ -187,10 +185,14 @@ void MainWindow::on_comboBox_customers_activated(int index){
             myDB.fillTable(qr, ui->tableWidget_01);
         }
         else if(ui->comboBox_customers->currentIndex()==4){
-            qDebug()<<"4";
+            fileName = myDB.readFile("://queries/number_of_orders_per_customer");
+            qr = myDB.executeQuery(fileName);
+            myDB.fillTable(qr, ui->tableWidget_01);
         }
         else if(ui->comboBox_customers->currentIndex()==5){
-            qDebug()<<"5";
+            fileName = myDB.readFile("://queries/list_products_sold_by_customer");
+            qr = myDB.executeQuery(fileName);
+            myDB.fillTable(qr, ui->tableWidget_01);
         }
         else if(ui->comboBox_customers->currentIndex()==6){
             qDebug()<<"6";

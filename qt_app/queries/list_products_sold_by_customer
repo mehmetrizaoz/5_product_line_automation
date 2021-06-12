@@ -1,0 +1,9 @@
+SELECT
+    c.customerName,
+    p.productName,
+    o.orderDate
+FROM customers c
+    JOIN orders o using(customerNumber)
+    JOIN orderdetails od using(orderNumber)
+    JOIN products p using(productCode)
+ORDER BY o.orderDate;

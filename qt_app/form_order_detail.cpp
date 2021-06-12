@@ -52,12 +52,10 @@ void Form_Order_Detail::on_show(){
     }
 }
 
-Form_Order_Detail::~Form_Order_Detail()
-{
+Form_Order_Detail::~Form_Order_Detail(){
     delete ui;
 }
 
-void Form_Order_Detail::on_add_order_detail_clicked()
-{
+void Form_Order_Detail::on_add_order_detail_clicked(){
 
 }

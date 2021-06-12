@@ -40,7 +40,7 @@ Form_Order::Form_Order(QWidget *parent) :
 }
 
 void Form_Order::on_show(){
-    //fill customers combobox with query result
+    //todo: refactor combobox filling
     QSqlQuery qr = myDB.executeQuery("SELECT * FROM customers");
     vector<int> cols{1};
     int row = 1;
@@ -50,7 +50,6 @@ void Form_Order::on_show(){
         ui->comboBox->addItem(cust);
     }
 
-    //generate next order number automatically
     qr = myDB.executeQuery("SELECT MAX(CONVERT(orderNumber,UNSIGNED INTEGER)) FROM orders");
     cols.clear();
     cols.push_back(0);
@@ -59,12 +58,10 @@ void Form_Order::on_show(){
     ui->lineEdit->setText(QString::number(n));
 }
 
-Form_Order::~Form_Order()
-{
+Form_Order::~Form_Order(){
     delete ui;
 }
 
-void Form_Order::on_add_office_clicked()
-{
+void Form_Order::on_add_office_clicked(){
 
 }

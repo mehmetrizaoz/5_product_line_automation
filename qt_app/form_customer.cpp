@@ -49,7 +49,6 @@ Form_Customer::~Form_Customer(){
 }
 
 void Form_Customer::on_show(){
-    //fill employee combobox with query result
     QSqlQuery qr = myDB.executeQuery("SELECT * FROM employees");    
     vector<int> cols{2, 1};
     int row = 1;
@@ -59,7 +58,6 @@ void Form_Customer::on_show(){
         ui->comboBox->addItem(responsibleEmployee);
     }
 
-    //fill customer number field witt last number + 1
     qr = myDB.executeQuery("SELECT MAX(CONVERT(customerNumber, UNSIGNED INTEGER)) FROM customers");
     cols.clear();
     cols.push_back(0);
