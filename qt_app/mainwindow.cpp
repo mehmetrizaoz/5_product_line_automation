@@ -87,6 +87,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->comboBox_orders, SIGNAL(activated(int)), ord, SLOT(on_show()));
     connect(ui->comboBox_productlines, SIGNAL(activated(int)), lin, SLOT(on_show()));
     connect(ui->comboBox_products, SIGNAL(activated(int)), pro, SLOT(on_show()));
+    connect(ui->comboBox_order_details, SIGNAL(activated(int)), orddt, SLOT(on_show()));
 }
 
 MainWindow::~MainWindow(){
