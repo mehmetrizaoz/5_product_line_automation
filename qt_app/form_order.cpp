@@ -50,6 +50,7 @@ void Form_Order::on_show(){
         ui->comboBox->addItem(cust);
     }
 
+    //generate next order number automatically
     qr = myDB.executeQuery("SELECT MAX(CONVERT(orderNumber,UNSIGNED INTEGER)) FROM orders");
     cols.clear();
     cols.push_back(0);

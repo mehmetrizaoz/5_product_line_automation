@@ -80,15 +80,13 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     //used to get connection status from login window
     connect(login, SIGNAL(loginClicked()), this, SLOT(get_login_status()));
 
-    //used to set office windows officeCode column with next p.k.
-    connect(ui->comboBox_offices, SIGNAL(activated(int)), office, SLOT(on_show()));
-
-    //used to set employee windows employeeNumber column with next p.k.
+    //trigger on show events
+    connect(ui->comboBox_offices, SIGNAL(activated(int)), office, SLOT(on_show()));    
     connect(ui->comboBox_employees, SIGNAL(activated(int)), emp, SLOT(on_show()));
-
     connect(ui->comboBox_customers, SIGNAL(activated(int)), cus, SLOT(on_show()));
-
     connect(ui->comboBox_orders, SIGNAL(activated(int)), ord, SLOT(on_show()));
+    connect(ui->comboBox_productlines, SIGNAL(activated(int)), lin, SLOT(on_show()));
+    connect(ui->comboBox_products, SIGNAL(activated(int)), pro, SLOT(on_show()));
 }
 
 MainWindow::~MainWindow(){

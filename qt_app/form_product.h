@@ -2,6 +2,7 @@
 #define FORM_PRODUCT_H
 
 #include <QDialog>
+#include "database.h"
 
 namespace Ui {
 class Form_Product;
@@ -13,10 +14,12 @@ class Form_Product : public QDialog
 
 public:
     explicit Form_Product(QWidget *parent = nullptr);
-    ~Form_Product();
-
+    ~Form_Product();    
+    database myDB;
+public slots:
+    void on_show();
 private slots:
-    void on_pushButton_clicked();
+    void on_add_product_clicked();
 
 private:
     Ui::Form_Product *ui;

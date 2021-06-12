@@ -16,7 +16,8 @@ public:
     explicit Form_ProductLines(QWidget *parent = nullptr);
     ~Form_ProductLines();
     database myDB;
-
+public slots:
+    void on_show();
 private slots:
     void on_pushButton_1_clicked();
 
