@@ -4,6 +4,11 @@
 #include <QMainWindow>
 #include <QDebug>
 #include <QDesktopWidget>
+#include <QSqlDatabase>
+#include <QSqlDriver>
+#include <QtSql>
+#include <QSqlError>
+#include <QSqlQuery>
 
 Form_Order::Form_Order(QWidget *parent) :
     QDialog(parent),
@@ -11,6 +16,7 @@ Form_Order::Form_Order(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowTitle("Order");
+    myDB = database();
     window()->setGeometry(QStyle::alignedRect(Qt::LeftToRight,Qt::AlignCenter,window()->size(),qApp->desktop()->availableGeometry()));
     setStyleSheet("background-color: rgb(224,243,176)");
 
@@ -34,7 +40,22 @@ Form_Order::Form_Order(QWidget *parent) :
 }
 
 void Form_Order::on_show(){
-   qDebug() << "........";
+    //fill customers combobox with query result
+    QSqlQuery qr = myDB.executeQuery("SELECT * FROM customers");
+    vector<int> cols{1};
+    int row = 1;
+    ui->comboBox->clear();
+    for(int i=1; i<=qr.size(); i++){
+        QString cust = myDB.getCells(qr, row, cols);
+        ui->comboBox->addItem(cust);
+    }
+
+    qr = myDB.executeQuery("SELECT MAX(CONVERT(orderNumber,UNSIGNED INTEGER)) FROM orders");
+    cols.clear();
+    cols.push_back(0);
+    row = 1;
+    int n = myDB.getCells(qr, row, cols).toInt() + 1;
+    ui->lineEdit->setText(QString::number(n));
 }
 
 Form_Order::~Form_Order()

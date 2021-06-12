@@ -2,6 +2,7 @@
 #define FORM_ORDER_H
 
 #include <QDialog>
+#include "database.h"
 
 namespace Ui {
 class Form_Order;
@@ -14,6 +15,7 @@ class Form_Order : public QDialog
 public:
     explicit Form_Order(QWidget *parent = nullptr);
     ~Form_Order();
+    database myDB;
 public slots:
     void on_show();
 private slots:
