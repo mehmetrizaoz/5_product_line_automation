@@ -87,6 +87,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->comboBox_employees, SIGNAL(activated(int)), emp, SLOT(on_show()));
 
     connect(ui->comboBox_customers, SIGNAL(activated(int)), cus, SLOT(on_show()));
+
+    connect(ui->comboBox_orders, SIGNAL(activated(int)), ord, SLOT(on_show()));
 }
 
 MainWindow::~MainWindow(){

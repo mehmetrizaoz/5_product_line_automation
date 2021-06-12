@@ -69,9 +69,14 @@ void Form_Customer::on_show(){
 }
 
 void Form_Customer::on_add_customer_clicked(){
+    //get selected employee number
+    QSqlQuery qr = myDB.executeQuery("SELECT * FROM employees");
+    vector<int> cols{0};
+    QString empNum = myDB.getCells(qr, ui->comboBox->currentIndex()+1, cols);
+
     QString queryString ="insert into customers (customerNumber, customerName, contactLastName, contactFirstName, \
 creditLimit, phone, addressLine1, addressLine2, city, state, postalCode, salesRepEmployeeNumber, country\
-) values (";
+) values (";              
     queryString.append(ui->lineEdit->text() + ",");
     queryString.append("'" + ui->lineEdit_2->text() + "',");
     queryString.append("'" + ui->lineEdit_3->text() + "',");
@@ -82,11 +87,7 @@ creditLimit, phone, addressLine1, addressLine2, city, state, postalCode, salesRe
     queryString.append("'" + ui->lineEdit_8->text() + "',");
     queryString.append("'" + ui->lineEdit_9->text() + "',");
     queryString.append("'" + ui->lineEdit_10->text() + "',");
-    queryString.append("'" + ui->lineEdit_11->text() + "',");
-    //get selected employee number
-    QSqlQuery qr = myDB.executeQuery("SELECT * FROM employees");
-    vector<int> cols{0};
-    QString empNum = myDB.getCells(qr, ui->comboBox->currentIndex()+1, cols);
+    queryString.append("'" + ui->lineEdit_11->text() + "',");        
     queryString.append(empNum);
     queryString.append(",'" + ui->lineEdit_12->text() + "')");
     myDB.executeQuery(queryString);    

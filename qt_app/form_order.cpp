@@ -2,6 +2,7 @@
 #include "ui_form_order.h"
 #include <QVBoxLayout>
 #include <QMainWindow>
+#include <QDebug>
 #include <QDesktopWidget>
 
 Form_Order::Form_Order(QWidget *parent) :
@@ -30,6 +31,10 @@ Form_Order::Form_Order(QWidget *parent) :
     layout->addWidget(ui->comboBox,6,1);
     layout->addWidget(ui->add_office,7,0,1,0);
     this->setLayout(layout);
+}
+
+void Form_Order::on_show(){
+   qDebug() << "........";
 }
 
 Form_Order::~Form_Order()

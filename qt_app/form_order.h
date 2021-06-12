@@ -14,7 +14,8 @@ class Form_Order : public QDialog
 public:
     explicit Form_Order(QWidget *parent = nullptr);
     ~Form_Order();
-
+public slots:
+    void on_show();
 private slots:
     void on_add_office_clicked();
 
