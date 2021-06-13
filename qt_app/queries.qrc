@@ -5,7 +5,6 @@
         <file>queries/number_of_employees_for_each_office</file>
         <file>queries/list_offices</file>
         <file>queries/number_of_customers_for_each_employee</file>
-        <file>queries/insert_test</file>
         <file>queries/number_of_products_per_line</file>
         <file>queries/list_products_by_productline</file>
         <file>queries/list_employee_hierarchy</file>
@@ -16,5 +15,6 @@
         <file>queries/list_orders</file>
         <file>queries/list_order_details</file>
         <file>queries/list_active_order_details</file>
+        <file>queries/list_products</file>
     </qresource>
 </RCC>

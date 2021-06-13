@@ -66,8 +66,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->comboBox_products->addItem("delete product");
     ui->comboBox_products->addItem("update product");
     ui->comboBox_products->addItem("list products");
-    ui->comboBox_products->addItem("group sales by product");
-    ui->comboBox_products->addItem("group orders by product");
 
     ui->comboBox_productlines->addItem("add product line");
     ui->comboBox_productlines->addItem("delete product line");
@@ -261,10 +259,9 @@ void MainWindow::on_comboBox_products_activated(int index){
             qDebug()<<"2";
         }
         else if(ui->comboBox_products->currentIndex()==3){
-            qDebug()<<"3";
-        }
-        else if(ui->comboBox_products->currentIndex()==4){
-            qDebug()<<"4";
+            fileName = myDB.readFile("://queries/list_products");
+            qr = myDB.executeQuery(fileName);
+            myDB.fillTable(qr, ui->tableWidget_01);
         }
     }
     else{ login->show(); }
