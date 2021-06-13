@@ -16,5 +16,6 @@
         <file>queries/list_order_details</file>
         <file>queries/list_active_order_details</file>
         <file>queries/list_products</file>
+        <file>queries/list_product_lines</file>
     </qresource>
 </RCC>

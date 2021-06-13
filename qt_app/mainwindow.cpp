@@ -279,7 +279,9 @@ void MainWindow::on_comboBox_productlines_activated(int index){
             qDebug()<<"2";
         }
         else if(ui->comboBox_productlines->currentIndex()==3){
-            qDebug()<<"3";
+            fileName = myDB.readFile("://queries/list_product_lines");
+            qr = myDB.executeQuery(fileName);
+            myDB.fillTable(qr, ui->tableWidget_01);
         }
         else if(ui->comboBox_productlines->currentIndex()==4){
             fileName = myDB.readFile("://queries/list_products_by_productline");
