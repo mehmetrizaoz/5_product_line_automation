@@ -1,0 +1,15 @@
+SELECT 
+	o.orderNumber, 
+	o.orderDate, 
+	o.status, 
+	c.customerName 
+FROM orders o 
+JOIN 
+	customers c USING(customerNumber) 
+ORDER BY FIELD(o.status, 
+	'In Process', 
+	'ON Hold', 
+	'Cancelled', 
+	'Resolved', 
+	'Disputed', 
+	'Shipped');

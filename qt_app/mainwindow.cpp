@@ -55,7 +55,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->comboBox_orders->addItem("delete order");
     ui->comboBox_orders->addItem("update order");
     ui->comboBox_orders->addItem("list orders");
-    ui->comboBox_orders->addItem("group orders by customer");
 
     ui->comboBox_order_details->addItem("add order detail");
     ui->comboBox_order_details->addItem("delete order detail");
@@ -75,6 +74,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->comboBox_productlines->addItem("list product lines");
     ui->comboBox_productlines->addItem("group products by line");
     ui->comboBox_productlines->addItem("number of products per line");
+
+    ui->tableWidget_01->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents );
 
     //used to get connection status from login window
     connect(login, SIGNAL(loginClicked()), this, SLOT(get_login_status()));
@@ -195,7 +196,9 @@ void MainWindow::on_comboBox_customers_activated(int index){
             myDB.fillTable(qr, ui->tableWidget_01);
         }
         else if(ui->comboBox_customers->currentIndex()==6){
-            qDebug()<<"6";
+            fileName = myDB.readFile("://queries/list_customers_by_payement");
+            qr = myDB.executeQuery(fileName);
+            myDB.fillTable(qr, ui->tableWidget_01);
         }
     }
     else{ login->show(); }
@@ -207,16 +210,15 @@ void MainWindow::on_comboBox_orders_activated(int index){
             ord->show();
         }
         else if(ui->comboBox_orders->currentIndex()==1){
-            qDebug()<<"1";
+            qDebug()<<"1";                        
         }
         else if(ui->comboBox_orders->currentIndex()==2){
             qDebug()<<"2";
         }
         else if(ui->comboBox_orders->currentIndex()==3){
-            qDebug()<<"3";
-        }
-        else if(ui->comboBox_orders->currentIndex()==4){
-            qDebug()<<"4";
+            fileName = myDB.readFile("://queries/list_orders");
+            qr = myDB.executeQuery(fileName);
+            myDB.fillTable(qr, ui->tableWidget_01);
         }
     }
     else{ login->show(); }

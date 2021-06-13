@@ -1,0 +1,9 @@
+SELECT
+	c.customerName, 
+	sum(od.priceEach * od.quantityOrdered) total 
+FROM customers c 
+	JOIN orders o using(customerNumber) 
+	JOIN orderdetails od using(orderNumber) 
+GROUP BY c.customerName 
+ORDER BY total desc;
+
