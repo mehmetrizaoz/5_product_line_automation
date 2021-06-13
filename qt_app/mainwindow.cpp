@@ -60,6 +60,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->comboBox_order_details->addItem("delete order detail");
     ui->comboBox_order_details->addItem("update order detail");
     ui->comboBox_order_details->addItem("list order detail");
+    ui->comboBox_order_details->addItem("list details of active orders");
 
     ui->comboBox_products->addItem("add product");
     ui->comboBox_products->addItem("delete product");
@@ -236,8 +237,14 @@ void MainWindow::on_comboBox_order_details_activated(int index){
             qDebug()<<"2";
         }
         else if(ui->comboBox_order_details->currentIndex()==3){
-            qDebug()<<"3";
+            fileName = myDB.readFile("://queries/list_order_details");
+            qr = myDB.executeQuery(fileName);
+            myDB.fillTable(qr, ui->tableWidget_01);
         }
+        else if(ui->comboBox_order_details->currentIndex()==4){
+            fileName = myDB.readFile("://queries/list_active_order_details");
+            qr = myDB.executeQuery(fileName);
+            myDB.fillTable(qr, ui->tableWidget_01);        }
     }
     else{ login->show(); }
 }

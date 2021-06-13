@@ -1,0 +1,19 @@
+SELECT
+    od.orderNumber,
+    o.status,
+    p.productName,
+    SUM(od.quantityOrdered * od.priceEach) Total
+FROM
+    orderdetails od
+JOIN
+    products p USING(productCode)
+JOIN
+    orders o USING(orderNumber)
+GROUP BY
+    od.orderNumber,
+    o.status,
+    p.productName
+WITH ROLLUP
+ORDER BY
+    od.orderNumber
+DESC;

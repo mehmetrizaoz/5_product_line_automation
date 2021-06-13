@@ -14,5 +14,7 @@
         <file>queries/list_products_sold_by_customer</file>
         <file>queries/list_customers_by_payement</file>
         <file>queries/list_orders</file>
+        <file>queries/list_order_details</file>
+        <file>queries/list_active_order_details</file>
     </qresource>
 </RCC>
