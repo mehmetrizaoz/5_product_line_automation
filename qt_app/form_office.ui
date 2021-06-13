@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>691</width>
-    <height>324</height>
+    <height>322</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -148,7 +148,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QPushButton" name="add_office">
+  <widget class="QPushButton" name="process_office_record">
    <property name="geometry">
     <rect>
      <x>119</x>
@@ -158,7 +158,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Add</string>
+    <string>null</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_3">
@@ -244,7 +244,7 @@
   <tabstop>lineEdit_7</tabstop>
   <tabstop>lineEdit_8</tabstop>
   <tabstop>lineEdit_9</tabstop>
-  <tabstop>add_office</tabstop>
+  <tabstop>process_office_record</tabstop>
  </tabstops>
  <resources/>
  <connections/>

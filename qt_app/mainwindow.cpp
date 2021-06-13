@@ -111,13 +111,16 @@ void MainWindow::get_login_status(){
 void MainWindow::on_comboBox_offices_activated(int index){
     if(login->isConnected == true){
         if(ui->comboBox_offices->currentIndex()==0){
+            office->mode = 0;
             office->show();
         }
         else if(ui->comboBox_offices->currentIndex()==1){
-            qDebug()<<"2";
+            office->mode = 1;
+            office->show();
         }
         else if(ui->comboBox_offices->currentIndex()==2){
-            qDebug()<<"2";
+            office->mode = 2;
+            office->show();
         }
         else if(ui->comboBox_offices->currentIndex()==3){
             fileName = myDB.readFile("://queries/list_offices");

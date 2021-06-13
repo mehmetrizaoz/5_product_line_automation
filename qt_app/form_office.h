@@ -16,11 +16,14 @@ public:
     explicit Form_Office(QWidget *parent = nullptr);
     ~Form_Office();
     database myDB;
+    int mode = 0;
+    QSqlQuery qr;
+    void fill_form_with_query_result();
+    void clear_form();
 public slots:
     void on_show();
 private slots:
-    void on_add_office_clicked();
-
+    void on_process_office_record_clicked();
 private:
     Ui::Form_Office *ui;
 };
