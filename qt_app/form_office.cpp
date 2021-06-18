@@ -10,6 +10,7 @@
 #include <QSqlDriver>
 #include <QtSql>
 #include <QSqlError>
+#include <QThread>
 #include <QSqlQuery>
 #include "database.h"
 
@@ -44,9 +45,9 @@ Form_Office::Form_Office(QWidget *parent) : QDialog(parent), ui(new Ui::Form_Off
 }
 
 void Form_Office::keyPressEvent(QKeyEvent *event) {
-   if(mode == 1 || mode == 2) {
+   if(mode == DELETE || mode == UPDATE) {
        if (event->key() == Qt::Key_N) {
-           if(qr.next() != NULL)
+           if(qr.next() != NULL) //todo: ring behaviour will be implemented
             this->fill_form_with_query_result();
        }
        if (event->key() == Qt::Key_P) {
@@ -62,24 +63,23 @@ Form_Office::~Form_Office(){
 
 void Form_Office::on_show(){
     QString fileName = myDB.readFile("://queries/list_offices");
-
-    if(mode==0) {
+    if(mode == INSERT) {
         clear_form();
-        ui->process_office_record->setText("add");
+        ui->process_office_record->setText("add"); //todo: mode will be used
         qr = myDB.executeQuery("SELECT MAX(CONVERT(officeCode,UNSIGNED INTEGER)) FROM offices");
         vector<int> cols{0};
         int row = 1;
         int n = myDB.getCells(qr, row, cols).toInt() + 1;
         ui->lineEdit->setText(QString::number(n));
     }
-    else if(mode==1){
-        ui->process_office_record->setText("delete");        
+    else if(mode == UPDATE){
+        ui->process_office_record->setText("update");
         qr = myDB.executeQuery(fileName);
         qr.next();
         this->fill_form_with_query_result();
     }
-    else if(mode==2){
-        ui->process_office_record->setText("update");
+    else if(mode == DELETE){
+        ui->process_office_record->setText("delete"); //todo: make code a function
         qr = myDB.executeQuery(fileName);
         qr.next();
         this->fill_form_with_query_result();
@@ -111,7 +111,7 @@ void Form_Office::fill_form_with_query_result(){
 }
 
 void Form_Office::on_process_office_record_clicked(){
-    if( mode == 0 ){
+    if( mode == INSERT ){
         QString queryString = "insert into `offices`(`officeCode`,`city`,`phone`,`addressLine1`,`addressLine2`,`state`,`country`,`postalCode`,`territory`) values (";
         queryString.append("'" + ui->lineEdit->text()   + "',");
         queryString.append("'" + ui->lineEdit_2->text() + "',");
@@ -124,16 +124,23 @@ void Form_Office::on_process_office_record_clicked(){
         queryString.append("'" + ui->lineEdit_9->text() + "')");
         myDB.executeQuery(queryString);
 
-        qDebug() << queryString;
         QString next = QString::number(ui->lineEdit->text().toInt() + 1);
         this->clear_form();
         ui->lineEdit->setText(next);
     }
-    else if( mode == 1 ){
+    else if( mode == UPDATE ){
         qDebug() << "update";
     }
-    else if( mode == 2 ){
-        qDebug() << "delete";
-    }
+    else if( mode == DELETE ){
+        QString queryString = "DELETE FROM offices WHERE officeCode = ";
+        queryString.append(ui->lineEdit->text());
+        myDB.executeQuery(queryString);
+        //qDebug() << queryString;
 
+        QString fileName = myDB.readFile("://queries/list_offices");
+        QThread::msleep(100);
+        qr = myDB.executeQuery(fileName);
+        qr.next();
+        this->fill_form_with_query_result();
+    }
 }

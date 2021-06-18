@@ -1,6 +1,10 @@
 #ifndef FORM_OFFICE_H
 #define FORM_OFFICE_H
 
+#define INSERT 0
+#define UPDATE 2
+#define DELETE 1
+
 #include <QDialog>
 #include <QApplication>
 #include <QKeyEvent>
