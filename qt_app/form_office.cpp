@@ -43,11 +43,26 @@ Form_Office::Form_Office(QWidget *parent) : QDialog(parent), ui(new Ui::Form_Off
     this->setLayout(layout);
 }
 
+void Form_Office::keyPressEvent(QKeyEvent *event) {
+   if(mode == 1 || mode == 2) {
+       if (event->key() == Qt::Key_N) {
+           if(qr.next() != NULL)
+            this->fill_form_with_query_result();
+       }
+       if (event->key() == Qt::Key_P) {
+           if(qr.previous() != NULL)
+            this->fill_form_with_query_result();
+       }
+   }
+}
+
 Form_Office::~Form_Office(){
     delete ui;
 }
 
-void Form_Office::on_show(){       
+void Form_Office::on_show(){
+    QString fileName = myDB.readFile("://queries/list_offices");
+
     if(mode==0) {
         clear_form();
         ui->process_office_record->setText("add");
@@ -58,11 +73,15 @@ void Form_Office::on_show(){
         ui->lineEdit->setText(QString::number(n));
     }
     else if(mode==1){
-        ui->process_office_record->setText("delete");
+        ui->process_office_record->setText("delete");        
+        qr = myDB.executeQuery(fileName);
+        qr.next();
         this->fill_form_with_query_result();
     }
     else if(mode==2){
         ui->process_office_record->setText("update");
+        qr = myDB.executeQuery(fileName);
+        qr.next();
         this->fill_form_with_query_result();
     }
 }
@@ -80,8 +99,6 @@ void Form_Office::clear_form(){
 }
 
 void Form_Office::fill_form_with_query_result(){
-    qr = myDB.executeQuery("SELECT * FROM offices");
-    qr.next();
     ui->lineEdit->setText(qr.value(0).toString());
     ui->lineEdit_2->setText(qr.value(1).toString());
     ui->lineEdit_3->setText(qr.value(2).toString());
@@ -94,7 +111,7 @@ void Form_Office::fill_form_with_query_result(){
 }
 
 void Form_Office::on_process_office_record_clicked(){
-    if(mode==0){
+    if( mode == 0 ){
         QString queryString = "insert into `offices`(`officeCode`,`city`,`phone`,`addressLine1`,`addressLine2`,`state`,`country`,`postalCode`,`territory`) values (";
         queryString.append("'" + ui->lineEdit->text()   + "',");
         queryString.append("'" + ui->lineEdit_2->text() + "',");
@@ -112,4 +129,11 @@ void Form_Office::on_process_office_record_clicked(){
         this->clear_form();
         ui->lineEdit->setText(next);
     }
+    else if( mode == 1 ){
+        qDebug() << "update";
+    }
+    else if( mode == 2 ){
+        qDebug() << "delete";
+    }
+
 }

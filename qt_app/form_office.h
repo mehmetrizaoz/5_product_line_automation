@@ -2,6 +2,8 @@
 #define FORM_OFFICE_H
 
 #include <QDialog>
+#include <QApplication>
+#include <QKeyEvent>
 #include "database.h"
 
 namespace Ui {
@@ -26,6 +28,8 @@ private slots:
     void on_process_office_record_clicked();
 private:
     Ui::Form_Office *ui;
+protected:
+    void keyPressEvent(QKeyEvent * e);
 };
 
 #endif // FORM_OFFICE_H

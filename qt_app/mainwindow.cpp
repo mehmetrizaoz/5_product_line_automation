@@ -78,6 +78,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     //used to get connection status from login window
     connect(login, SIGNAL(loginClicked()), this, SLOT(get_login_status()));
+
     //trigger on show events
     connect(ui->comboBox_offices, SIGNAL(activated(int)), office, SLOT(on_show()));    
     connect(ui->comboBox_employees, SIGNAL(activated(int)), emp, SLOT(on_show()));
