@@ -1,0 +1,6 @@
+SELECT
+	city, 
+        count(city) number_of_employees
+FROM offices JOIN employees USING(officeCode)
+GROUP BY city
+ORDER BY number_of_employees DESC;

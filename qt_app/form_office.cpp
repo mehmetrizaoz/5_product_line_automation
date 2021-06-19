@@ -173,10 +173,8 @@ void Form_Office::on_process_office_record_clicked(){
         queryString.append("territory = '" + ui->lineEdit_9->text() + "' ");
         queryString.append("WHERE officeCode = " + ui->lineEdit->text());
         myDB.executeQuery(queryString);
-
         refresh_query();
     }
-
     else if( mode == DELETE ){
         myDB.executeQuery("DELETE FROM offices WHERE officeCode = " + ui->lineEdit->text());
         recordOnScreen--;

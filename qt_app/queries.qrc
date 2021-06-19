@@ -2,7 +2,6 @@
     <qresource prefix="/">
         <file>queries/list_employees</file>
         <file>queries/list_customers</file>
-        <file>queries/number_of_employees_for_each_office</file>
         <file>queries/list_offices</file>
         <file>queries/number_of_customers_for_each_employee</file>
         <file>queries/number_of_products_per_line</file>
@@ -17,5 +16,6 @@
         <file>queries/list_active_order_details</file>
         <file>queries/list_products</file>
         <file>queries/list_product_lines</file>
+        <file>queries/number_of_employees_for_each_city</file>
     </qresource>
 </RCC>

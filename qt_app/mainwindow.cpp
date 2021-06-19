@@ -129,7 +129,7 @@ void MainWindow::on_comboBox_offices_activated(int index){
             myDB.fillTable(qr, ui->tableWidget_01);
         }
         else if(ui->comboBox_offices->currentIndex()==4){
-            fileName = myDB.readFile("://queries/number_of_employees_for_each_office");
+            fileName = myDB.readFile("://queries/number_of_employees_for_each_city");
             qr = myDB.executeQuery(fileName);
             myDB.fillTable(qr, ui->tableWidget_01);
         }
