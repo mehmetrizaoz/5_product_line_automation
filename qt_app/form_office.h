@@ -31,9 +31,12 @@ private:
     QString getMode(int m);
     void fill_form_with_query_result();
     void clear_form();
+    void refresh_query();
+    int  getNextOfficeCode();
     void keyPressEvent(QKeyEvent * e);
     database myDB;
     QSqlQuery qr;
+    int recordOnScreen = 1;
 };
 
 #endif // FORM_OFFICE_H

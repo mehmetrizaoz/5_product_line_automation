@@ -1,5 +1,6 @@
 #include "form_office.h"
 #include "ui_form_office.h"
+#include "database.h"
 #include <QMainWindow>
 #include <QVBoxLayout>
 #include <QDesktopWidget>
@@ -12,11 +13,10 @@
 #include <QSqlError>
 #include <QThread>
 #include <QSqlQuery>
-#include "database.h"
 
 Form_Office::Form_Office(QWidget *parent) : QDialog(parent), ui(new Ui::Form_Office){
     ui->setupUi(this);
-    this->setWindowTitle("Office");
+    setWindowTitle("Office");
     myDB = database();
     window()->setGeometry(QStyle::alignedRect(Qt::LeftToRight,Qt::AlignCenter,window()->size(),qApp->desktop()->availableGeometry()));
     setStyleSheet("background-color: rgb(224,243,176)");
@@ -41,7 +41,7 @@ Form_Office::Form_Office(QWidget *parent) : QDialog(parent), ui(new Ui::Form_Off
     layout->addWidget(ui->label_9,8,0);
     layout->addWidget(ui->lineEdit_9,8,1);
     layout->addWidget(ui->process_office_record,9,0,1,0);
-    this->setLayout(layout);
+    setLayout(layout);
 }
 
 void Form_Office::keyPressEvent(QKeyEvent *event){
@@ -49,14 +49,22 @@ void Form_Office::keyPressEvent(QKeyEvent *event){
        if (event->key() == Qt::Key_Up){ //next record
            if(qr.next() == NULL){
                qr.first();
+               recordOnScreen = 1;
            }
-           this->fill_form_with_query_result();
+           else{
+               recordOnScreen++;
+           }
+           fill_form_with_query_result();
        }
        if (event->key() == Qt::Key_Down){ //previous record
            if(qr.previous() == NULL){
                qr.last();
+               recordOnScreen = qr.size();
            }
-           this->fill_form_with_query_result();
+           else{
+               recordOnScreen--;
+           }
+           fill_form_with_query_result();
        }
    }
 }
@@ -78,21 +86,25 @@ QString Form_Office::getMode(int m){
     return "";
 }
 
+int Form_Office::getNextOfficeCode(){
+    qr = myDB.executeQuery("SELECT MAX(CONVERT(officeCode,UNSIGNED INTEGER)) FROM offices");
+    vector<int> cols{0};
+    int row = 1;
+    return myDB.getCells(qr, row, cols).toInt() + 1;
+}
+
 void Form_Office::on_show(){
     QString fileName = myDB.readFile("://queries/list_offices");
     ui->process_office_record->setText(getMode(mode));
+
     if(mode == ADD){
-        clear_form();        
-        qr = myDB.executeQuery("SELECT MAX(CONVERT(officeCode,UNSIGNED INTEGER)) FROM offices");
-        vector<int> cols{0};
-        int row = 1;
-        int n = myDB.getCells(qr, row, cols).toInt() + 1;
-        ui->lineEdit->setText(QString::number(n));
+        clear_form();                
+        ui->lineEdit->setText(QString::number(getNextOfficeCode()));
     }
     else if(mode == UPDATE || mode == DELETE){
         qr = myDB.executeQuery(fileName);
         qr.next();
-        this->fill_form_with_query_result();
+        fill_form_with_query_result();
     }
 }
 
@@ -120,6 +132,16 @@ void Form_Office::fill_form_with_query_result(){
     ui->lineEdit_9->setText(qr.value(8).toString());
 }
 
+void Form_Office::refresh_query(){
+    QThread::msleep(100);
+    QString fileName = myDB.readFile("://queries/list_offices");
+    qr = myDB.executeQuery(fileName);
+    for(int i = 0; i<recordOnScreen; i++){
+        qr.next();
+    }
+    fill_form_with_query_result();
+}
+
 void Form_Office::on_process_office_record_clicked(){
     QString queryString;
     if( mode == ADD ){
@@ -136,7 +158,7 @@ void Form_Office::on_process_office_record_clicked(){
         myDB.executeQuery(queryString);
 
         QString offCode = QString::number(ui->lineEdit->text().toInt() + 1);
-        this->clear_form();
+        clear_form();
         ui->lineEdit->setText(offCode);
     }
     else if( mode == UPDATE ){
@@ -148,22 +170,16 @@ void Form_Office::on_process_office_record_clicked(){
         queryString.append("state = '" + ui->lineEdit_6->text() + "', ");
         queryString.append("country = '" + ui->lineEdit_7->text() + "', ");
         queryString.append("postalCode = '" + ui->lineEdit_8->text() + "', ");
-        queryString.append("territory = '" + ui->lineEdit_8->text() + "' ");
+        queryString.append("territory = '" + ui->lineEdit_9->text() + "' ");
         queryString.append("WHERE officeCode = " + ui->lineEdit->text());
-        qDebug() << queryString;
         myDB.executeQuery(queryString);
+
+        refresh_query();
     }
+
     else if( mode == DELETE ){
-        queryString = "DELETE FROM offices WHERE officeCode = ";
-        queryString.append(ui->lineEdit->text());
-        myDB.executeQuery(queryString);
-
-        QThread::msleep(100);
-
-        //todo: change behavior below
-        QString fileName = myDB.readFile("://queries/list_offices");
-        qr = myDB.executeQuery(fileName);
-        qr.next();
-        this->fill_form_with_query_result();
+        myDB.executeQuery("DELETE FROM offices WHERE officeCode = " + ui->lineEdit->text());
+        recordOnScreen--;
+        refresh_query();
     }
 }
