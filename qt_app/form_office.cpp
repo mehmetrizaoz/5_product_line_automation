@@ -44,15 +44,20 @@ Form_Office::Form_Office(QWidget *parent) : QDialog(parent), ui(new Ui::Form_Off
     this->setLayout(layout);
 }
 
-void Form_Office::keyPressEvent(QKeyEvent *event) {
+void Form_Office::keyPressEvent(QKeyEvent *event){
    if(mode == DELETE || mode == UPDATE){
-       if (event->key() == Qt::Key_N)
-           if(qr.next() == NULL)
-              qr.first();
-       if (event->key() == Qt::Key_P)
-           if(qr.previous() == NULL)
-              qr.last();
-       this->fill_form_with_query_result();
+       if (event->key() == Qt::Key_Up){ //next record
+           if(qr.next() == NULL){
+               qr.first();
+           }
+           this->fill_form_with_query_result();
+       }
+       if (event->key() == Qt::Key_Down){ //previous record
+           if(qr.previous() == NULL){
+               qr.last();
+           }
+           this->fill_form_with_query_result();
+       }
    }
 }
 
@@ -61,12 +66,15 @@ Form_Office::~Form_Office(){
 }
 
 QString Form_Office::getMode(int m){
-    if(m == ADD)
+    if(m == ADD){
         return "Add";
-    else if(m == UPDATE)
+    }
+    else if(m == UPDATE){
         return "Update";
-    else if(m == DELETE)
+    }
+    else if(m == DELETE){
         return "Delete";
+    }
     return "";
 }
 
@@ -113,6 +121,7 @@ void Form_Office::fill_form_with_query_result(){
 }
 
 void Form_Office::on_process_office_record_clicked(){
+    QString queryString;
     if( mode == ADD ){
         QString queryString = "insert into `offices`(`officeCode`,`city`,`phone`,`addressLine1`,`addressLine2`,`state`,`country`,`postalCode`,`territory`) values (";
         queryString.append("'" + ui->lineEdit->text()   + "',");
@@ -126,20 +135,33 @@ void Form_Office::on_process_office_record_clicked(){
         queryString.append("'" + ui->lineEdit_9->text() + "')");
         myDB.executeQuery(queryString);
 
-        QString next = QString::number(ui->lineEdit->text().toInt() + 1);
+        QString offCode = QString::number(ui->lineEdit->text().toInt() + 1);
         this->clear_form();
-        ui->lineEdit->setText(next);
+        ui->lineEdit->setText(offCode);
     }
     else if( mode == UPDATE ){
-        qDebug() << "update";
+        queryString = "UPDATE offices SET ";
+        queryString.append("city = '" + ui->lineEdit_2->text() + "', ");
+        queryString.append("phone = '" + ui->lineEdit_3->text() + "', ");
+        queryString.append("addressLine1 = '" + ui->lineEdit_4->text() + "', ");
+        queryString.append("addressLine2 = '" + ui->lineEdit_5->text() + "', ");
+        queryString.append("state = '" + ui->lineEdit_6->text() + "', ");
+        queryString.append("country = '" + ui->lineEdit_7->text() + "', ");
+        queryString.append("postalCode = '" + ui->lineEdit_8->text() + "', ");
+        queryString.append("territory = '" + ui->lineEdit_8->text() + "' ");
+        queryString.append("WHERE officeCode = " + ui->lineEdit->text());
+        qDebug() << queryString;
+        myDB.executeQuery(queryString);
     }
     else if( mode == DELETE ){
-        QString queryString = "DELETE FROM offices WHERE officeCode = ";
+        queryString = "DELETE FROM offices WHERE officeCode = ";
         queryString.append(ui->lineEdit->text());
         myDB.executeQuery(queryString);
 
-        QString fileName = myDB.readFile("://queries/list_offices");
         QThread::msleep(100);
+
+        //todo: change behavior below
+        QString fileName = myDB.readFile("://queries/list_offices");
         qr = myDB.executeQuery(fileName);
         qr.next();
         this->fill_form_with_query_result();
