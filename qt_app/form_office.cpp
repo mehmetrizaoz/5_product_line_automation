@@ -45,15 +45,14 @@ Form_Office::Form_Office(QWidget *parent) : QDialog(parent), ui(new Ui::Form_Off
 }
 
 void Form_Office::keyPressEvent(QKeyEvent *event) {
-   if(mode == DELETE || mode == UPDATE) {
-       if (event->key() == Qt::Key_N) {
-           if(qr.next() != NULL) //todo: ring behaviour will be implemented
-              this->fill_form_with_query_result();
-       }
-       if (event->key() == Qt::Key_P) {
-           if(qr.previous() != NULL)
-              this->fill_form_with_query_result();
-       }
+   if(mode == DELETE || mode == UPDATE){
+       if (event->key() == Qt::Key_N)
+           if(qr.next() == NULL)
+              qr.first();
+       if (event->key() == Qt::Key_P)
+           if(qr.previous() == NULL)
+              qr.last();
+       this->fill_form_with_query_result();
    }
 }
 

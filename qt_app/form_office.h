@@ -21,11 +21,7 @@ class Form_Office : public QDialog
 public:
     explicit Form_Office(QWidget *parent = nullptr);
     ~Form_Office();
-    database myDB;
     int mode = 0;
-    QSqlQuery qr;
-    void fill_form_with_query_result();
-    void clear_form();
 public slots:
     void on_show();
 private slots:
@@ -33,8 +29,11 @@ private slots:
 private:
     Ui::Form_Office *ui;
     QString getMode(int m);
-protected:
+    void fill_form_with_query_result();
+    void clear_form();
     void keyPressEvent(QKeyEvent * e);
+    database myDB;
+    QSqlQuery qr;
 };
 
 #endif // FORM_OFFICE_H
