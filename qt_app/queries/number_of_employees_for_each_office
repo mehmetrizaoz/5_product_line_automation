@@ -1,9 +1,8 @@
 SELECT
-    o.city office,
-    COUNT(*) AS number_of_employee
-FROM 
-    offices o
-JOIN employees e
-    ON e.officeCode = o.officeCode
+    city,
+    COUNT(city) AS number_of_employee
+FROM offices
+JOIN employees
+    USING(officeCode)
 GROUP BY city
 ORDER BY number_of_employee DESC;
