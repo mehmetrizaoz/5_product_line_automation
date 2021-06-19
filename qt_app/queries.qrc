@@ -16,6 +16,6 @@
         <file>queries/list_active_order_details</file>
         <file>queries/list_products</file>
         <file>queries/list_product_lines</file>
-        <file>queries/number_of_employees_for_each_city</file>
+        <file>queries/number_of_employees_for_each_office</file>
     </qresource>
 </RCC>

@@ -90,7 +90,6 @@ creditLimit, phone, addressLine1, addressLine2, city, state, postalCode, salesRe
     queryString.append(",'" + ui->lineEdit_12->text() + "')");
     myDB.executeQuery(queryString);    
 
-    //clear fields
     ui->lineEdit->setText(QString::number(ui->lineEdit->text().toInt() + 1));
     ui->lineEdit_2->setText("");
     ui->lineEdit_3->setText("");

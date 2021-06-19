@@ -1,0 +1,6 @@
+select
+    officeCode,
+    o.city,
+    (select count(*) from employees where officeCode = o.officeCode) count
+from offices o
+order by count desc;
