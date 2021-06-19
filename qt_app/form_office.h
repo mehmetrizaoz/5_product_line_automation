@@ -1,9 +1,9 @@
 #ifndef FORM_OFFICE_H
 #define FORM_OFFICE_H
 
-#define INSERT 0
-#define UPDATE 2
+#define ADD    0
 #define DELETE 1
+#define UPDATE 2
 
 #include <QDialog>
 #include <QApplication>
@@ -32,6 +32,7 @@ private slots:
     void on_process_office_record_clicked();
 private:
     Ui::Form_Office *ui;
+    QString getMode(int m);
 protected:
     void keyPressEvent(QKeyEvent * e);
 };
