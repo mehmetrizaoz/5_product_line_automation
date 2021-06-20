@@ -41,16 +41,18 @@ Form_Order::Form_Order(QWidget *parent) : QDialog(parent), ui(new Ui::Form_Order
 
 void Form_Order::on_show(){   
     ui->process_order_record->setText(get_mode(mode));
-    if(mode == ADD){
-        QSqlQuery qr = myDB.executeQuery("SELECT * FROM customers");
-        vector<int> cols{1};
-        int row = 1;
-        ui->comboBox->clear();
-        for(int i=1; i<=qr.size(); i++){
-            QString cust = myDB.getCells(qr, row, cols);
-            ui->comboBox->addItem(cust);
-        }
 
+    QSqlQuery qr = myDB.executeQuery("SELECT * FROM customers");
+    vector<int> cols{1};
+    int row = 1;
+    ui->comboBox->clear();
+    int customerCount = qr.size();
+    for(int i=1; i<=qr.size(); i++){
+        QString cust = myDB.getCells(qr, row, cols);
+        ui->comboBox->addItem(cust);
+    }
+
+    if(mode == ADD){
         qr = myDB.executeQuery("SELECT MAX(CONVERT(orderNumber,UNSIGNED INTEGER)) FROM orders");
         cols.clear();
         cols.push_back(0);
@@ -59,11 +61,32 @@ void Form_Order::on_show(){
         ui->lineEdit->setText(QString::number(n));
     }
     else if(mode == UPDATE || mode == DELETE){
-        /*
-        QString fileName = myDB.readFile("://queries/list_offices");
-        qr = myDB.executeQuery(fileName);
+        qr = myDB.executeQuery("select * from orders");
         qr.next();
-        fill_form_with_query_result();*/
+        ui->lineEdit->setText(qr.value(0).toString());
+        ui->lineEdit_2->setText(qr.value(1).toString());
+        ui->lineEdit_3->setText(qr.value(2).toString());
+        ui->lineEdit_4->setText(qr.value(3).toString());
+        ui->lineEdit_5->setText(qr.value(4).toString());
+        ui->lineEdit_6->setText(qr.value(5).toString());
+
+        QString qs = "select customerName from customers where customerNumber = ";
+        qs.append(qr.value(6).toString());
+        qr = myDB.executeQuery(qs);
+        qr.next();
+        qDebug() << customerCount;
+        QString cName = qr.value(0).toString() + " ";
+
+        //todo: refactor below solution
+        for(int i=0; i<customerCount; i++){
+            ui->comboBox->setCurrentIndex(i);
+            QString aa = ui->comboBox->currentText();
+            if(aa == cName){
+                break;
+            }
+        }
+
+        //fill_form_with_query_result(customerCount);
     }
 }
 
