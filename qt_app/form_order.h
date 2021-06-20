@@ -6,6 +6,7 @@
 #define UPDATE 2
 
 #include <QDialog>
+#include <QKeyEvent>
 #include "database.h"
 
 namespace Ui {

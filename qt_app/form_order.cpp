@@ -39,59 +39,71 @@ Form_Order::Form_Order(QWidget *parent) : QDialog(parent), ui(new Ui::Form_Order
     this->setLayout(layout);
 }
 
+void Form_Order::fill_form_with_query_result(){
+    ui->lineEdit->setText(qr.value(0).toString());
+    ui->lineEdit_2->setText(qr.value(1).toString());
+    ui->lineEdit_3->setText(qr.value(2).toString());
+    ui->lineEdit_4->setText(qr.value(3).toString());
+    ui->lineEdit_5->setText(qr.value(4).toString());
+    ui->lineEdit_6->setText(qr.value(5).toString());
+
+    QString qs = "select customerName from customers where customerNumber = " + qr.value(6).toString();
+    QSqlQuery qr3 = myDB.executeQuery(qs);
+    qr3.next();
+    QString cName = qr3.value(0).toString() + " ";
+    ui->comboBox->setCurrentText(cName);
+}
+
 void Form_Order::on_show(){   
     ui->process_order_record->setText(get_mode(mode));
 
-    QSqlQuery qr = myDB.executeQuery("SELECT * FROM customers");
+    //fill customer combobox items
+    QSqlQuery qr1 = myDB.executeQuery("SELECT * FROM customers");
     vector<int> cols{1};
     int row = 1;
     ui->comboBox->clear();
-    int customerCount = qr.size();
-    for(int i=1; i<=qr.size(); i++){
-        QString cust = myDB.getCells(qr, row, cols);
+    for(int i=1; i<=qr1.size(); i++){
+        QString cust = myDB.getCells(qr1, row, cols);
         ui->comboBox->addItem(cust);
     }
 
     if(mode == ADD){
-        qr = myDB.executeQuery("SELECT MAX(CONVERT(orderNumber,UNSIGNED INTEGER)) FROM orders");
-        cols.clear();
-        cols.push_back(0);
-        row = 1;
-        int n = myDB.getCells(qr, row, cols).toInt() + 1;
-        ui->lineEdit->setText(QString::number(n));
+        get_next_order_code();
     }
     else if(mode == UPDATE || mode == DELETE){
         qr = myDB.executeQuery("select * from orders");
         qr.next();
-        ui->lineEdit->setText(qr.value(0).toString());
-        ui->lineEdit_2->setText(qr.value(1).toString());
-        ui->lineEdit_3->setText(qr.value(2).toString());
-        ui->lineEdit_4->setText(qr.value(3).toString());
-        ui->lineEdit_5->setText(qr.value(4).toString());
-        ui->lineEdit_6->setText(qr.value(5).toString());
-
-        QString qs = "select customerName from customers where customerNumber = ";
-        qs.append(qr.value(6).toString());
-        qr = myDB.executeQuery(qs);
-        qr.next();
-        qDebug() << customerCount;
-        QString cName = qr.value(0).toString() + " ";
-
-        //todo: refactor below solution
-        for(int i=0; i<customerCount; i++){
-            ui->comboBox->setCurrentIndex(i);
-            QString aa = ui->comboBox->currentText();
-            if(aa == cName){
-                break;
-            }
-        }
-
-        //fill_form_with_query_result(customerCount);
+        fill_form_with_query_result();
     }
 }
 
 void Form_Order::keyPressEvent(QKeyEvent *event){
-
+    qDebug()<<"1";
+    if(mode == DELETE || mode == UPDATE){
+        qDebug()<<"2";
+        if (event->key() == Qt::Key_Up){ //next record
+            qDebug()<<"3";
+            if(qr.next() == NULL){
+                qDebug()<<"4";
+                qr.first();
+                recordOnScreen = 1;
+            }
+            else{
+                qDebug()<<"5";
+                recordOnScreen++;
+            }
+            fill_form_with_query_result();
+        }
+        if (event->key() == Qt::Key_Down){ //previous record
+            if(qr.previous() == NULL){
+                qr.last();
+                recordOnScreen = qr.size();
+            }
+            else
+                recordOnScreen--;
+            fill_form_with_query_result();
+        }
+    }
 }
 
 QString Form_Order::get_mode(int m){
@@ -105,10 +117,13 @@ QString Form_Order::get_mode(int m){
 }
 
 int Form_Order::get_next_order_code(){
-    qr = myDB.executeQuery("SELECT MAX(CONVERT(orderNumber,UNSIGNED INTEGER)) FROM orders");
-    vector<int> cols{0};
+    vector<int> cols{1};
     int row = 1;
-    return myDB.getCells(qr, row, cols).toInt() + 1;
+    QSqlQuery qr2 = myDB.executeQuery("SELECT MAX(CONVERT(orderNumber,UNSIGNED INTEGER)) FROM orders");
+    cols.clear();
+    cols.push_back(0);
+    int n = myDB.getCells(qr2, row, cols).toInt() + 1;
+    ui->lineEdit->setText(QString::number(n));
 }
 
 void Form_Order::clear_form(){
@@ -118,10 +133,7 @@ void Form_Order::clear_form(){
     ui->lineEdit_4->setText("");
     ui->lineEdit_5->setText("");
     ui->lineEdit_6->setText("");
-}
-
-void Form_Order::fill_form_with_query_result(){
-
+    ui->comboBox->setCurrentIndex(0);
 }
 
 void Form_Order::refresh_query(){
@@ -151,7 +163,6 @@ void Form_Order::on_process_order_record_clicked(){
         queryString.append("'" + ui->lineEdit_6->text() + "',");
         queryString.append(customerNumber + ")");
         myDB.executeQuery(queryString);
-        qDebug() << queryString;
 
         QString nextOrderNumber = QString::number(ui->lineEdit->text().toInt() + 1);
         clear_form();
