@@ -139,7 +139,7 @@ void Form_Office::refresh_query(){
 void Form_Office::on_process_office_record_clicked(){
     QString queryString;
     if( mode == ADD ){
-        QString queryString = "insert into `offices`(`officeCode`,`city`,`phone`,`addressLine1`,`addressLine2`,`state`,`country`,`postalCode`,`territory`) values (";
+        queryString = "insert into `offices`(`officeCode`,`city`,`phone`,`addressLine1`,`addressLine2`,`state`,`country`,`postalCode`,`territory`) values (";
         queryString.append("'" + ui->lineEdit->text()   + "',");
         queryString.append("'" + ui->lineEdit_2->text() + "',");
         queryString.append("'" + ui->lineEdit_3->text() + "',");

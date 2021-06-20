@@ -89,7 +89,12 @@ int Form_Order::get_next_order_code(){
 }
 
 void Form_Order::clear_form(){
-
+    ui->lineEdit->setText("");
+    ui->lineEdit_2->setText("");
+    ui->lineEdit_3->setText("");
+    ui->lineEdit_4->setText("");
+    ui->lineEdit_5->setText("");
+    ui->lineEdit_6->setText("");
 }
 
 void Form_Order::fill_form_with_query_result(){
@@ -105,8 +110,29 @@ Form_Order::~Form_Order(){
 }
 
 void Form_Order::on_process_order_record_clicked(){
+    QString queryString;
     if( mode == ADD ){
+        queryString = "SELECT customerNumber FROM customers WHERE customerName = ";
+        queryString.append("'" + ui->comboBox->currentText() + "'");
+        qr = myDB.executeQuery(queryString);
+        vector<int> cols{0};
+        int row = 1;
+        QString customerNumber = myDB.getCells(qr, row, cols);
 
+        queryString = "insert into `orders`(`orderNumber`,`orderDate`,`requiredDate`,`shippedDate`,`status`,`comments`,`customerNumber`) values (";
+        queryString.append("'" + ui->lineEdit->text()   + "',");
+        queryString.append("'" + ui->lineEdit_2->text() + "',");
+        queryString.append("'" + ui->lineEdit_3->text() + "',");
+        queryString.append("'" + ui->lineEdit_4->text() + "',");
+        queryString.append("'" + ui->lineEdit_5->text() + "',");
+        queryString.append("'" + ui->lineEdit_6->text() + "',");
+        queryString.append(customerNumber + ")");
+        myDB.executeQuery(queryString);
+        qDebug() << queryString;
+
+        QString nextOrderNumber = QString::number(ui->lineEdit->text().toInt() + 1);
+        clear_form();
+        ui->lineEdit->setText(nextOrderNumber);
     }
     else if( mode == UPDATE ){
 
