@@ -51,9 +51,8 @@ void Form_Office::keyPressEvent(QKeyEvent *event){
                qr.first();
                recordOnScreen = 1;
            }
-           else{
-               recordOnScreen++;
-           }
+           else
+               recordOnScreen++;           
            fill_form_with_query_result();
        }
        if (event->key() == Qt::Key_Down){ //previous record
@@ -61,9 +60,8 @@ void Form_Office::keyPressEvent(QKeyEvent *event){
                qr.last();
                recordOnScreen = qr.size();
            }
-           else{
-               recordOnScreen--;
-           }
+           else
+               recordOnScreen--;           
            fill_form_with_query_result();
        }
    }
@@ -73,35 +71,31 @@ Form_Office::~Form_Office(){
     delete ui;
 }
 
-QString Form_Office::getMode(int m){
-    if(m == ADD){
-        return "Add";
-    }
-    else if(m == UPDATE){
-        return "Update";
-    }
-    else if(m == DELETE){
-        return "Delete";
-    }
+QString Form_Office::get_mode(int m){
+    if(m == ADD)
+        return "Add";    
+    else if(m == UPDATE)
+        return "Update";    
+    else if(m == DELETE)
+        return "Delete";    
     return "";
 }
 
-int Form_Office::getNextOfficeCode(){
+int Form_Office::get_next_office_code(){
     qr = myDB.executeQuery("SELECT MAX(CONVERT(officeCode,UNSIGNED INTEGER)) FROM offices");
     vector<int> cols{0};
     int row = 1;
     return myDB.getCells(qr, row, cols).toInt() + 1;
 }
 
-void Form_Office::on_show(){
-    QString fileName = myDB.readFile("://queries/list_offices");
-    ui->process_office_record->setText(getMode(mode));
-
+void Form_Office::on_show(){    
+    ui->process_office_record->setText(get_mode(mode));
     if(mode == ADD){
         clear_form();                
-        ui->lineEdit->setText(QString::number(getNextOfficeCode()));
+        ui->lineEdit->setText(QString::number(get_next_office_code()));
     }
     else if(mode == UPDATE || mode == DELETE){
+        QString fileName = myDB.readFile("://queries/list_offices");
         qr = myDB.executeQuery(fileName);
         qr.next();
         fill_form_with_query_result();

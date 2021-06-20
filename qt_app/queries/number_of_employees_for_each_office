@@ -1,6 +1,7 @@
-select
+SELECT
     officeCode,
-    o.city,
-    (select count(*) from employees where officeCode = o.officeCode) count
-from offices o
-order by count desc;
+    count(firstName) count
+FROM offices
+LEFT JOIN employees USING(officeCode)
+GROUP BY officeCode
+ORDER BY count DESC;

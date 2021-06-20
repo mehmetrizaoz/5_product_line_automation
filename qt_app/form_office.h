@@ -17,7 +17,6 @@ class Form_Office;
 class Form_Office : public QDialog
 {
     Q_OBJECT
-
 public:
     explicit Form_Office(QWidget *parent = nullptr);
     ~Form_Office();
@@ -28,11 +27,11 @@ private slots:
     void on_process_office_record_clicked();
 private:
     Ui::Form_Office *ui;
-    QString getMode(int m);
+    QString get_mode(int m);
     void fill_form_with_query_result();
     void clear_form();
     void refresh_query();
-    int  getNextOfficeCode();
+    int  get_next_office_code();
     void keyPressEvent(QKeyEvent * e);
     database myDB;
     QSqlQuery qr;

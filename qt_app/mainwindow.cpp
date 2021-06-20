@@ -210,13 +210,16 @@ void MainWindow::on_comboBox_customers_activated(int index){
 void MainWindow::on_comboBox_orders_activated(int index){
     if(login->isConnected == true){
         if(ui->comboBox_orders->currentIndex()==0){
+            ord->mode = 0;
             ord->show();
         }
         else if(ui->comboBox_orders->currentIndex()==1){
-            qDebug()<<"1";                        
+            ord->mode = 1;
+            ord->show();
         }
         else if(ui->comboBox_orders->currentIndex()==2){
-            qDebug()<<"2";
+            ord->mode = 2;
+            ord->show();
         }
         else if(ui->comboBox_orders->currentIndex()==3){
             fileName = myDB.readFile("://queries/list_orders");
