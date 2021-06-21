@@ -61,7 +61,11 @@ void Form_ProductLines::on_show(){
 }
 
 void Form_ProductLines::refresh_query(){
-
+    QThread::msleep(100);
+    qr = myDB.executeQuery("select * from productlines");
+    qr.next();
+    for(int i = 0; i<recordOnScreen-1; i++){ qr.next(); }
+    populate_window();
 }
 
 QString Form_ProductLines::get_mode(int m){
@@ -79,12 +83,30 @@ void Form_ProductLines::clear_form(){
 }
 
 void Form_ProductLines::keyPressEvent(QKeyEvent *event){
-
+    if(mode == DELETE || mode == UPDATE){
+        if (event->key() == Qt::Key_Up){ //next record
+            if(qr.next() == NULL){
+                qr.first();
+                recordOnScreen = 1;
+            }
+            else { recordOnScreen++; }
+            populate_window();
+        }
+        if (event->key() == Qt::Key_Down){ //previous record
+            if(qr.previous() == NULL){
+                qr.last();
+                recordOnScreen = qr.size();
+            }
+            else { recordOnScreen--; }
+            populate_window();
+        }
+    }
 }
 
 void Form_ProductLines::on_process_product_line_record_clicked(){
+    QString queryString;
     if( mode == ADD ){
-        QString queryString = "insert into `productlines`(`productLine`,`textDescription`,`htmlDescription`,`image`) values(";
+        queryString = "insert into `productlines`(`productLine`,`textDescription`,`htmlDescription`,`image`) values(";
         queryString.append("'" + ui->lineEdit->text()   + "',");
         queryString.append("'" + ui->lineEdit_2->text() + "',");
         queryString.append("'" + ui->lineEdit_3->text() + "',");
@@ -93,9 +115,18 @@ void Form_ProductLines::on_process_product_line_record_clicked(){
         clear_form();
     }
     else if( mode == UPDATE ){
-
+        queryString = "UPDATE productlines SET ";
+        queryString.append("textDescription = '" + ui->lineEdit_2->text() + "', ");
+        queryString.append("htmlDescription = '" + ui->lineEdit_3->text() + "' ");
+        //queryString.append("image = '" + ui->lineEdit_4->text() + "', ");
+        queryString.append("where productLine = '" + ui->lineEdit->text() + "'");
+        qDebug() << queryString;
+        myDB.executeQuery(queryString);
+        refresh_query();
     }
     else if( mode == DELETE ){
-
+        myDB.executeQuery("DELETE FROM productlines WHERE productLine = '" + ui->lineEdit->text() + "'");
+        recordOnScreen--;
+        refresh_query();
     }
 }

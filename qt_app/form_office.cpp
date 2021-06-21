@@ -130,9 +130,8 @@ void Form_Office::refresh_query(){
     QThread::msleep(100);
     QString fileName = myDB.readFile("://queries/list_offices");
     qr = myDB.executeQuery(fileName);
-    for(int i = 0; i<recordOnScreen; i++){
-        qr.next();
-    }
+    qr.next();
+    for(int i = 0; i<recordOnScreen-1; i++){ qr.next(); }
     populate_window();
 }
 

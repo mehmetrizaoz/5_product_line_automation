@@ -129,7 +129,8 @@ void Form_Order::clear_form(){
 void Form_Order::refresh_query(){
     QThread::msleep(100);
     qr = myDB.executeQuery("select * from orders");
-    for(int i = 0; i<recordOnScreen; i++){ qr.next(); }
+    qr.next();
+    for(int i = 0; i<recordOnScreen-1; i++){ qr.next(); }
     populate_window();
 }
 
@@ -164,7 +165,6 @@ void Form_Order::on_process_order_record_clicked(){
         clear_form();
         ui->lineEdit->setText(nextOrderNumber);
     }
-
     else if( mode == UPDATE ){
         customerNumber = get_customer_number_from_customer_name();
         queryString = "UPDATE orders SET ";
@@ -179,7 +179,6 @@ void Form_Order::on_process_order_record_clicked(){
         myDB.executeQuery(queryString);
         refresh_query();
     }
-
     else if( mode == DELETE ){
         myDB.executeQuery("DELETE FROM orders WHERE orderNumber = " + ui->lineEdit->text());
         recordOnScreen--;
