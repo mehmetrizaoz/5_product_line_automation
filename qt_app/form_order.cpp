@@ -86,8 +86,7 @@ void Form_Order::keyPressEvent(QKeyEvent *event){
                 qr.first();
                 recordOnScreen = 1;
             }
-            else
-                recordOnScreen++;            
+            else { recordOnScreen++; }
             populate_window();
         }
         if (event->key() == Qt::Key_Down){ //previous record
@@ -95,20 +94,16 @@ void Form_Order::keyPressEvent(QKeyEvent *event){
                 qr.last();
                 recordOnScreen = qr.size();
             }
-            else
-                recordOnScreen--;
+            else { recordOnScreen--; }
             populate_window();
         }
     }
 }
 
 QString Form_Order::get_mode(int m){
-    if(m == ADD)
-        return "Add";
-    else if(m == UPDATE)
-        return "Update";
-    else if(m == DELETE)
-        return "Delete";
+    if(m == ADD) { return "Add"; }
+    else if(m == UPDATE) { return "Update"; }
+    else if(m == DELETE) { return "Delete"; }
     return "";
 }
 
@@ -145,17 +140,19 @@ Form_Order::~Form_Order(){
     delete ui;
 }
 
+QString Form_Order::get_customer_number_from_customer_name(){
+    QString queryString = "select customerNumber from customers where customerName = '" + ui->comboBox->currentText() + "'";
+    vector<int> cols{0};
+    int row = 1;
+    return myDB.getCells(myDB.executeQuery(queryString), row, cols);
+}
+
 void Form_Order::on_process_order_record_clicked(){
     QString queryString;
     QString customerNumber;
 
     if( mode == ADD ){
-        //todo: make function - update has same query
-        queryString = "select customerNumber from customers where customerName = '" + ui->comboBox->currentText() + "'";
-        vector<int> cols{0};
-        int row = 1;
-        customerNumber = myDB.getCells(myDB.executeQuery(queryString), row, cols);
-
+        customerNumber = get_customer_number_from_customer_name();
         queryString = "insert into `orders`(`orderNumber`,`orderDate`,`requiredDate`,`shippedDate`,`status`,`comments`,`customerNumber`) values (";
         queryString.append("'" + ui->lineEdit->text()   + "',");
         queryString.append("'" + ui->lineEdit_2->text() + "',");
@@ -171,11 +168,7 @@ void Form_Order::on_process_order_record_clicked(){
         ui->lineEdit->setText(nextOrderNumber);
     }
     else if( mode == UPDATE ){
-        queryString = "select customerNumber from customers where customerName = '" + ui->comboBox->currentText() + "'";
-        vector<int> cols{0};
-        int row = 1;
-        customerNumber = myDB.getCells(myDB.executeQuery(queryString), row, cols);
-
+        customerNumber = get_customer_number_from_customer_name();
         queryString = "UPDATE orders SET ";
         queryString.append("orderDate = '" + ui->lineEdit_2->text() + "', ");
         queryString.append("requiredDate = '" + ui->lineEdit_3->text() + "', ");
