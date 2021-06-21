@@ -135,6 +135,7 @@ void Form_Order::clear_form(){
 }
 
 void Form_Order::refresh_query(){
+    qDebug() << recordOnScreen;
     /*QThread::msleep(100);
     QString fileName = myDB.readFile("select * from orders");
     qr = myDB.executeQuery(fileName);

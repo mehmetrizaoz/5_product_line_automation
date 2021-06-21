@@ -33,6 +33,7 @@ private:
     void clear_form();
     void refresh_query();
     int  get_next_order_code();
+    void fill_costumers();
     void keyPressEvent(QKeyEvent * e);
 };
 
