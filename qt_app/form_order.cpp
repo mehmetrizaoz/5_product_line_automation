@@ -70,8 +70,7 @@ void Form_Order::on_show(){
     clear_form();
     fill_costumers();
 
-    if(mode == ADD)
-        get_next_order_code();    
+    if(mode == ADD){ get_next_order_code(); }
     else if(mode == UPDATE || mode == DELETE){
         qr = myDB.executeQuery("select * from orders");
         qr.next();
@@ -107,7 +106,7 @@ QString Form_Order::get_mode(int m){
     return "";
 }
 
-int Form_Order::get_next_order_code(){
+void Form_Order::get_next_order_code(){
     vector<int> cols{1};
     int row = 1;
     QSqlQuery qr2 = myDB.executeQuery("SELECT MAX(CONVERT(orderNumber,UNSIGNED INTEGER)) FROM orders");
@@ -130,9 +129,7 @@ void Form_Order::clear_form(){
 void Form_Order::refresh_query(){
     QThread::msleep(100);
     qr = myDB.executeQuery("select * from orders");
-    for(int i = 0; i<recordOnScreen; i++){
-        qr.next();
-    }
+    for(int i = 0; i<recordOnScreen; i++){ qr.next(); }
     populate_window();
 }
 
@@ -167,6 +164,7 @@ void Form_Order::on_process_order_record_clicked(){
         clear_form();
         ui->lineEdit->setText(nextOrderNumber);
     }
+
     else if( mode == UPDATE ){
         customerNumber = get_customer_number_from_customer_name();
         queryString = "UPDATE orders SET ";
@@ -181,6 +179,7 @@ void Form_Order::on_process_order_record_clicked(){
         myDB.executeQuery(queryString);
         refresh_query();
     }
+
     else if( mode == DELETE ){
         myDB.executeQuery("DELETE FROM orders WHERE orderNumber = " + ui->lineEdit->text());
         recordOnScreen--;

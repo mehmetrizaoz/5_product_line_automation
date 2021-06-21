@@ -278,13 +278,16 @@ void MainWindow::on_comboBox_products_activated(int index){
 void MainWindow::on_comboBox_productlines_activated(int index){
     if(login->isConnected == true){
         if(ui->comboBox_productlines->currentIndex()==0){
+            lin->mode = 0;
             lin->show();
         }
         else if(ui->comboBox_productlines->currentIndex()==1){
-            qDebug()<<"1";
+            lin->mode = 1;
+            lin->show();
         }
         else if(ui->comboBox_productlines->currentIndex()==2){
-            qDebug()<<"2";
+            lin->mode = 2;
+            lin->show();
         }
         else if(ui->comboBox_productlines->currentIndex()==3){
             fileName = myDB.readFile("://queries/list_product_lines");

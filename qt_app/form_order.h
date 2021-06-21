@@ -32,7 +32,7 @@ private:
     void populate_window();
     void clear_form();
     void refresh_query();
-    int  get_next_order_code();
+    void get_next_order_code();
     void fill_costumers();
     QString get_customer_number_from_customer_name();
     void keyPressEvent(QKeyEvent * e);

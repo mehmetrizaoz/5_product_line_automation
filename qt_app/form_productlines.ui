@@ -64,7 +64,7 @@
      <widget class="QLineEdit" name="lineEdit_4"/>
     </item>
     <item row="4" column="1">
-     <widget class="QPushButton" name="pushButton_1">
+     <widget class="QPushButton" name="process_product_line_record">
       <property name="text">
        <string>Add</string>
       </property>
