@@ -44,7 +44,7 @@ QString database::getCells(QSqlQuery query, int row, vector<int> cols){
         query.next();
     }
     for (auto it = begin(cols); it!=end(cols); ++it){
-        str += query.value(*it).toString() + " ";
+        str += query.value(*it).toString() + " "; //todo: last space is problematic
     }
     return str;
 }

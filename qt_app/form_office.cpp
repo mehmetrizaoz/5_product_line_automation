@@ -53,7 +53,7 @@ void Form_Office::keyPressEvent(QKeyEvent *event){
            }
            else
                recordOnScreen++;           
-           fill_form_with_query_result();
+           populate_window();
        }
        if (event->key() == Qt::Key_Down){ //previous record
            if(qr.previous() == NULL){
@@ -62,7 +62,7 @@ void Form_Office::keyPressEvent(QKeyEvent *event){
            }
            else
                recordOnScreen--;           
-           fill_form_with_query_result();
+           populate_window();
        }
    }
 }
@@ -98,7 +98,7 @@ void Form_Office::on_show(){
         QString fileName = myDB.readFile("://queries/list_offices");
         qr = myDB.executeQuery(fileName);
         qr.next();
-        fill_form_with_query_result();
+        populate_window();
     }
 }
 
@@ -114,7 +114,7 @@ void Form_Office::clear_form(){
     ui->lineEdit_9->setText("");
 }
 
-void Form_Office::fill_form_with_query_result(){
+void Form_Office::populate_window(){
     ui->lineEdit->setText(qr.value(0).toString());
     ui->lineEdit_2->setText(qr.value(1).toString());
     ui->lineEdit_3->setText(qr.value(2).toString());
@@ -133,7 +133,7 @@ void Form_Office::refresh_query(){
     for(int i = 0; i<recordOnScreen; i++){
         qr.next();
     }
-    fill_form_with_query_result();
+    populate_window();
 }
 
 void Form_Office::on_process_office_record_clicked(){

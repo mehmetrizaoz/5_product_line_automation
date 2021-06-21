@@ -29,7 +29,7 @@ private:
     QSqlQuery qr;
     int recordOnScreen = 1;
     QString get_mode(int m);
-    void fill_form_with_query_result();
+    void populate_window();
     void clear_form();
     void refresh_query();
     int  get_next_order_code();

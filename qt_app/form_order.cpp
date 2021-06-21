@@ -39,7 +39,7 @@ Form_Order::Form_Order(QWidget *parent) : QDialog(parent), ui(new Ui::Form_Order
     this->setLayout(layout);
 }
 
-void Form_Order::fill_form_with_query_result(){
+void Form_Order::populate_window(){
     ui->lineEdit->setText(qr.value(0).toString());
     ui->lineEdit_2->setText(qr.value(1).toString());
     ui->lineEdit_3->setText(qr.value(2).toString());
@@ -70,13 +70,12 @@ void Form_Order::on_show(){
     clear_form();
     fill_costumers();
 
-    if(mode == ADD){
-        get_next_order_code();
-    }
+    if(mode == ADD)
+        get_next_order_code();    
     else if(mode == UPDATE || mode == DELETE){
         qr = myDB.executeQuery("select * from orders");
         qr.next();
-        fill_form_with_query_result();
+        populate_window();
     }
 }
 
@@ -87,10 +86,9 @@ void Form_Order::keyPressEvent(QKeyEvent *event){
                 qr.first();
                 recordOnScreen = 1;
             }
-            else{
-                recordOnScreen++;
-            }
-            fill_form_with_query_result();
+            else
+                recordOnScreen++;            
+            populate_window();
         }
         if (event->key() == Qt::Key_Down){ //previous record
             if(qr.previous() == NULL){
@@ -99,7 +97,7 @@ void Form_Order::keyPressEvent(QKeyEvent *event){
             }
             else
                 recordOnScreen--;
-            fill_form_with_query_result();
+            populate_window();
         }
     }
 }
@@ -135,13 +133,12 @@ void Form_Order::clear_form(){
 }
 
 void Form_Order::refresh_query(){
-    /*QThread::msleep(100);
-    QString fileName = myDB.readFile("select * from orders");
-    qr = myDB.executeQuery(fileName);
+    QThread::msleep(100);
+    qr = myDB.executeQuery("select * from orders");
     for(int i = 0; i<recordOnScreen; i++){
         qr.next();
     }
-    fill_form_with_query_result();*/
+    populate_window();
 }
 
 Form_Order::~Form_Order(){
@@ -150,13 +147,14 @@ Form_Order::~Form_Order(){
 
 void Form_Order::on_process_order_record_clicked(){
     QString queryString;
+    QString customerNumber;
+
     if( mode == ADD ){
-        queryString = "SELECT customerNumber FROM customers WHERE customerName = ";
-        queryString.append("'" + ui->comboBox->currentText() + "'");
-        qr = myDB.executeQuery(queryString);
+        //todo: make function - update has same query
+        queryString = "select customerNumber from customers where customerName = '" + ui->comboBox->currentText() + "'";
         vector<int> cols{0};
         int row = 1;
-        QString customerNumber = myDB.getCells(qr, row, cols);
+        customerNumber = myDB.getCells(myDB.executeQuery(queryString), row, cols);
 
         queryString = "insert into `orders`(`orderNumber`,`orderDate`,`requiredDate`,`shippedDate`,`status`,`comments`,`customerNumber`) values (";
         queryString.append("'" + ui->lineEdit->text()   + "',");
@@ -173,7 +171,22 @@ void Form_Order::on_process_order_record_clicked(){
         ui->lineEdit->setText(nextOrderNumber);
     }
     else if( mode == UPDATE ){
+        queryString = "select customerNumber from customers where customerName = '" + ui->comboBox->currentText() + "'";
+        vector<int> cols{0};
+        int row = 1;
+        customerNumber = myDB.getCells(myDB.executeQuery(queryString), row, cols);
 
+        queryString = "UPDATE orders SET ";
+        queryString.append("orderDate = '" + ui->lineEdit_2->text() + "', ");
+        queryString.append("requiredDate = '" + ui->lineEdit_3->text() + "', ");
+        queryString.append("shippedDate = '" + ui->lineEdit_4->text() + "', ");
+        queryString.append("status = '" + ui->lineEdit_5->text() + "', ");
+        queryString.append("comments = '" + ui->lineEdit_6->text() + "', ");
+        queryString.append("customerNumber = '" + customerNumber + "' ");
+        queryString.append("where orderNumber = " + ui->lineEdit->text());
+
+        myDB.executeQuery(queryString);
+        refresh_query();
     }
     else if( mode == DELETE ){
         myDB.executeQuery("DELETE FROM orders WHERE orderNumber = " + ui->lineEdit->text());

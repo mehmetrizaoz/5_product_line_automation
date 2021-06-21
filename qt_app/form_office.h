@@ -28,7 +28,7 @@ private slots:
 private:
     Ui::Form_Office *ui;
     QString get_mode(int m);
-    void fill_form_with_query_result();
+    void populate_window();
     void clear_form();
     void refresh_query();
     int  get_next_office_code();
