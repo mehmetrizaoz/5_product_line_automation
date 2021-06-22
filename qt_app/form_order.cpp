@@ -175,7 +175,7 @@ void Form_Order::on_process_order_record_clicked(){
         queryString.append("comments = '" + ui->lineEdit_6->text() + "', ");
         queryString.append("customerNumber = '" + customerNumber + "' ");
         queryString.append("where orderNumber = " + ui->lineEdit->text());
-
+        qDebug() << queryString;
         myDB.executeQuery(queryString);
         refresh_query();
     }

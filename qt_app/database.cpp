@@ -71,38 +71,33 @@ QSqlQuery database::executeQuery(QString qr){
 void database::fillTable(QSqlQuery query, QTableWidget *tableWidget){
     int columnCount = query.record().count();
     int rowCount = query.size();
+
     tableWidget->setRowCount(rowCount+1); //+1 is for column headers
     tableWidget->setColumnCount(columnCount);
 
     QFont font;
     font.setBold(true);
+    auto model = tableWidget->model();
 
-    //add column names to the table
+    //add header to the table
     QSqlRecord record = query.record();//db.record("table_name");
-    for(int i = 0; i < record.count(); i++){
-       QTableWidgetItem *pCell = new QTableWidgetItem;
-       tableWidget->setItem(0, i, pCell);
+    for(int i = 0; i < columnCount; i++){
+       model->setData(model->index(0,i), record.fieldName(i));
        tableWidget->item(0, i)->setFont(font);
        tableWidget->item(0, i)->setForeground(QBrush(QColor(255, 255, 255)));
-       tableWidget->item(0,i)->setBackgroundColor(QColor(0,100,1));
-       pCell->setText(record.fieldName(i));
+       tableWidget->item(0, i)->setBackgroundColor(QColor(0,100,1));
     }
 
-    //fill table with query result
     for(int row=1; row<=rowCount; row++){
        query.next();
        for(int col=0; col<columnCount; col++){
-          QTableWidgetItem *pCell = new QTableWidgetItem;
-          tableWidget->setItem(row, col, pCell);
-
-          if(row % 2)
-            tableWidget->item(row,col)->setBackgroundColor(QColor(240,232,205));
-          else
-            tableWidget->item(row,col)->setBackgroundColor(QColor(255,255,176));
-
-          pCell->setText(query.value(col).toString());
+           model->setData(model->index(row,col), query.value(col).toString());
+           if(row % 2)
+                tableWidget->item(row, col)->setBackgroundColor(QColor(240,232,205));
+           else
+                tableWidget->item(row, col)->setBackgroundColor(QColor(255,255,176));
        }
-    }
+    }    
 }
 
 database::database()

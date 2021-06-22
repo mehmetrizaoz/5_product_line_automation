@@ -120,7 +120,6 @@ void Form_ProductLines::on_process_product_line_record_clicked(){
         queryString.append("htmlDescription = '" + ui->lineEdit_3->text() + "' ");
         //queryString.append("image = '" + ui->lineEdit_4->text() + "', ");
         queryString.append("where productLine = '" + ui->lineEdit->text() + "'");
-        qDebug() << queryString;
         myDB.executeQuery(queryString);
         refresh_query();
     }

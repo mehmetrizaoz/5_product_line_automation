@@ -223,9 +223,12 @@ void MainWindow::on_comboBox_orders_activated(int index){
             ord->show();
         }
         else if(ui->comboBox_orders->currentIndex()==3){
+            qDebug()<<"1";
             fileName = myDB.readFile("://queries/list_orders");
-            qr = myDB.executeQuery(fileName);
-            myDB.fillTable(qr, ui->tableWidget_01);
+            qDebug()<<"2";
+            QSqlQuery q1 = myDB.executeQuery(fileName);
+            qDebug()<<"3";
+            myDB.fillTable(q1, ui->tableWidget_01);
         }
     }
     else{ login->show(); }
