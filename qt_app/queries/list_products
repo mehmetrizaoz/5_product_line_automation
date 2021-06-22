@@ -1,12 +1,4 @@
 SELECT
-    productName,
-    quantityInStock quantity,
-    productLine,
-    buyPrice
+    *
 FROM
-    products
-JOIN
-    productlines
-USING(productLine)
-ORDER BY
-    quantity;
+    products;

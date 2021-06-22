@@ -80,7 +80,7 @@ void database::fillTable(QSqlQuery query, QTableWidget *tableWidget){
     auto model = tableWidget->model();
 
     //add header to the table
-    QSqlRecord record = query.record();//db.record("table_name");
+    QSqlRecord record = query.record(); //db.record("table_name");
     for(int i = 0; i < columnCount; i++){
        model->setData(model->index(0,i), record.fieldName(i));
        tableWidget->item(0, i)->setFont(font);

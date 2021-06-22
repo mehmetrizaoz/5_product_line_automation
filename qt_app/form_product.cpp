@@ -9,10 +9,7 @@
 #include <QSqlError>
 #include <QSqlQuery>
 
-Form_Product::Form_Product(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::Form_Product)
-{
+Form_Product::Form_Product(QWidget *parent) : QDialog(parent), ui(new Ui::Form_Product){
     ui->setupUi(this);
     this->setWindowTitle("Product");
     myDB = database();
@@ -38,27 +35,129 @@ Form_Product::Form_Product(QWidget *parent) :
     layout->addWidget(ui->lineEdit_8,7,1);
     layout->addWidget(ui->label_9,8,0);
     layout->addWidget(ui->lineEdit_9,8,1);
-    layout->addWidget(ui->add_product,9,0,1,0);
+    layout->addWidget(ui->process_product_recor,9,0,1,0);
     this->setLayout(layout);
 }
 
-Form_Product::~Form_Product()
-{
+Form_Product::~Form_Product(){
     delete ui;
 }
 
-void Form_Product::on_show(){
-    QSqlQuery qr = myDB.executeQuery("SELECT * FROM productlines");
+void Form_Product::fill_product_line_combo_box(){
+    QSqlQuery qry = myDB.executeQuery("SELECT * FROM productlines");
     vector<int> cols{0};
     int row = 1;
     ui->comboBox->clear();
-    for(int i=1; i<=qr.size(); i++){
-        QString lne = myDB.getCells(qr, row, cols);
+    for(int i=1; i<=qry.size(); i++){
+        QString lne = myDB.getCells(qry, row, cols);
+        qDebug()<<lne;
         ui->comboBox->addItem(lne);
     }
 }
 
-void Form_Product::on_add_product_clicked()
-{
+QString Form_Product::get_mode(int m){
+    if(m == ADD) { return "Add"; }
+    else if(m == UPDATE) { return "Update"; }
+    else if(m == DELETE) { return "Delete"; }
+    return "";
+}
 
+void Form_Product::clear_form(){
+    ui->lineEdit->setText("");
+    ui->lineEdit_2->setText("");
+    ui->lineEdit_4->setText("");
+    ui->lineEdit_5->setText("");
+    ui->lineEdit_6->setText("");
+    ui->lineEdit_7->setText("");
+    ui->lineEdit_8->setText("");
+    ui->lineEdit_9->setText("");
+    ui->comboBox->setCurrentIndex(0);
+}
+
+void Form_Product::keyPressEvent(QKeyEvent *event){
+    if(mode == DELETE || mode == UPDATE){
+        if (event->key() == Qt::Key_Up){ //next record
+            if(qr.next() == NULL){
+                qr.first();
+                recordOnScreen = 1;
+            }
+            else { recordOnScreen++; }
+            populate_window();
+        }
+        if (event->key() == Qt::Key_Down){ //previous record
+            if(qr.previous() == NULL){
+                qr.last();
+                recordOnScreen = qr.size();
+            }
+            else { recordOnScreen--; }
+            populate_window();
+        }
+    }
+}
+
+void Form_Product::populate_window(){
+    ui->lineEdit->setText(qr.value(0).toString());
+    ui->lineEdit_2->setText(qr.value(1).toString());
+    qDebug()<<qr.value(2).toString();
+    ui->comboBox->setCurrentText(qr.value(2).toString() + " ");
+    ui->lineEdit_4->setText(qr.value(3).toString());
+    ui->lineEdit_5->setText(qr.value(4).toString());
+    ui->lineEdit_6->setText(qr.value(5).toString());
+    ui->lineEdit_7->setText(qr.value(6).toString());
+    ui->lineEdit_8->setText(qr.value(7).toString());
+    ui->lineEdit_9->setText(qr.value(8).toString());
+}
+
+void Form_Product::on_show(){
+    ui->process_product_recor->setText(get_mode(mode));
+    if( mode == ADD ){
+        clear_form();
+        fill_product_line_combo_box();
+    }
+    if(mode == UPDATE || mode == DELETE){
+        qr = myDB.executeQuery("select * from products");
+        qr.next();
+        populate_window();
+    }
+}
+
+void Form_Product::refresh_query(){
+    QThread::msleep(100);
+    qr = myDB.executeQuery("select * from products");
+    qr.next();
+    for(int i = 0; i<recordOnScreen-1; i++){ qr.next(); }
+    populate_window();
+}
+
+void Form_Product::on_process_product_recor_clicked(){
+    QString queryString;
+    if( mode == ADD ){
+        queryString = "insert into `products`(`productCode`,`productName`,`productLine`,`productScale`, \
+                `productVendor`,`productDescription`,`quantityInStock`,`buyPrice`,`MSRP`) values(";
+        queryString.append("'" + ui->lineEdit->text()   + "',");
+        queryString.append("'" + ui->lineEdit_2->text() + "',");
+        queryString.append("'" + ui->comboBox->currentText() + "',");
+        queryString.append("'" + ui->lineEdit_4->text() + "',");
+        queryString.append("'" + ui->lineEdit_5->text() + "',");
+        queryString.append("'" + ui->lineEdit_6->text() + "',");
+        queryString.append("'" + ui->lineEdit_7->text() + "',");
+        queryString.append("'" + ui->lineEdit_8->text() + "',");
+        queryString.append("'" + ui->lineEdit_9->text() + "')");
+        myDB.executeQuery(queryString);
+        clear_form();
+    }
+    else if( mode == UPDATE ){
+        /*queryString = "UPDATE products SET ";
+        queryString.append("textDescription = '" + ui->lineEdit_2->text() + "', ");
+        queryString.append("htmlDescription = '" + ui->lineEdit_3->text() + "' ");
+        //queryString.append("image = '" + ui->lineEdit_4->text() + "', ");
+        queryString.append("where productLine = '" + ui->lineEdit->text() + "'");
+        myDB.executeQuery(queryString);
+        refresh_query();*/
+    }
+    else if( mode == DELETE ){
+        myDB.executeQuery("DELETE FROM products WHERE productCode = '" + ui->lineEdit->text() + "'");
+        recordOnScreen--;
+        refresh_query();
+    }
 }

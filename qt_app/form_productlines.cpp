@@ -37,10 +37,6 @@ Form_ProductLines::~Form_ProductLines(){
     delete ui;
 }
 
-int Form_ProductLines::get_next_product_line_code(){
-
-}
-
 void Form_ProductLines::populate_window(){
     ui->lineEdit->setText(qr.value(0).toString());
     ui->lineEdit_2->setText(qr.value(1).toString());
@@ -50,7 +46,7 @@ void Form_ProductLines::populate_window(){
 
 void Form_ProductLines::on_show(){
     ui->process_product_line_record->setText(get_mode(mode));
-    clear_form();
+    //clear_form();
 
     if(mode == UPDATE || mode == DELETE){
         qr = myDB.executeQuery("select * from productlines");

@@ -115,7 +115,7 @@
     <string>Product Code:</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="add_product">
+  <widget class="QPushButton" name="process_product_recor">
    <property name="geometry">
     <rect>
      <x>220</x>
@@ -244,7 +244,7 @@
   <tabstop>lineEdit_7</tabstop>
   <tabstop>lineEdit_8</tabstop>
   <tabstop>lineEdit_9</tabstop>
-  <tabstop>add_product</tabstop>
+  <tabstop>process_product_recor</tabstop>
  </tabstops>
  <resources/>
  <connections/>

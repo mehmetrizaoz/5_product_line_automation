@@ -26,7 +26,6 @@ public slots:
     void on_show();
 private slots:
     void on_process_product_line_record_clicked();
-
 private:
     QSqlQuery qr;
     int recordOnScreen = 1;
@@ -36,7 +35,6 @@ private:
     void keyPressEvent(QKeyEvent *event);
     void populate_window();
     void refresh_query();
-    int get_next_product_line_code();
 };
 
 #endif // FORM_PRODUCTLINES_H
