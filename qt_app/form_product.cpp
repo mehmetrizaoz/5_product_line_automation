@@ -110,9 +110,9 @@ void Form_Product::populate_window(){
 
 void Form_Product::on_show(){
     ui->process_product_recor->setText(get_mode(mode));
+    clear_form();
+    fill_product_line_combo_box();
     if( mode == ADD ){
-        clear_form();
-        fill_product_line_combo_box();
     }
     if(mode == UPDATE || mode == DELETE){
         qr = myDB.executeQuery("select * from products");
@@ -147,13 +147,19 @@ void Form_Product::on_process_product_recor_clicked(){
         clear_form();
     }
     else if( mode == UPDATE ){
-        /*queryString = "UPDATE products SET ";
-        queryString.append("textDescription = '" + ui->lineEdit_2->text() + "', ");
-        queryString.append("htmlDescription = '" + ui->lineEdit_3->text() + "' ");
-        //queryString.append("image = '" + ui->lineEdit_4->text() + "', ");
-        queryString.append("where productLine = '" + ui->lineEdit->text() + "'");
+        queryString = "UPDATE products SET ";
+        queryString.append("productName = '" + ui->lineEdit_2->text() + "', ");
+        queryString.append("productLine = '" + ui->comboBox->currentText() + "', ");
+        queryString.append("productScale = '" + ui->lineEdit_4->text() + "', ");
+        queryString.append("productVendor = '" + ui->lineEdit_5->text() + "', ");
+        queryString.append("productDescription = '" + ui->lineEdit_6->text() + "', ");
+        queryString.append("quantityInStock = '" + ui->lineEdit_7->text() + "', ");
+        queryString.append("buyPrice = '" + ui->lineEdit_8->text() + "', ");
+        queryString.append("MSRP = '" + ui->lineEdit_9->text() + "' ");
+        queryString.append("where productCode = '" + ui->lineEdit->text() + "'");
+        qDebug()<<queryString;
         myDB.executeQuery(queryString);
-        refresh_query();*/
+        refresh_query();
     }
     else if( mode == DELETE ){
         myDB.executeQuery("DELETE FROM products WHERE productCode = '" + ui->lineEdit->text() + "'");

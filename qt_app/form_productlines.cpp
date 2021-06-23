@@ -46,7 +46,7 @@ void Form_ProductLines::populate_window(){
 
 void Form_ProductLines::on_show(){
     ui->process_product_line_record->setText(get_mode(mode));
-    //clear_form();
+    clear_form();
 
     if(mode == UPDATE || mode == DELETE){
         qr = myDB.executeQuery("select * from productlines");

@@ -67,10 +67,10 @@ void Form_Order::fill_costumers(){
 
 void Form_Order::on_show(){   
     ui->process_order_record->setText(get_mode(mode));
-
+    clear_form();
+    fill_costumers();
     if(mode == ADD){
-        clear_form();
-        fill_costumers();
+
         get_next_order_code();
     }
     else if(mode == UPDATE || mode == DELETE){
