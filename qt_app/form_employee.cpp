@@ -33,12 +33,37 @@ Form_Employee::Form_Employee(QWidget *parent) :
     layout->addWidget(ui->comboBox_2,6,1);
     layout->addWidget(ui->label_8,7,0);
     layout->addWidget(ui->lineEdit_8,7,1);
-    layout->addWidget(ui->add_employee,8,0,1,0);
+    layout->addWidget(ui->process_employee_record,8,0,1,0);
     this->setLayout(layout);
 
 }
 
+void Form_Employee::populate_window(){
+
+}
+
+void Form_Employee::keyPressEvent(QKeyEvent *event){
+
+}
+
+QString Form_Employee::get_mode(int m){
+    if(m == ADD) { return "Add"; }
+    else if(m == UPDATE) { return "Update"; }
+    else if(m == DELETE) { return "Delete"; }
+    return "";
+}
+
+void Form_Employee::clear_form(){
+
+}
+
+void Form_Employee::refresh_query(){
+
+}
+
 void Form_Employee::on_show(){
+    ui->process_employee_record->setText(get_mode(mode));
+
     QSqlQuery qr = myDB.executeQuery("SELECT max(employeeNumber) FROM classicmodels.employees");
     vector<int> cols{0};
     int row = 1;
@@ -72,7 +97,7 @@ Form_Employee::~Form_Employee()
     delete ui;
 }
 
-void Form_Employee::on_add_employee_clicked()
+void Form_Employee::on_process_employee_record_clicked()
 {
 
 }

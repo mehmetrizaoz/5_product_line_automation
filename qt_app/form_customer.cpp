@@ -40,7 +40,7 @@ Form_Customer::Form_Customer(QWidget *parent) : QDialog(parent), ui(new Ui::Form
     layout->addWidget(ui->comboBox,11,1);
     layout->addWidget(ui->label_13,12,0);
     layout->addWidget(ui->lineEdit_12,12,1);
-    layout->addWidget(ui->add_customer,13,0,1,0);
+    layout->addWidget(ui->process_customer_record,13,0,1,0);
     this->setLayout(layout);
 }
 
@@ -49,6 +49,8 @@ Form_Customer::~Form_Customer(){
 }
 
 void Form_Customer::on_show(){
+    ui->process_customer_record->setText(get_mode(mode));
+
     QSqlQuery qr = myDB.executeQuery("SELECT * FROM employees");    
     vector<int> cols{2, 1};
     int row = 1;
@@ -66,7 +68,30 @@ void Form_Customer::on_show(){
     ui->lineEdit->setText(QString::number(n));
 }
 
-void Form_Customer::on_add_customer_clicked(){
+void Form_Customer::populate_window(){
+
+}
+
+void Form_Customer::keyPressEvent(QKeyEvent *event){
+
+}
+
+QString Form_Customer::get_mode(int m){
+    if(m == ADD) { return "Add"; }
+    else if(m == UPDATE) { return "Update"; }
+    else if(m == DELETE) { return "Delete"; }
+    return "";
+}
+
+void Form_Customer::clear_form(){
+
+}
+
+void Form_Customer::refresh_query(){
+
+}
+
+void Form_Customer::on_process_customer_record_clicked(){
     //get selected employee number
     QSqlQuery qr = myDB.executeQuery("SELECT * FROM employees");
     vector<int> cols{0};
@@ -103,3 +128,4 @@ creditLimit, phone, addressLine1, addressLine2, city, state, postalCode, salesRe
     ui->lineEdit_11->setText("");
     ui->lineEdit_12->setText("");
 }
+

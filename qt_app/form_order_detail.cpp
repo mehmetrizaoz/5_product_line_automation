@@ -27,11 +27,35 @@ Form_Order_Detail::Form_Order_Detail(QWidget *parent) : QDialog(parent), ui(new 
     layout->addWidget(ui->lineEdit_2,3,1);
     layout->addWidget(ui->label_5,4,0);
     layout->addWidget(ui->lineEdit_3,4,1);
-    layout->addWidget(ui->add_order_detail,5,0,1,0);
+    layout->addWidget(ui->process_order_detail_record,5,0,1,0);
     this->setLayout(layout);
 }
 
+void Form_Order_Detail::populate_window(){
+
+}
+
+void Form_Order_Detail::keyPressEvent(QKeyEvent *event){
+
+}
+
+QString Form_Order_Detail::get_mode(int m){
+    if(m == ADD) { return "Add"; }
+    else if(m == UPDATE) { return "Update"; }
+    else if(m == DELETE) { return "Delete"; }
+    return "";
+}
+
+void Form_Order_Detail::clear_form(){
+
+}
+
+void Form_Order_Detail::refresh_query(){
+
+}
+
 void Form_Order_Detail::on_show(){
+    ui->process_order_detail_record->setText(get_mode(mode));
     QSqlQuery qr = myDB.executeQuery("SELECT * FROM orders");
     vector<int> cols{0};
     int row = 1;
@@ -56,6 +80,7 @@ Form_Order_Detail::~Form_Order_Detail(){
     delete ui;
 }
 
-void Form_Order_Detail::on_add_order_detail_clicked(){
+void Form_Order_Detail::on_process_order_detail_record_clicked()
+{
 
 }

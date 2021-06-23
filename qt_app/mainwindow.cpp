@@ -140,14 +140,18 @@ void MainWindow::on_comboBox_offices_activated(int index){
 
 void MainWindow::on_comboBox_employees_activated(int index){
     if(login->isConnected == true){
-        if(ui->comboBox_employees->currentIndex()==0){
+        if(ui->comboBox_employees->currentIndex()==0){            
+            emp->mode = 0;
             emp->show();
+
         }
         else if(ui->comboBox_employees->currentIndex()==1){
-            qDebug()<<"1";
+            emp->mode = 1;
+            emp->show();
         }
         else if(ui->comboBox_employees->currentIndex()==2){
-            qDebug()<<"2";
+            emp->mode = 2;
+            emp->show();
         }
         else if(ui->comboBox_employees->currentIndex()==3){
             fileName = myDB.readFile("://queries/list_employees");
@@ -175,14 +179,17 @@ void MainWindow::on_comboBox_employees_activated(int index){
 
 void MainWindow::on_comboBox_customers_activated(int index){
     if(login->isConnected == true){
-        if(ui->comboBox_customers->currentIndex()==0){
+        if(ui->comboBox_customers->currentIndex()==0){           
+            cus->mode = 0;
             cus->show();
         }
         else if(ui->comboBox_customers->currentIndex()==1){
-            qDebug()<<"1";
+            cus->mode = 1;
+            cus->show();
         }
         else if(ui->comboBox_customers->currentIndex()==2){
-            qDebug()<<"2";
+            cus->mode = 2;
+            cus->show();
         }
         else if(ui->comboBox_customers->currentIndex()==3){
             fileName = myDB.readFile("://queries/list_customers");
@@ -223,11 +230,8 @@ void MainWindow::on_comboBox_orders_activated(int index){
             ord->show();
         }
         else if(ui->comboBox_orders->currentIndex()==3){
-            qDebug()<<"1";
-            fileName = myDB.readFile("://queries/list_orders");
-            qDebug()<<"2";
-            QSqlQuery q1 = myDB.executeQuery(fileName);
-            qDebug()<<"3";
+            fileName = myDB.readFile("://queries/list_orders");            
+            QSqlQuery q1 = myDB.executeQuery(fileName);            
             myDB.fillTable(q1, ui->tableWidget_01);
         }
     }
@@ -236,14 +240,17 @@ void MainWindow::on_comboBox_orders_activated(int index){
 
 void MainWindow::on_comboBox_order_details_activated(int index){
     if(login->isConnected == true){
-        if(ui->comboBox_order_details->currentIndex()==0){
+        if(ui->comboBox_order_details->currentIndex()==0){            
+            orddt->mode = 0;
             orddt->show();
         }
         else if(ui->comboBox_order_details->currentIndex()==1){
-            qDebug()<<"1";
+            orddt->mode = 1;
+            orddt->show();
         }
         else if(ui->comboBox_order_details->currentIndex()==2){
-            qDebug()<<"2";
+            orddt->mode = 2;
+            orddt->show();
         }
         else if(ui->comboBox_order_details->currentIndex()==3){
             fileName = myDB.readFile("://queries/list_order_details");

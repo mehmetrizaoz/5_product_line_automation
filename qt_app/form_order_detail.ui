@@ -128,7 +128,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QPushButton" name="add_order_detail">
+  <widget class="QPushButton" name="process_order_detail_record">
    <property name="geometry">
     <rect>
      <x>130</x>

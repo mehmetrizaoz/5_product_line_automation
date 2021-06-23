@@ -279,7 +279,7 @@
     <string>Sales Representative:</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="add_customer">
+  <widget class="QPushButton" name="process_customer_record">
    <property name="geometry">
     <rect>
      <x>140</x>
@@ -340,7 +340,7 @@
   <tabstop>lineEdit_11</tabstop>
   <tabstop>comboBox</tabstop>
   <tabstop>lineEdit_12</tabstop>
-  <tabstop>add_customer</tabstop>
+  <tabstop>process_customer_record</tabstop>
  </tabstops>
  <resources/>
  <connections/>
