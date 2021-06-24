@@ -142,7 +142,17 @@ void Form_Order_Detail::on_process_order_detail_record_clicked(){
         clear_form();
     }
     else if( mode == UPDATE ){
+        queryString = "UPDATE orderdetails SET ";
+        queryString.append("quantityOrdered = '" + ui->lineEdit->text() + "', ");
+        queryString.append("priceEach = '" + ui->lineEdit_2->text() + "', ");
+        queryString.append("orderLineNumber = '" + ui->lineEdit_3->text() + "' ");
 
+        queryString.append("where orderNumber = '" + ui->comboBox->currentText() + "'");
+        queryString.append(" and productCode = '" + ui->comboBox_2->currentText() + "'");
+
+        myDB.executeQuery(queryString);
+        qDebug()<<queryString;
+        refresh_query();
     }
     else if( mode == DELETE ){
         QString str = "DELETE FROM orderdetails WHERE orderNumber = ";
