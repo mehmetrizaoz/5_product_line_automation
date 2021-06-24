@@ -50,7 +50,6 @@ void Form_Product::fill_product_line_combo_box(){
     ui->comboBox->clear();
     for(int i=1; i<=qry.size(); i++){
         QString lne = myDB.getCells(qry, row, cols);
-        qDebug()<<lne;
         ui->comboBox->addItem(lne);
     }
 }
@@ -98,8 +97,7 @@ void Form_Product::keyPressEvent(QKeyEvent *event){
 void Form_Product::populate_window(){
     ui->lineEdit->setText(qr.value(0).toString());
     ui->lineEdit_2->setText(qr.value(1).toString());
-    qDebug()<<qr.value(2).toString();
-    ui->comboBox->setCurrentText(qr.value(2).toString() + " ");
+    ui->comboBox->setCurrentText(qr.value(2).toString());
     ui->lineEdit_4->setText(qr.value(3).toString());
     ui->lineEdit_5->setText(qr.value(4).toString());
     ui->lineEdit_6->setText(qr.value(5).toString());
@@ -112,9 +110,10 @@ void Form_Product::on_show(){
     ui->process_product_recor->setText(get_mode(mode));
     clear_form();
     fill_product_line_combo_box();
+
     if( mode == ADD ){
     }
-    if(mode == UPDATE || mode == DELETE){
+    else if(mode == UPDATE || mode == DELETE){
         qr = myDB.executeQuery("select * from products");
         qr.next();
         populate_window();
@@ -156,8 +155,7 @@ void Form_Product::on_process_product_recor_clicked(){
         queryString.append("quantityInStock = '" + ui->lineEdit_7->text() + "', ");
         queryString.append("buyPrice = '" + ui->lineEdit_8->text() + "', ");
         queryString.append("MSRP = '" + ui->lineEdit_9->text() + "' ");
-        queryString.append("where productCode = '" + ui->lineEdit->text() + "'");
-        qDebug()<<queryString;
+        queryString.append("where productCode = '" + ui->lineEdit->text() + "'");        
         myDB.executeQuery(queryString);
         refresh_query();
     }

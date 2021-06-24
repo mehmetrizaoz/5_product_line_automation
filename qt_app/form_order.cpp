@@ -50,7 +50,7 @@ void Form_Order::populate_window(){
     QString qs = "select customerName from customers where customerNumber = " + qr.value(6).toString();
     QSqlQuery qr3 = myDB.executeQuery(qs);
     qr3.next();
-    QString cName = qr3.value(0).toString() + " ";
+    QString cName = qr3.value(0).toString();
     ui->comboBox->setCurrentText(cName);
 }
 
@@ -176,12 +176,17 @@ void Form_Order::on_process_order_record_clicked(){
         queryString.append("comments = '" + ui->lineEdit_6->text() + "', ");
         queryString.append("customerNumber = '" + customerNumber + "' ");
         queryString.append("where orderNumber = " + ui->lineEdit->text());
-        qDebug() << queryString;
         myDB.executeQuery(queryString);
         refresh_query();
     }
     else if( mode == DELETE ){
-        myDB.executeQuery("DELETE FROM orders WHERE orderNumber = " + ui->lineEdit->text());
+        QString str = "DELETE FROM orderdetails WHERE orderNumber = " + ui->lineEdit->text();
+        myDB.executeQuery(str);
+
+        str = "DELETE FROM orders WHERE orderNumber = " + ui->lineEdit->text();
+        myDB.executeQuery(str);
+
+        qDebug()<<str;
         recordOnScreen--;
         refresh_query();
     }

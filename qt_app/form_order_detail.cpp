@@ -32,8 +32,9 @@ Form_Order_Detail::Form_Order_Detail(QWidget *parent) : QDialog(parent), ui(new 
 }
 
 void Form_Order_Detail::populate_window(){
-    ui->comboBox->setCurrentText(qr.value(0).toString() + " ");
-    ui->comboBox_2->setCurrentText(qr.value(1).toString() + " ");
+    qDebug()<<qr.value(0).toString()<< " "<<qr.value(1).toString();
+    ui->comboBox->setCurrentText(qr.value(0).toString());
+    ui->comboBox_2->setCurrentText(qr.value(1).toString());
     ui->lineEdit->setText(qr.value(2).toString());
     ui->lineEdit_2->setText(qr.value(3).toString());
     ui->lineEdit_3->setText(qr.value(4).toString());
@@ -78,7 +79,11 @@ void Form_Order_Detail::clear_form(){
 }
 
 void Form_Order_Detail::refresh_query(){
-
+    QThread::msleep(100);
+    qr = myDB.executeQuery("select * from orderdetails");
+    qr.next();
+    for(int i = 0; i<recordOnScreen-1; i++){ qr.next(); }
+    populate_window();
 }
 
 void Form_Order_Detail::fill_combo_orders_combo_box(){
@@ -89,6 +94,7 @@ void Form_Order_Detail::fill_combo_orders_combo_box(){
     for(int i=1; i<=qr2.size(); i++){
         QString nn = myDB.getCells(qr2, row, cols);
         ui->comboBox->addItem(nn);
+        qDebug()<<nn;
     }
 }
 
@@ -101,6 +107,7 @@ void Form_Order_Detail::fill_combo_products_combo_box(){
     for(int i=1; i<=qr2.size(); i++){
         QString man = myDB.getCells(qr2, row, cols);
         ui->comboBox_2->addItem(man);
+        qDebug()<<man;
     }
 }
 
@@ -121,7 +128,29 @@ Form_Order_Detail::~Form_Order_Detail(){
     delete ui;
 }
 
-void Form_Order_Detail::on_process_order_detail_record_clicked()
-{
+void Form_Order_Detail::on_process_order_detail_record_clicked(){
+    QString queryString;
+    if( mode == ADD ){
+        queryString = "insert into `orderdetails`(`orderNumber`,`productCode`,`quantityOrdered`,`priceEach`,`orderLineNumber`) values (";
+        queryString.append("'" + ui->comboBox->currentText() + "',");
+        queryString.append("'" + ui->comboBox_2->currentText() + "',");
+        queryString.append("'" + ui->lineEdit->text() + "',");
+        queryString.append("'" + ui->lineEdit_2->text() + "',");
+        queryString.append("'" + ui->lineEdit_3->text() + "')");
+        qDebug()<<queryString;
+        myDB.executeQuery(queryString);
+        clear_form();
+    }
+    else if( mode == UPDATE ){
 
+    }
+    else if( mode == DELETE ){
+        QString str = "DELETE FROM orderdetails WHERE orderNumber = ";
+        str.append("'" + ui->comboBox->currentText() + "'");
+        str.append(" AND productCode = '" + ui->comboBox_2->currentText() + "'");
+
+        myDB.executeQuery(str);
+        recordOnScreen--;
+        refresh_query();
+    }
 }

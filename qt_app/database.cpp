@@ -40,12 +40,18 @@ void database::disconnect(){
 
 QString database::getCells(QSqlQuery query, int row, vector<int> cols){
     QString str;
+
     for(int i=0; i<row; i++){
         query.next();
     }
-    for (auto it = begin(cols); it!=end(cols); ++it){
-        str += query.value(*it).toString() + " "; //todo: last space is problematic
+
+    for (auto it = begin(cols); it != end(cols); ++it){
+        str += query.value(*it).toString();
+        if(it != end(cols) - 1){
+            str += " ";
+        }
     }
+
     return str;
 }
 

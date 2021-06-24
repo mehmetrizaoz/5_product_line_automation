@@ -53,7 +53,6 @@ void Form_ProductLines::on_show(){
         qr.next();
         populate_window();
     }
-
 }
 
 void Form_ProductLines::refresh_query(){
