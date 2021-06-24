@@ -40,7 +40,26 @@ void Form_Order_Detail::populate_window(){
 }
 
 void Form_Order_Detail::keyPressEvent(QKeyEvent *event){
-
+    if(mode == DELETE || mode == UPDATE){
+        if (event->key() == Qt::Key_Up){ //next record
+            if(qr.next() == NULL){
+                qr.first();
+                recordOnScreen = 1;
+            }
+            else
+                recordOnScreen++;
+            populate_window();
+        }
+        if (event->key() == Qt::Key_Down){ //previous record
+            if(qr.previous() == NULL){
+                qr.last();
+                recordOnScreen = qr.size();
+            }
+            else
+                recordOnScreen--;
+            populate_window();
+        }
+    }
 }
 
 QString Form_Order_Detail::get_mode(int m){
