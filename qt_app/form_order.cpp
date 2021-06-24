@@ -70,7 +70,6 @@ void Form_Order::on_show(){
     clear_form();
     fill_costumers();
     if(mode == ADD){
-
         get_next_order_code();
     }
     else if(mode == UPDATE || mode == DELETE){

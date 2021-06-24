@@ -36,6 +36,8 @@ private:
     void populate_window();
     void clear_form();
     void refresh_query();
+    void fill_combo_products_combo_box();
+    void fill_combo_orders_combo_box();
     void keyPressEvent(QKeyEvent * e);
 };
 

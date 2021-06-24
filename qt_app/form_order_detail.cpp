@@ -32,7 +32,11 @@ Form_Order_Detail::Form_Order_Detail(QWidget *parent) : QDialog(parent), ui(new 
 }
 
 void Form_Order_Detail::populate_window(){
-
+    ui->comboBox->setCurrentText(qr.value(0).toString() + " ");
+    ui->comboBox_2->setCurrentText(qr.value(1).toString() + " ");
+    ui->lineEdit->setText(qr.value(2).toString());
+    ui->lineEdit_2->setText(qr.value(3).toString());
+    ui->lineEdit_3->setText(qr.value(4).toString());
 }
 
 void Form_Order_Detail::keyPressEvent(QKeyEvent *event){
@@ -47,32 +51,50 @@ QString Form_Order_Detail::get_mode(int m){
 }
 
 void Form_Order_Detail::clear_form(){
-
+    ui->comboBox->setCurrentIndex(0);
+    ui->comboBox_2->setCurrentIndex(0);
+    ui->lineEdit->setText("");
+    ui->lineEdit_2->setText("");
+    ui->lineEdit_3->setText("");
 }
 
 void Form_Order_Detail::refresh_query(){
 
 }
 
-void Form_Order_Detail::on_show(){
-    ui->process_order_detail_record->setText(get_mode(mode));
-    QSqlQuery qr = myDB.executeQuery("SELECT * FROM orders");
+void Form_Order_Detail::fill_combo_orders_combo_box(){
+    QSqlQuery qr2 = myDB.executeQuery("SELECT * FROM orders");
     vector<int> cols{0};
     int row = 1;
     ui->comboBox->clear();
-    for(int i=1; i<=qr.size(); i++){
-        QString nn = myDB.getCells(qr, row, cols);
+    for(int i=1; i<=qr2.size(); i++){
+        QString nn = myDB.getCells(qr2, row, cols);
         ui->comboBox->addItem(nn);
     }
+}
 
-    qr = myDB.executeQuery("SELECT * FROM products");
-    cols.clear();
-    cols.push_back(0);
+void Form_Order_Detail::fill_combo_products_combo_box(){
+    QSqlQuery qr2 = myDB.executeQuery("SELECT * FROM products");
+    vector<int> cols{0};
+    int row = 1;
     row = 1;
     ui->comboBox_2->clear();
-    for(int i=1; i<=qr.size(); i++){
-        QString man = myDB.getCells(qr, row, cols);
+    for(int i=1; i<=qr2.size(); i++){
+        QString man = myDB.getCells(qr2, row, cols);
         ui->comboBox_2->addItem(man);
+    }
+}
+
+void Form_Order_Detail::on_show(){        
+    ui->process_order_detail_record->setText(get_mode(mode));
+    clear_form();
+    fill_combo_orders_combo_box();
+    fill_combo_products_combo_box();
+
+    if(mode == UPDATE || mode == DELETE){
+        qr = myDB.executeQuery("select * from orderdetails");
+        qr.next();
+        populate_window();
     }
 }
 
