@@ -137,7 +137,6 @@ void Form_Order_Detail::on_process_order_detail_record_clicked(){
         queryString.append("'" + ui->lineEdit->text() + "',");
         queryString.append("'" + ui->lineEdit_2->text() + "',");
         queryString.append("'" + ui->lineEdit_3->text() + "')");
-        qDebug()<<queryString;
         myDB.executeQuery(queryString);
         clear_form();
     }
@@ -146,10 +145,8 @@ void Form_Order_Detail::on_process_order_detail_record_clicked(){
         queryString.append("quantityOrdered = '" + ui->lineEdit->text() + "', ");
         queryString.append("priceEach = '" + ui->lineEdit_2->text() + "', ");
         queryString.append("orderLineNumber = '" + ui->lineEdit_3->text() + "' ");
-
         queryString.append("where orderNumber = '" + ui->comboBox->currentText() + "'");
         queryString.append(" and productCode = '" + ui->comboBox_2->currentText() + "'");
-
         myDB.executeQuery(queryString);
         qDebug()<<queryString;
         refresh_query();
@@ -158,7 +155,6 @@ void Form_Order_Detail::on_process_order_detail_record_clicked(){
         QString str = "DELETE FROM orderdetails WHERE orderNumber = ";
         str.append("'" + ui->comboBox->currentText() + "'");
         str.append(" AND productCode = '" + ui->comboBox_2->currentText() + "'");
-
         myDB.executeQuery(str);
         recordOnScreen--;
         refresh_query();

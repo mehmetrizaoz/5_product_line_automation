@@ -91,7 +91,7 @@ int Form_Office::get_next_office_code(){
 void Form_Office::on_show(){    
     ui->process_office_record->setText(get_mode(mode));
     clear_form();
-    if(mode == ADD){        
+    if(mode == ADD){
         ui->lineEdit->setText(QString::number(get_next_office_code()));
     }
     else if(mode == UPDATE || mode == DELETE){
