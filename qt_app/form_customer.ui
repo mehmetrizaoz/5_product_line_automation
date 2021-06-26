@@ -26,8 +26,8 @@
   <widget class="QLabel" name="label_7">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>200</y>
+     <x>50</x>
+     <y>150</y>
      <width>131</width>
      <height>17</height>
     </rect>
@@ -39,8 +39,8 @@
   <widget class="QLineEdit" name="lineEdit_8">
    <property name="geometry">
     <rect>
-     <x>260</x>
-     <y>240</y>
+     <x>270</x>
+     <y>190</y>
      <width>113</width>
      <height>25</height>
     </rect>
@@ -62,8 +62,8 @@
   <widget class="QLabel" name="label_8">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>230</y>
+     <x>50</x>
+     <y>180</y>
      <width>131</width>
      <height>17</height>
     </rect>
@@ -75,8 +75,8 @@
   <widget class="QLineEdit" name="lineEdit_6">
    <property name="geometry">
     <rect>
-     <x>260</x>
-     <y>180</y>
+     <x>270</x>
+     <y>130</y>
      <width>113</width>
      <height>25</height>
     </rect>
@@ -85,8 +85,8 @@
   <widget class="QLineEdit" name="lineEdit_7">
    <property name="geometry">
     <rect>
-     <x>260</x>
-     <y>210</y>
+     <x>270</x>
+     <y>160</y>
      <width>113</width>
      <height>25</height>
     </rect>
@@ -95,8 +95,8 @@
   <widget class="QLineEdit" name="lineEdit_9">
    <property name="geometry">
     <rect>
-     <x>260</x>
-     <y>270</y>
+     <x>270</x>
+     <y>220</y>
      <width>113</width>
      <height>25</height>
     </rect>
@@ -105,8 +105,8 @@
   <widget class="QLabel" name="label_9">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>270</y>
+     <x>60</x>
+     <y>220</y>
      <width>67</width>
      <height>17</height>
     </rect>
@@ -151,8 +151,8 @@
   <widget class="QLabel" name="label_6">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>170</y>
+     <x>20</x>
+     <y>120</y>
      <width>141</width>
      <height>17</height>
     </rect>
@@ -200,8 +200,8 @@
   <widget class="QLineEdit" name="lineEdit_10">
    <property name="geometry">
     <rect>
-     <x>260</x>
-     <y>300</y>
+     <x>270</x>
+     <y>250</y>
      <width>113</width>
      <height>25</height>
     </rect>
@@ -210,8 +210,8 @@
   <widget class="QLineEdit" name="lineEdit_11">
    <property name="geometry">
     <rect>
-     <x>260</x>
-     <y>330</y>
+     <x>270</x>
+     <y>280</y>
      <width>113</width>
      <height>25</height>
     </rect>
@@ -220,8 +220,8 @@
   <widget class="QLineEdit" name="lineEdit_12">
    <property name="geometry">
     <rect>
-     <x>260</x>
-     <y>380</y>
+     <x>270</x>
+     <y>330</y>
      <width>113</width>
      <height>25</height>
     </rect>
@@ -230,8 +230,8 @@
   <widget class="QLabel" name="label_10">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>300</y>
+     <x>60</x>
+     <y>250</y>
      <width>67</width>
      <height>17</height>
     </rect>
@@ -243,8 +243,8 @@
   <widget class="QLabel" name="label_11">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>320</y>
+     <x>60</x>
+     <y>270</y>
      <width>121</width>
      <height>17</height>
     </rect>
@@ -256,8 +256,8 @@
   <widget class="QLabel" name="label_13">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>380</y>
+     <x>60</x>
+     <y>330</y>
      <width>67</width>
      <height>17</height>
     </rect>
@@ -269,8 +269,8 @@
   <widget class="QLabel" name="label_12">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>360</y>
+     <x>40</x>
+     <y>310</y>
      <width>201</width>
      <height>17</height>
     </rect>
@@ -296,7 +296,7 @@
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>150</y>
+     <y>360</y>
      <width>111</width>
      <height>17</height>
     </rect>
@@ -308,8 +308,8 @@
   <widget class="QComboBox" name="comboBox">
    <property name="geometry">
     <rect>
-     <x>260</x>
-     <y>360</y>
+     <x>270</x>
+     <y>310</y>
      <width>111</width>
      <height>25</height>
     </rect>
@@ -319,7 +319,7 @@
    <property name="geometry">
     <rect>
      <x>260</x>
-     <y>150</y>
+     <y>360</y>
      <width>113</width>
      <height>25</height>
     </rect>

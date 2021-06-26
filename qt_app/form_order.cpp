@@ -180,13 +180,10 @@ void Form_Order::on_process_order_record_clicked(){
         refresh_query();
     }
     else if( mode == DELETE ){
-        QString str = "DELETE FROM orderdetails WHERE orderNumber = " + ui->lineEdit->text();
-        myDB.executeQuery(str);
-
-        str = "DELETE FROM orders WHERE orderNumber = " + ui->lineEdit->text();
-        myDB.executeQuery(str);
-
-        qDebug()<<str;
+        queryString = "DELETE FROM orderdetails WHERE orderNumber = " + ui->lineEdit->text();
+        myDB.executeQuery(queryString);
+        queryString = "DELETE FROM orders WHERE orderNumber = " + ui->lineEdit->text();
+        myDB.executeQuery(queryString);
         recordOnScreen--;
         refresh_query();
     }

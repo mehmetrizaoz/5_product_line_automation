@@ -24,14 +24,18 @@ public slots:
     void on_show();
 private slots:
     void on_process_customer_record_clicked();
+    void on_comboBox_currentIndexChanged(int index);
+
 private:
     Ui::Form_Customer *ui;
     QSqlQuery qr;
+    QString employeeNo;
     int recordOnScreen = 1;
     QString get_mode(int m);
     void populate_window();
     void clear_form();
     void refresh_query();
+    void fill_employees();
     void keyPressEvent(QKeyEvent * e);
 };
 
