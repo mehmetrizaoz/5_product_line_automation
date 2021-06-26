@@ -163,7 +163,6 @@ void Form_Customer::on_process_customer_record_clicked(){
         QSqlQuery qr2 = myDB.executeQuery("SELECT * FROM employees");
         vector<int> cols{0};
         QString empNum = myDB.getCells(qr2, ui->comboBox->currentIndex()+1, cols);
-
         queryString ="insert into customers (customerNumber, customerName, contactLastName, \
             contactFirstName, creditLimit, phone, addressLine1, addressLine2, city, state, \
             postalCode, salesRepEmployeeNumber, country) values (";
@@ -181,7 +180,6 @@ void Form_Customer::on_process_customer_record_clicked(){
         queryString.append(empNum);
         queryString.append(",'" + ui->lineEdit_12->text() + "')");
         myDB.executeQuery(queryString);
-
         clear_form();
         ui->lineEdit->setText(QString::number(ui->lineEdit->text().toInt() + 1));
     }
@@ -200,33 +198,41 @@ void Form_Customer::on_process_customer_record_clicked(){
         queryString.append("salesRepEmployeeNumber = '" + employeeNo + "', ");
         queryString.append("creditLimit = '" + ui->lineEdit_5->text() + "' ");
         queryString.append("where customerNumber = " + ui->lineEdit->text());
-        qDebug()<<queryString;
         myDB.executeQuery(queryString);
         refresh_query();
     }
     else if( mode == DELETE ){
-        //todo
-        /*queryString = "DELETE FROM orderdetails WHERE orderNumber = " + ui->lineEdit->text();
+        QString orderNumber;
+        queryString = "select orderNumber from orders where customerNumber = " + ui->lineEdit->text();
+        //qDebug()<<queryString;
+        QSqlQuery qr5 = myDB.executeQuery(queryString);
+        int rowCount = qr5.size();
+        for(int row=1; row<=rowCount; row++){
+            qr5.next();
+            orderNumber = qr5.value(0).toString();
+            queryString = "delete from orderdetails where orderNumber = " + orderNumber;
+            myDB.executeQuery(queryString);
+            //qDebug() << queryString;
+            queryString = "delete from orders where orderNumber = " + orderNumber;
+            myDB.executeQuery(queryString);
+            //qDebug() << queryString;
+        }
+        queryString = "DELETE FROM payments WHERE customerNumber = " + ui->lineEdit->text();
+        //qDebug()<<queryString;
         myDB.executeQuery(queryString);
-
-        queryString = "DELETE FROM orders WHERE customerNumber = " + ui->lineEdit->text();
-        myDB.executeQuery(queryString);
-
         queryString = "DELETE FROM customers WHERE customerNumber = " + ui->lineEdit->text();
-        qDebug()<<queryString;
+        //qDebug()<<queryString;
         myDB.executeQuery(queryString);
         recordOnScreen--;
-        refresh_query();*/
+        refresh_query();
     }
 }
-
 
 void Form_Customer::on_comboBox_currentIndexChanged(int index){
     QString str = ui->comboBox->currentText();
     QStringList list = str.split(" ");
     QString name = list.value(0);
     QString last = list.value(1);
-
     QString qs = "select employeeNumber from employees where firstName = '" + name + "' and lastName = '" + last + "'";
     QSqlQuery qr5 = myDB.executeQuery(qs);
     qr5.next();
